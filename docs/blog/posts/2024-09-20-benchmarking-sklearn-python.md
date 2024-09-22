@@ -129,7 +129,7 @@ So this entire benchmark doesn't make much sense.. but it was fun to do!
 
 ## Conclusions
 
-The training speed of scikit-learn won't differ much between python versions because they most of the workload is done in Cython. And I could have known before running any benchmarks!
+The training speed of scikit-learn won't differ much between python versions because most of the workload is done in Cython. And I could have known before running any benchmarks!
 
 If you're looking to speed up your ML projects, start at scikit-learn's page on [computational performance](https://scikit-learn.org/stable/computing/computational_performance.html). As a bonus, you can try switching all your preprocessing code from `pandas` to [`polars`](https://github.com/pola-rs/polars) dataframes. `scikit-learn` supports `polars` since January 2024 ([scikit-learn 1.4+](https://scikit-learn.org/dev/whats_new/v1.4.html#version-1-4-0)) so you won't even have to convert your dataframes.
 Queries using [polars](https://github.com/pola-rs/polars) dataframes are 10-100x faster than [pandas](https://github.com/pandas-dev/pandas) dataframes ([benchmark](https://pola.rs/posts/benchmarks/)). On top of that, polars just [released a new accelerated GPU engine with nvidia](https://pola.rs/posts/gpu-engine-release/) that promises another 2-13x speedup.
