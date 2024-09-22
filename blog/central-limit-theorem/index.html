@@ -1,0 +1,1326 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal site and blog of Tim Vink">
+      
+      
+        <meta name="author" content="Tim Vink">
+      
+      
+        <link rel="canonical" href="https://timvink.nl/blog/central-limit-theorem/">
+      
+      
+        <link rel="prev" href="../closest-coordinates/">
+      
+      
+        <link rel="next" href="../streamlit-threshold-app/">
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.36">
+    
+    
+      
+        <title>From Central Limit Theorem to Bayes's Theorem via Linear Regression - TimVink.nl</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.06209087.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-2CM8V82P6Z"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-2CM8V82P6Z",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-2CM8V82P6Z",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+      
+        <meta  property="og:type"  content="website" >
+      
+        <meta  property="og:title"  content="From Central Limit Theorem to Bayes's Theorem via Linear Regression - TimVink.nl" >
+      
+        <meta  property="og:description"  content="Personal site and blog of Tim Vink" >
+      
+        <meta  property="og:image"  content="https://timvink.nl/assets/images/social/blog/posts/2019-05-16-central-limit-theorem.png" >
+      
+        <meta  property="og:image:type"  content="image/png" >
+      
+        <meta  property="og:image:width"  content="1200" >
+      
+        <meta  property="og:image:height"  content="630" >
+      
+        <meta  property="og:url"  content="https://timvink.nl/blog/central-limit-theorem/" >
+      
+        <meta  name="twitter:card"  content="summary_large_image" >
+      
+        <meta  name="twitter:title"  content="From Central Limit Theorem to Bayes's Theorem via Linear Regression - TimVink.nl" >
+      
+        <meta  name="twitter:description"  content="Personal site and blog of Tim Vink" >
+      
+        <meta  name="twitter:image"  content="https://timvink.nl/assets/images/social/blog/posts/2019-05-16-central-limit-theorem.png" >
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#from-central-limit-theorem-to-bayess-theorem-via-linear-regression" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TimVink.nl" class="md-header__button md-logo" aria-label="TimVink.nl" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m23 11.5-3.05-1.13c-.26-1.15-.91-1.81-.91-1.81a4.19 4.19 0 0 0-5.93 0l-1.48 1.48L5 3c-1 4 0 8 2.45 11.22L2 19.5s8.89 2 14.07-2.05c2.76-2.16 3.38-3.42 3.77-4.75zm-5.29.22c-.39.39-1.03.39-1.42 0a.996.996 0 0 1 0-1.41c.39-.39 1.03-.39 1.42 0s.39 1.02 0 1.41"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TimVink.nl
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              From Central Limit Theorem to Bayes's Theorem via Linear Regression
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="light-blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  Homepage
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../about/" class="md-tabs__link">
+        
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TimVink.nl" class="md-nav__button md-logo" aria-label="TimVink.nl" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m23 11.5-3.05-1.13c-.26-1.15-.91-1.81-.91-1.81a4.19 4.19 0 0 0-5.93 0l-1.48 1.48L5 3c-1 4 0 8 2.45 11.22L2 19.5s8.89 2 14.07-2.05c2.76-2.16 3.38-3.42 3.77-4.75zm-5.29.22c-.39.39-1.03.39-1.42 0a.996.996 0 0 1 0-1.41c.39-.39 1.03-.39 1.42 0s.39 1.02 0 1.41"/></svg>
+
+    </a>
+    TimVink.nl
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Homepage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Blog
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Blog
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tim's blog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Archive
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Archive
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2024/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2023/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2023
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2022/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2022
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2021/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2021
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2020/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2020
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2019/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2019
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#central-limit-theorem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Central Limit Theorem
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clt-in-ab-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      CLT in A/B Testing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linear-regression" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linear regression
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Linear regression">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#toy-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Toy problem
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-clt-to-calculate-uncertainty" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using CLT to calculate uncertainty
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using CLT to calculate uncertainty">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#downside-linear-regression" class="md-nav__link">
+    <span class="md-ellipsis">
+      Downside linear regression
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bayes-theorem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bayes' Theorem
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bayesian-linear-regression" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bayesian linear regression
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bayesian linear regression">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#calculating-the-posterior-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Calculating the posterior distribution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applying-bayesian-linear-regression" class="md-nav__link">
+    <span class="md-ellipsis">
+      Applying bayesian linear regression
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discussion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Discussion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <img src="https://github.com/timvink.png" alt="Tim Vink">
+                    </span>
+                    <span class="md-profile__description">
+                      <strong>
+                        
+                          Tim Vink
+                        
+                      </strong>
+                      <br>
+                      Author
+                    </span>
+                  </div>
+                
+              </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2019-05-16 07:00:00" class="md-ellipsis">May 16, 2019</time>
+                      </div>
+                    </li>
+                    
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              21 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+
+
+<h1 id="from-central-limit-theorem-to-bayess-theorem-via-linear-regression">From Central Limit Theorem to Bayes's Theorem via Linear Regression</h1>
+<p>Take any statistics course and you'll have heard about the central limit theorem. And you might have read about Bayes' theorem offering a different, more probabilistic method. In this long post I'll show how they are related, explaining concepts such as linear regression along the way. I'll use math, history, code, examples and plots to show you why both theorems are still very relevant for modern data scientists. </p>
+<!-- more -->
+
+<p>We'll cover:</p>
+<ul>
+<li><a href="#central-limit-theorem">Central Limit Theorem</a></li>
+<li><a href="#clt-in-ab-testing">CLT in A/B Testing</a></li>
+<li><a href="#linear-regression">Linear Regression</a></li>
+<li><a href="#using-clt-to-calculate-uncertainty">Using CLT to calculate uncertainty</a></li>
+<li><a href="#bayes-theorem">Bayes' Theorem</a></li>
+<li><a href="#bayesian-linear-regression">Bayesian Linear Regression</a></li>
+<li><a href="#discussion">Discussion</a></li>
+</ul>
+<h2 id="central-limit-theorem">Central Limit Theorem</h2>
+<p>It's hard to understate the importance of this theorem for modern science. It was only discovered in 1733 by the French Abraham de Moivre, then forgotten en rescued again by Pierre-Simon Laplace in 1812. But the real importance was only discerned in 1901 by Aleksandr Lyapunov. Now it is considered the unofficial sovereign of probability theory (<a href="https://en.wikipedia.org/wiki/Central_limit_theorem#History">source</a>).</p>
+<p>The Central Limit Theorem (CLT) states that if your population size is big enough (at least more than 30), the means of <span class="arithmatex">\(n\)</span> random samples of your population will be normally distributed <em>regardless</em> of the underlying distribution of your population. Let's skip the math and the jargon and just try this out in R:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nf">library</span><span class="p">(</span><span class="n">gridExtra</span><span class="p">)</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nf">set.seed</span><span class="p">(</span><span class="m">1337</span><span class="p">)</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">population</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rweibull</span><span class="p">(</span><span class="m">10e5</span><span class="p">,</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">generate_sample_means</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">population</span><span class="p">,</span><span class="w"> </span><span class="n">sample_size</span><span class="p">,</span><span class="w"> </span><span class="n">n_samples</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">  </span><span class="nf">rerun</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">        </span><span class="n">population</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="n">sample_size</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">mean</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="n">unlist</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="p">}</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="n">sample_means</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">population</span><span class="w"> </span><span class="o">%&gt;%</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">  </span><span class="nf">generate_sample_means</span><span class="p">(</span><span class="n">sample_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">n_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1000</span><span class="p">)</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="n">p1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tibble</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">population</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">  </span><span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_histogram</span><span class="p">(</span><span class="n">bins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">  </span><span class="nf">ggtitle</span><span class="p">(</span><span class="n">glue</span><span class="o">::</span><span class="nf">glue</span><span class="p">(</span><span class="s">&quot;&#39;True&#39; population with mean {round(mean(population),4)}&quot;</span><span class="p">),</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">          </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">glue</span><span class="o">::</span><span class="nf">glue</span><span class="p">(</span><span class="s">&quot;100k samples from Weibull(λ = 1, k = 1.5)&quot;</span><span class="p">))</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="n">p2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tibble</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample_means</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">  </span><span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_histogram</span><span class="p">(</span><span class="n">bins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">  </span><span class="nf">ggtitle</span><span class="p">(</span><span class="n">glue</span><span class="o">::</span><span class="nf">glue</span><span class="p">(</span><span class="s">&quot;Mean of means {round(mean(sample_means), 4)}&quot;</span><span class="p">),</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">          </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">glue</span><span class="o">::</span><span class="nf">glue</span><span class="p">(</span><span class="s">&quot;Means of 1000 samples of size 100&quot;</span><span class="p">))</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="nf">grid.arrange</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span><span class="w"> </span><span class="n">p2</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+</span></code></pre></div>
+<p><img alt="samples" src="../../assets/images/clt_post/clt_theorem.png" /></p>
+<p>Here we assume we know the entire true population of 100.000 values that have a clearly skewed <a href="https://en.wikipedia.org/wiki/Weibull_distribution">weibull</a> distribution (left plot).
+If we sample 100 values, record the average, and repeat 1000 times, we can start to see that distribution of sampled means looks like a <a href="https://en.wikipedia.org/wiki/Normal_distribution">normal distribution</a> (right plot), with the mean of those sampled means approaching the actual mean of our population. Still confused? Check out this <a href="http://mfviz.com/central-limit/">interactive visualization</a> of the central limit theorem.</p>
+<p>This is already quite cool, but it gets more interesting when you see what happens when you increase the size of your (1000) samples:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nf">tibble</span><span class="p">(</span><span class="n">sample_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">50</span><span class="p">,</span><span class="m">100</span><span class="p">,</span><span class="m">500</span><span class="p">,</span><span class="m">1000</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nf">mutate</span><span class="p">(</span><span class="n">sample_means</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">map</span><span class="p">(</span><span class="n">sample_size</span><span class="p">,</span><span class="w"> </span><span class="n">generate_sample_means</span><span class="p">,</span><span class="w"> </span><span class="m">1000</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="n">unnest</span><span class="w"> </span><span class="o">%&gt;%</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample_means</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nf">geom_histogram</span><span class="p">(</span><span class="n">bins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="nf">coord_cartesian</span><span class="p">(</span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">.</span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="m">1.2</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="nf">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="w"> </span><span class="n">sample_size</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">scales</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;free_y&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p><img alt="samples" src="../../assets/images/clt_post/clt_sample_size.png" /></p>
+<p>So as you increase your sample size, your sampled means will be <em>closer</em> to the the true mean of our population (in this case 0.9042). And because the sampled means are normally distributed, you can actually estimate from a sample what the expected distance is between the sampled mean and the true population mean. This is called the estimated <a href="https://en.wikipedia.org/wiki/Standard_error">standard error</a> (<span class="arithmatex">\(SE\)</span>) and calculated as:</p>
+<div class="arithmatex">\[
+\sigma_{\overline{x}}=\frac{s}{\sqrt{N}}
+\]</div>
+<div class="arithmatex">\[
+s=\sqrt{\frac{1}{N-1} \sum_{i=1}^{N}\left(x_{i}-\overline{x}\right)^{2}}
+\]</div>
+<ul>
+<li><span class="arithmatex">\(\sigma_{\overline{x}}\)</span> = (estimated) standard error of mean</li>
+<li><span class="arithmatex">\(s\)</span> = sample standard deviation</li>
+<li><span class="arithmatex">\(N\)</span> = sample size</li>
+<li><span class="arithmatex">\(x_{i}\)</span> = sample element <span class="arithmatex">\(i\)</span></li>
+<li><span class="arithmatex">\(\overline{x}\)</span> = sample mean</li>
+</ul>
+<p>So if your estimated standard error is 0.1, this means that on average you expect your sample mean to be off by 0.1 to the true population average. As you can see in both the plot and the formula: the bigger your sample size, the lower your standard error. You can use the CLT and this standard error do all sorts of cool things. Let's start with a classic use-case: A/B Testing.</p>
+<h2 id="clt-in-ab-testing">CLT in A/B Testing</h2>
+<p>Let's say we have a landing page and we've measured that 1.0 % of our visitors click our 'buy' button (Scenario A). This is the mean of many visitors not clicking (zeros) en a couple that do click (ones). Now we build a new and improved landing page (our B scenario), and show this to 200 randomly selected visitors instead, and the click rate (conversion) is now 1.2%. But does that mean our new landing page is actually better, or we just got lucky?</p>
+<p>We can use the CLT to find out how likely it is to find a sample mean of 1.2% given our 'null hypothesis' of mean 1%. Remember that for normal distributions, 95% of the values are within two standard deviations (= standard errors) of the mean <span class="arithmatex">\(\mu\)</span>:</p>
+<div class="arithmatex">\[
+\mu \pm 2 \cdot \operatorname{SE}\left(\mu\right)
+\]</div>
+<p><img alt="" src="../../assets/images/clt_post/Standard_deviation_diagram.svg" /></p>
+<p>You might know this as the <em>95% confidence interval</em>. We need to be more precise however: exactly how many standard deviations (aka standard errors) is our sample mean
+(1.2 %) away from our population mean (1 %)? This is called the <em>z-score</em> (a.k.a. <a href="https://en.wikipedia.org/wiki/Standard_score">standard score</a>) and is given by:</p>
+<div class="arithmatex">\[
+z=(x-\mu) / \sigma
+\]</div>
+<ul>
+<li><span class="arithmatex">\(z\)</span> = z-score (standard score)</li>
+<li><span class="arithmatex">\(x\)</span> = Mean of experiment</li>
+<li><span class="arithmatex">\(\mu\)</span> = Mean of population</li>
+<li><span class="arithmatex">\(\sigma\)</span> = Standard error of population (or estimated SE from sample)</li>
+</ul>
+<p>As you can see from the formula and the graph below (from wikipedia), the z-score is a nice normalized metric to say how far away our sampled mean is from the population mean.</p>
+<p><img alt="" src="../../assets/images/clt_post/The_Normal_Distribution.svg" /></p>
+<p>Let's calculate the z-score for our A/B test. In this case we know of the 'true' population (our A scenario), so we do not have to estimate the standard error <span class="arithmatex">\(\sigma\)</span> from a sample but can calculate it from the logs. So let's say we measured that 1% of visitor click buy, with a 0.15% standard deviation. So <span class="arithmatex">\(\mu\)</span> = 1% and <span class="arithmatex">\(x\)</span> is 1.2%, so the z-score is (0.012 - 0.01) / 0.0015 = 1.333. This means we now know that our new landing page has an average conversion that is 1.333 standard deviations away from our normal landing page. But how probable is that? Again, because our means are normally distributed, we need to know how much of the distribution is on or past our z-score; i.e. we need to know the area under the curve paste the z-score; i.e. we need to know the probability <span class="arithmatex">\(P\)</span> that a value from distribution <span class="arithmatex">\(Z\)</span> is equal to more than our z-score <span class="arithmatex">\(z\)</span>. This probability is called the <em>p-value</em>, and can be seen in the graph below. (<a href="https://faculty.elgin.edu/dkernler/statistics/ch10/10-2.html">source</a>)</p>
+<p><img alt="" src="../../assets/images/clt_post/p-value.jpg" /></p>
+<p>It's hard to compute the p-value by hand because we need to integrate to find the area under the curve. We could look up pre-computed values (f.e. see this <a href="http://www.z-table.com/">z-score table</a>), but it's easiest to compute using R:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Calculate p-value from z-score</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nf">pnorm</span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="m">1.33333</span><span class="p">),</span><span class="w"> </span><span class="n">lower.tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">F</span><span class="p">)</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1">#&gt; 0.09121177</span>
+</span></code></pre></div>
+<p>So we now know that there is a probability of ~9% that we find a conversion rate of 1.2% given a measurement of 200 visits to our old landing page. In order words; there is a 9% chance that our new landing page did not improve conversion but we were just lucky with our sample. In fact, it could even be that new landing page is <em>worse</em> than the current! So when do you decide that your new landing page is better than the old one? Often a p-value of 0.05 (5%) or even 0.01 (1%) is used, but ultimately, it's up to you determine the threshold. Often it's said that a p-value below 0.05 means something is <em>'significant'</em>, but this threshold makes no sense and you should carefully think about it yourself.. can you afford to be wrong?</p>
+<p>So we've learned you can use the central limit theorem to do A/B testing. You simply measure or assume a mean for A and then do an experiment that gives you a sample B from which you can calculate its standard error. You assume B is not different from A (your <em>null hypothesis</em>), and will only accept that B is different (reject your null hypothesis) if the probability of measuring the mean you have for B is very low (<em>p-value</em> below f.e. 5%).</p>
+<p>Want to go deeper?</p>
+<ul>
+<li>Build some intuition around p-values using this <a href="https://hackernoon.com/explaining-p-values-with-puppies-af63d68005d0">short explanation with puppies</a>.</li>
+<li>p-values are very common in the scientific community but there is a <a href="https://lucklab.ucdavis.edu/blog/2018/4/19/why-i-lost-faith-in-p-values">lot</a> <a href="https://www.vox.com/science-and-health/2017/7/31/16021654/p-values-statistical-significance-redefine-0005">of</a> <a href="https://www.sciencedirect.com/science/article/pii/S1063458412007789">critique</a>. TLDR; it can happen that your null hypothesis is not true or off, which means your false positive rate can be completely off.</li>
+<li>You can also turn this math around and determine up front the experiment (sample) size you need to make certain conclusions. If you expect your new landing page to lead to 5% more conversion, and you want to be very very sure it is (1% chance you're wrong), you would need X visitors (see <a href="https://www.ncbi.nlm.nih.gov/books/NBK43321/">math details</a>).</li>
+</ul>
+<p>Next, let's look at how the CLT is also used in another very common machine learning algorithm, linear regression.</p>
+<h2 id="linear-regression">Linear regression</h2>
+<p>The earliest form of linear regression was published by Legendre in 1805 (<a href="https://en.wikipedia.org/wiki/Regression_analysis#History">source</a>). Now it is often the first algorithm data scientists are taught when they learn about machine learning. This old algorithm is even present in our modern deep learning algorithms: a fully connected feedforward neural net with linear activation functions and several layers will in essence simply perform linear regression (<a href="https://stats.stackexchange.com/questions/253337/what-is-the-difference-between-regular-linear-regression-and-deep-learning-lin">source</a>).</p>
+<p>In machine learning, we assume we can predict a vector <span class="arithmatex">\(Y\)</span> with some feature matrix <span class="arithmatex">\(X\)</span> plus some random errors <span class="arithmatex">\(\epsilon\)</span>:</p>
+<div class="arithmatex">\[
+Y = f ( X ) + \epsilon
+\]</div>
+<p>In (multivariate) linear regression, we assume <span class="arithmatex">\(f\)</span> can be modelled with <span class="arithmatex">\(n\)</span> independent features that can be added together (<a href="https://educationalresearchtechniques.com/2017/11/13/additive-assumption-and-multiple-regression/">additive assumption</a>) and an intercept <span class="arithmatex">\(\beta _ { 0 }\)</span>:</p>
+<div class="arithmatex">\[
+Y = \beta _ { 0 } + \beta _ { 1 } X _ { 1 } + ... + \beta _ { n } X _ { n } + \epsilon
+\]</div>
+<p>Simple right, except how do you find the <span class="arithmatex">\(\beta\)</span> values? Well if you make <a href="https://statisticsbyjim.com/regression/ols-linear-regression-assumptions/">several assumptions</a> such as that the error <span class="arithmatex">\(\epsilon\)</span> has mean zero, the <a href="https://en.wikipedia.org/wiki/Gauss%E2%80%93Markov_theorem">Gauss-Markov Theorem</a> states that the so-called Best Linear Unbiased Estimator (BLUE) is <a href="https://en.wikipedia.org/wiki/Ordinary_least_squares">Ordinary Least Squares</a>. This means you can find the best values for <span class="arithmatex">\(\beta\)</span> if you minimize the sum of the squared differences between your predictions <span class="arithmatex">\(\hat{y}\)</span> and actuals <span class="arithmatex">\(Y\)</span>. This is called the residual sum of squares <span class="arithmatex">\(RSS\)</span>:</p>
+<div class="arithmatex">\[
+\mathrm{RSS}=\sum_{i=1}^{n}\left(y_{i}-\hat{y}_{i}\right)^{2}
+\]</div>
+<p>There are two basic methods to find the values for <span class="arithmatex">\(\beta\)</span> that minimise <span class="arithmatex">\(RSS\)</span>. The first is a closed form mathemical solution called the normal equation (<a href="https://eli.thegreenplace.net/2014/derivation-of-the-normal-equation-for-linear-regression/">proof</a>) that is surprisingly simple:</p>
+<div class="arithmatex">\[
+\widehat { \beta } = \left( X ^ { \prime } X \right) ^ { - 1 } X ^ { \prime } y
+\]</div>
+<p>Neat, but as <span class="arithmatex">\(X\)</span> gets bigger (more features and/or observations) it becomes <a href="https://www.quora.com/What-does-it-mean-if-something-is-computationally-expensive">computationally expensive</a>. An alternative is using optimization algorithms, of which <a href="https://towardsdatascience.com/linear-regression-using-gradient-descent-97a6c8700931">gradient descent</a> based algorithms are very popular in machine learning. These types of algorithms are typically much faster and can also be used for other types of models where no closed form solutions exist.</p>
+<h4 id="toy-problem">Toy problem</h4>
+<p>Let's try this out on the famous <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/mtcars.html">mtcars</a> dataset, which holds various characteristics for 32 cars. Let's try to predict the miles per gallon (<code>mpg</code>) of a car given it's weight (<code>wt</code>), horsepower (<code>hp</code>), quarter mile acceleration time (<code>qsec</code>) and whether or not the transmission is manual (<code>am</code>).  We'll do this using the normal equation, using <code>t()</code> for transpose and <code>%*%</code> for matrix multiplication:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">X</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mtcars</span><span class="w"> </span><span class="o">%&gt;%</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">   </span><span class="nf">select</span><span class="p">(</span><span class="n">wt</span><span class="p">,</span><span class="w"> </span><span class="n">hp</span><span class="p">,</span><span class="w"> </span><span class="n">qsec</span><span class="p">,</span><span class="w"> </span><span class="n">am</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">   </span><span class="nf">mutate</span><span class="p">(</span><span class="n">intercept</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">   </span><span class="n">as.matrix</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">Y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">mtcars</span><span class="o">$</span><span class="n">mpg</span><span class="p">)</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="n">beta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">matlib</span><span class="o">::</span><span class="nf">inv</span><span class="p">(</span><span class="nf">t</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">%*%</span><span class="w"> </span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">%*%</span><span class="w"> </span><span class="p">(</span><span class="nf">t</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">%*%</span><span class="w"> </span><span class="n">Y</span><span class="p">)</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="n">custom_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tibble</span><span class="p">(</span><span class="n">feature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;wt&quot;</span><span class="p">,</span><span class="s">&quot;hp&quot;</span><span class="p">,</span><span class="s">&quot;qsec&quot;</span><span class="p">,</span><span class="s">&quot;am&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;intercept&quot;</span><span class="p">),</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">  </span><span class="n">coefficients</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">beta</span><span class="p">))</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="n">custom_model</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="c1">#&gt;   A tibble: 5 x 2</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="c1">#&gt;   feature   coefficients</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="c1">#&gt;   &lt;chr&gt;                &lt;dbl&gt;</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="c1">#&gt; 1 wt                 -3.24  </span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="c1">#&gt; 2 hp                 -0.0174</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="c1">#&gt; 3 qsec                0.810</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="c1">#&gt; 4 am                  2.93  </span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="c1">#&gt; 5 intercept          17.4   </span>
+</span></code></pre></div>
+<p>Note the little trick where I've added the intercept as a feature with value 1. This way we can estimate all coefficients in one go.</p>
+<h2 id="using-clt-to-calculate-uncertainty">Using CLT to calculate uncertainty</h2>
+<p>So we've calculated (estimated) our coefficients, but remember our sample size (number of rows) was only 32. How likely is it that these estimates are actually true? The central limit theorem can be used here: it holds for our multivariate situation where we are estimating multiple coefficients. The key assumption here is that our 32 cars are a sample from a much larger population of cars (which makes sense). So our estimated coefficients are part of a <a href="https://en.wikipedia.org/wiki/Sampling_distribution">sampling distribution</a>, and if we could average the estimates obtained over a huge number of data sets (of size 32), then the average of these estimates would be spot on.</p>
+<p>Our estimated variance <span class="arithmatex">\(\hat{\sigma}\)</span> (standard error) is given by:</p>
+<div class="arithmatex">\[
+\hat{\sigma}^{2}=\frac{1}{N-p-1} \sum_{i=1}^{N}\left(y_{i}-\hat{y}_{i}\right)^{2}
+\]</div>
+<p>Note from the formula that the standard error will be smaller when the sample size <span class="arithmatex">\(N\)</span> increases. So in R we can calculate:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">y_hat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">%*%</span><span class="w"> </span><span class="n">beta</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">rss</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">((</span><span class="n">y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">y_hat</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">degrees_of_freedom</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="nf">nrow</span><span class="p">(</span><span class="n">mtcars</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">RSE</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">rss</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">degrees_of_freedom</span><span class="p">)</span><span class="w"> </span><span class="c1"># Residual standard error</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">RSE</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="c1">#&gt; 2.435098</span>
+</span></code></pre></div>
+<p>Using that we can now for a particular coefficient <span class="arithmatex">\(j\)</span> calculate the <span class="arithmatex">\(z\)</span>-score (from <a href="http://web.stanford.edu/~hastie/ElemStatLearn/">ESL p.48</a>):</p>
+<div class="arithmatex">\[
+z_{j}=\frac{\hat{\beta}_{j} - 0}{\hat{\sigma} \sqrt{v}_{j}}
+\]</div>
+<p>where <span class="arithmatex">\(v_{j}\)</span> is the <span class="arithmatex">\(j\)</span>th diagonal element of <span class="arithmatex">\(\left(\mathbf{X}^{T} \mathbf{X}\right)^{-1}\)</span> (the intuition here is that the more variability we have in the explanatory variable, the more accurately we can estimate the unknown coefficient <a href="https://stats.stackexchange.com/questions/267948/intuitive-explanation-of-the-xtx-1-term-in-the-variance-of-least-square">see SO post</a>). Note I've added the minus zero in the formula for clarify; our null hypothesis is that the true coefficient is zero (the feature does not influence our target).</p>
+<p>Using the <span class="arithmatex">\(z\)</span>-score, we can again calculate the <span class="arithmatex">\(p\)</span>-values. Note that we want a two sided hypothesis test: our null hypothesis is that the coefficient is zero, but it could in fact be positive of negative.</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">matrixinv</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">matlib</span><span class="o">::</span><span class="nf">inv</span><span class="p">(</span><span class="nf">t</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">%*%</span><span class="w"> </span><span class="n">X</span><span class="p">)</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">diagonals</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">diag</span><span class="p">(</span><span class="n">matrixinv</span><span class="p">)</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">zscores</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">beta</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">RSE</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">diagonals</span><span class="p">))</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">custom_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">custom_model</span><span class="w"> </span><span class="o">%&gt;%</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="nf">mutate</span><span class="p">(</span><span class="n">z_score</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">zscores</span><span class="p">),</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">         </span><span class="n">p_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">pnorm</span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="n">z_score</span><span class="p">),</span><span class="w"> </span><span class="n">lower.tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">F</span><span class="p">))</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="n">custom_model</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="c1">#&gt; feature   coefficients z_score  p_value</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="c1">#&gt; &lt;chr&gt;            &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="c1">#&gt; 1 wt             -3.24     -3.64 0.000274</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="c1">#&gt; 2 hp             -0.0174   -1.23 0.219   </span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="c1">#&gt; 3 qsec            0.810     1.85 0.0649  </span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="c1">#&gt; 4 am              2.93      2.09 0.0363  </span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="c1">#&gt; 5 intercept      17.4       1.87 0.0613</span>
+</span></code></pre></div>
+<p>We now have uncertainty estimates, and can see that there is a 21.9% chance that we found the current coefficient for horsepower <code>hp</code> (-0.0174) while it was actually zero (no influence on miles per gallon at all). We could use that information and build a new, simpler model without the <code>hp</code> feature.</p>
+<p>We've built a linear regression model from scratch and calculated uncertainty using the central limit theorem. Cool! Now let's check our math with the base R implementation. In R it's actually a one-liner using <code>lm()</code>, which is much much faster, and actually uses both C and fortran under hood (<a href="http://madrury.github.io/jekyll/update/statistics/2016/07/20/lm-in-R.html">here’s a deepdive</a>).</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">lm_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">mpg</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">wt</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">hp</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">qsec</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">factor</span><span class="p">(</span><span class="n">am</span><span class="p">),</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mtcars</span><span class="p">)</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nf">summary</span><span class="p">(</span><span class="n">lm_model</span><span class="p">)</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1">#&gt; Coefficients:</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1">#&gt;             Estimate Std. Error t value Pr(&gt;|t|)   </span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1">#&gt; (Intercept) 17.44019    9.31887   1.871  0.07215 .</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="c1">#&gt; wt          -3.23810    0.88990  -3.639  0.00114 **</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c1">#&gt; hp          -0.01765    0.01415  -1.247  0.22309   </span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="c1">#&gt; qsec         0.81060    0.43887   1.847  0.07573 .</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="c1">#&gt; factor(am)1  2.92550    1.39715   2.094  0.04579 *</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="c1">#&gt; ---</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="c1">#&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="c1">#&gt; Residual standard error: 2.435 on 27 degrees of freedom</span>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="c1">#&gt; Multiple R-squared:  0.8579, Adjusted R-squared:  0.8368</span>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="c1">#&gt; F-statistic: 40.74 on 4 and 27 DF,  p-value: 0.00000000004589</span>
+</span></code></pre></div>
+<p>Some observations:</p>
+<ul>
+<li>Our estimates are <em>almost</em> the same, but there are some small differences due to rounding errors (also note <code>tibble</code> does not show all digits when printing)</li>
+<li>Our <span class="arithmatex">\(p\)</span>-values are <em>roughly</em> the same. This is because for linear regression the normal distribution is replaced by the <a href="https://stattrek.com/probability-distributions/t-distribution.aspx"><span class="arithmatex">\(t\)</span>-distribution</a>. This distribution asymptotically approaches normal as the sample size increases, and is almost similar after <span class="arithmatex">\(N\)</span> &gt; 30 (our sample size <span class="arithmatex">\(N\)</span> was 32).</li>
+</ul>
+<h4 id="downside-linear-regression">Downside linear regression</h4>
+<p>We've seen that concepts from CLT are very important in linear regression (LR). Linear regression is awesome because it's simple, super fast to calculate and the results are easily interpretable by humans (maybe with the exception of <span class="arithmatex">\(p\)</span>-values). But there are some downsides:</p>
+<ul>
+<li>LR assumes our observed <span class="arithmatex">\(Y\)</span> values are actually sampled from a larger, true population of <span class="arithmatex">\(Y\)</span>. In our sample toy case with cars this could be true, but this is not always the case.</li>
+<li>Often building LR models involves an iterative process of removing non-significant features and adding new ones. You can do this in many different ways, going forward (adding features) or backward (removing them), but there is no best way. Two data scientists could end up with two different but valid models using the same data.</li>
+<li>LR returns point estimates of our coefficients, which by itself tells us nothing about the uncertainty in its accuracy.   </li>
+</ul>
+<p>We could in fact alleviate some of these concerns and build a model on our <code>mtcars</code> dataset while dropping CLT all together.</p>
+<h2 id="bayes-theorem">Bayes' Theorem</h2>
+<p>This Theorem has some interesting history. It was actually independently discovered and popularized by Pierre-Simon Laplace, who also rediscovered the central limit theorem! The theorem has been invented multiple times, the earliest record being that of a reverend called Thomas Bayes somewhere in the 1740s. Bayes's Theorem has been used to crack the enigma code, estimate the mass of Jupiter, and discover that slightly more human baby boys are born than baby girls. Today it is widely used but it was quite controversial for a long time. If you want to read more on the history see the blogpost <a href="https://www.lesswrong.com/posts/RTt59BtFLqQbsSiqd/a-history-of-bayes-theorem">A History of Bayes' Theorem</a> or read the book: <a href="https://www.amazon.com/Theory-That-Would-Not-Die/dp/0300169698/">The Theory that would not die</a>.</p>
+<p>What is the big idea? Basically we formulate what we already know (called our <em>initial belief</em>, <em>prior</em> or <em>event A</em>), and then when we see new data (<em>event B</em>), we update what we know (<em>believe</em>) accordingly (now called our <em>posterior</em>). The famous Bayesian equation is thus:</p>
+<div class="arithmatex">\[
+P(A | B)=\frac{P(B | A) P(A)}{P(B)}
+\]</div>
+<p>Here we are expressing 'events' occurring using <em>conditional probability</em>: the probability that an event will happen given that another event took place. So Bayes Theorem in words reads: "the probability of A given that B have occurred is calculated as the unconditioned probability of A occurring multiplied by the probability of B occurring if A happened, divided by the unconditioned probability of B." (<a href="https://towardsdatascience.com/linear-and-bayesian-modelling-in-r-predicting-movie-popularity-6c8ef0a44184">source</a>)</p>
+<p>You can also put this another way:</p>
+<ul>
+<li><span class="arithmatex">\(P(B \mid A)\)</span> is the probability of data given your hypothesis, and is called the likelihood.</li>
+<li><span class="arithmatex">\(P(A)\)</span> is the probability of your hypothesis, and is called the prior</li>
+<li><span class="arithmatex">\(P(B)\)</span> is the probability of the data under any hypothesis, and is called the normalizing constant</li>
+<li><span class="arithmatex">\(P(A \mid B)\)</span> is the probability of your hypothesis after seeing the data, called the posterior</li>
+</ul>
+<p>The normalizing constant <span class="arithmatex">\(P(B)\)</span> is not often something we're interested in, and if we drop it we can still maintain proportionality. Which is why Bayes' theorem also often reads:</p>
+<div class="arithmatex">\[
+P(A | B)\propto P(B | A) P(A)
+\]</div>
+<p>or in words:</p>
+<div class="arithmatex">\[
+\text { posterior } \propto \text { likelihood } \times \text { prior }
+\]</div>
+<h2 id="bayesian-linear-regression">Bayesian linear regression</h2>
+<p>In order to do <a href="https://en.wikipedia.org/wiki/Bayesian_linear_regression">bayesian linear regression</a> on our <code>mtcars</code> dataset we need to create a statistical model with a likelihood function. We can do that by rewriting our original linear regression model (defined earlier in this post) as a probabilistic model:</p>
+<div class="arithmatex">\[
+\begin{aligned} y_{i} &amp; \sim \mathcal{N}\left(\mu_{i}, \sigma\right) \\ \mu_{i} &amp;=\alpha+\beta X_{i} \end{aligned}
+\]</div>
+<p>So the miles per gallon <code>mpg</code> of a single car <span class="arithmatex">\(y_{i}\)</span> can be modelled using a normal distribution <span class="arithmatex">\(\mathcal{N}\)</span> parametrized by mean <span class="arithmatex">\(u_{i}\)</span>. which is a linear function of <span class="arithmatex">\(X\)</span> parametrized by intercept <span class="arithmatex">\(\alpha\)</span>, coefficients <span class="arithmatex">\(\beta\)</span> and standard deviation <span class="arithmatex">\(\sigma\)</span> (<a href="https://stats.stackexchange.com/a/252608">see this SO post</a>). Remember we will have as many coefficients <span class="arithmatex">\(\beta\)</span> as we have features (columns) in our dataset <span class="arithmatex">\(X\)</span>.</p>
+<p>Now to find the optimal values of these parameters we will use <a href="https://stats.stackexchange.com/questions/112451/maximum-likelihood-estimation-mle-in-layman-terms">maximum likelihood estimation</a>. Interestingly this is the same as estimating these values using Ordinary Least Squares estimation (see notes <a href="http://cs229.stanford.edu/notes/cs229-notes1.pdf">Andrew Ng, cs229</a>).</p>
+<p>So we now have a statistical model to find the <span class="arithmatex">\(\text { likelihood }\)</span> of our parameters: <span class="arithmatex">\(p(y \mid \alpha,\beta,\sigma)\)</span>. We are interested in the <span class="arithmatex">\(\text {posterior}\)</span> distribution of our parameters: <span class="arithmatex">\(p(\alpha,\beta,\sigma \mid y )\)</span>. We still need to define our <span class="arithmatex">\(\text { prior }\)</span>: <span class="arithmatex">\(p(\alpha,\beta,\sigma)\)</span>. Again, Bayes' formula:</p>
+<div class="arithmatex">\[
+\text { posterior } \propto \text { likelihood } \times \text { prior }\\
+p(\alpha,\beta,\sigma \mid y) \propto p(y \mid \alpha,\beta,\sigma) p(\alpha,\beta,\sigma)
+\]</div>
+<p>The priors also need to be defined as distributions. Here you need to carefully consider encode what you know as a distribution. As an example, for gas mileage I know that recent cars have a <code>mpg</code> between 10 and 40 (<a href="https://www.cars.com/articles/best-and-worst-gas-mileage-2018-1420698621218/">source</a>). Our model probably won't be able to explain everything, so my prior for the intercept <span class="arithmatex">\(\alpha\)</span> will be a normal distribution with mean 25 and standard deviation 15: <span class="arithmatex">\(N(25,15)\)</span>. We need to set priors for every coefficient in <span class="arithmatex">\(\beta\)</span> and the standard deviation <span class="arithmatex">\(\sigma\)</span> of our probabilistic model as well.</p>
+<p>What do you do if you have no clue on how to set your priors? I don't like cars enough to be an expert. We can say that we have no clue by using very uninformative priors (also known as <a href="https://www.quora.com/What-is-a-flat-prior-in-the-Bayesian-method">flat</a> or <a href="https://en.wikipedia.org/wiki/Prior_probability">diffuse</a> priors). An example would be a very wide uniform distribution like <span class="arithmatex">\(U(-10^{99},10^{99})\)</span>.</p>
+<p>Note that when we use very uninformative priors the influence of the likelihood (from the data) will be large, because <span class="arithmatex">\(\text{prior} \propto 1\)</span>. In bayesian linear regression this means the maximum likelihood of our posterior distributions of the parameters will yield the same result as the ordinary least squares method we used earlier. However, when we use very informative priors (a distribution with a high spike in a small numeric range), we will need a lot of data in order to make significant changes to our estimated parameters. In other words, the <a href="https://stats.stackexchange.com/questions/200982/do-bayesian-priors-become-irrelevant-with-large-sample-size/201059#201059">prior starts to lose weight when we add more data</a>.</p>
+<h4 id="calculating-the-posterior-distribution">Calculating the posterior distribution</h4>
+<p>From the bayesian formula you can see that we are multiplying probability distributions <span class="arithmatex">\(likelihood * prior\)</span>. This calculation is easier if both distributions are from the same <a href="https://en.wikipedia.org/wiki/List_of_probability_distributions">probability distribution family</a>, otherwise "there may be no analytical solution for the posterior distribution" <a href="https://en.wikipedia.org/wiki/Bayesian_linear_regression">source</a>. In our case we have a statistical model with a normally distributed likelihood, so we would be wise to define a <a href="https://en.wikipedia.org/wiki/Conjugate_prior">conjugate prior</a>: a prior that is also normally distributed. The prior and posterior are then called conjugate distributions, and the posterior can then be <a href="https://en.wikipedia.org/wiki/Bayesian_linear_regression">derived analyically</a>.</p>
+<p>After calculating the posterior, we are left with the joint distributions of our parameters: <span class="arithmatex">\(p(\alpha, \beta, \sigma \mid y)\)</span>. In order to find the marginal distributions <span class="arithmatex">\(p(\alpha \mid y)\)</span>, <span class="arithmatex">\(p(\sigma \mid y)\)</span> and each of <span class="arithmatex">\(p(\beta \mid y)\)</span>, we would have to solve a whole set of integrals. Instead, to find those marginal distributions sampling algorithms are used, where each parameter is sampled conditional on the other parameters. Most popular are <a href="https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo">Markov Chain Monte Carlo</a> techniques such as <a href="https://en.wikipedia.org/wiki/Gibbs_sampling">Gibbs Sampling</a>, <a href="https://en.wikipedia.org/wiki/Metropolis%E2%80%93Hastings_algorithm">Metropolis–Hastings Sampling</a> and more recently <a href="https://stats.stackexchange.com/questions/311813/can-somebody-explain-to-me-nuts-in-english">No U-Turns Sampling</a> (NUTS).</p>
+<p>Luckily there are many <a href="https://cran.r-project.org/web/views/Bayesian.html">packages for bayesian inference</a> in R to help us. I recommend <code>brms</code> because it is well documented and plays well with other packages. Using python? Have a look at <a href="https://docs.pymc.io/">pymc3</a> or the new <a href="https://www.tensorflow.org/probability">TensorFlow probability</a> library.</p>
+<h4 id="applying-bayesian-linear-regression">Applying bayesian linear regression</h4>
+<p>After all that theory, fitting a bayesian linear regression model in <code>brms</code> on our <code>mtcars</code> dataset is actually quite simple:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nf">library</span><span class="p">(</span><span class="n">brms</span><span class="p">)</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">custom_mtcars</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mtcars</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">mutate</span><span class="p">(</span><span class="n">am</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">factor</span><span class="p">(</span><span class="n">am</span><span class="p">))</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">fit</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">brm</span><span class="p">(</span><span class="n">mpg</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">wt</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">hp</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">qsec</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">am</span><span class="p">,</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">           </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">custom_mtcars</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">gaussian</span><span class="p">(),</span><span class="w"> </span><span class="n">chains</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="nf">fixef</span><span class="p">(</span><span class="n">fit</span><span class="p">)</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="c1">#&gt;             Estimate  Est.Error         Q2.5       Q97.5</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="c1">#&gt; Intercept 17.5712388 9.78331475 -1.545673562 36.30109293</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="c1">#&gt; wt        -3.2376061 0.97190016 -5.230973286 -1.34308464</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="c1">#&gt; hp        -0.0176161 0.01517784 -0.046647580  0.01238611</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="c1">#&gt; qsec       0.8023787 0.46047930 -0.132152623  1.69762655</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="c1">#&gt; am1        2.9189454 1.50775195  0.002281527  6.04845493</span>
+</span></code></pre></div>
+<p>Notice that the estimates are very very similar to our earlier OLS estimation. This is because <code>brms</code> uses "an improper flat prior over the reals" (see <code>vignette("brms_overview")</code>) by default. Because we used very uninformative priors what we see is basically the estimate the maximum likelihood of a probability distribution, which is the same also the OLS estimation. We can see the distributions by plotting the samples from the posterior marginal densities. <code>brms</code> offers plotting functionality, but let's extract the samples and do it manually:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Get MCMC Samples for each parameter</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">samples</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">fit</span><span class="w"> </span><span class="o">%&gt;%</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="n">brms</span><span class="o">::</span><span class="nf">as.mcmc</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span><span class="nf">as.matrix</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">  </span><span class="nf">as_tibble</span><span class="p">()</span>
+</span></code></pre></div>
+<p>By default <code>brms</code> takes 2000 samples. We can then use <a href="https://mathisonian.github.io/kde/">Kernel Density Estimation</a> (KDE) to create a smooth curve to visualize the density. The <code>ggplot</code> has KDE built in with the <code>geom_density()</code> geom. Let's visualize the distribution of the estimates for weight <code>wt</code>:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Visualize</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">plot_distribution</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">feature_name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="n">data</span><span class="w"> </span><span class="o">%&gt;%</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="nf">pull</span><span class="p">(</span><span class="n">feature_name</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="nf">tibble</span><span class="p">(</span><span class="n">feature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">.</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">feature</span><span class="p">))</span><span class="o">+</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">    </span><span class="nf">geom_density</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s">&quot;darkblue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="s">&quot;lightblue&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">    </span><span class="nf">geom_point</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">feature</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">    </span><span class="nf">ggtitle</span><span class="p">(</span><span class="n">glue</span><span class="o">::</span><span class="nf">glue</span><span class="p">(</span><span class="s">&quot;Posterior distribution of {feature_name}&quot;</span><span class="p">))</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="p">}</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="n">samples</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">plot_distribution</span><span class="p">(</span><span class="s">&quot;b_wt&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p><img alt="samples" src="../../assets/images/clt_post/posterior_wt.png" /></p>
+<p>Here we can visually see that the most likely value of weight is ~ -3, but also that given the <code>mtcars</code> dataset, we are very confident the coefficient is between -6 and 0. This plot is made so often that it is built in: <code>brms::plot(fit)</code>.</p>
+<p>But we can do better. I don't know much about cars but I can be a bit more specific on the priors:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">priors</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nf">set_prior</span><span class="p">(</span><span class="s">&quot;normal(25, 15)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">class</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Intercept&quot;</span><span class="p">),</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span><span class="nf">set_prior</span><span class="p">(</span><span class="s">&quot;normal(0, 10)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">class</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">coef</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;wt&quot;</span><span class="p">),</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">  </span><span class="nf">set_prior</span><span class="p">(</span><span class="s">&quot;normal(0, 10)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">class</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">coef</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;hp&quot;</span><span class="p">),</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">  </span><span class="nf">set_prior</span><span class="p">(</span><span class="s">&quot;normal(0, 10)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">class</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">coef</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;qsec&quot;</span><span class="p">),</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">  </span><span class="nf">set_prior</span><span class="p">(</span><span class="s">&quot;normal(0, 10)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">class</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">coef</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;am1&quot;</span><span class="p">)</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="p">)</span>
+</span></code></pre></div>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">fit2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">brm</span><span class="p">(</span><span class="n">mpg</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">wt</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">hp</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">qsec</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">am</span><span class="p">,</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">           </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">custom_mtcars</span><span class="p">,</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">           </span><span class="n">prior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">priors</span><span class="p">,</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">           </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">gaussian</span><span class="p">(),</span><span class="w"> </span><span class="n">chains</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="nf">fixef</span><span class="p">(</span><span class="n">fit2</span><span class="p">)</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="c1">#&gt;           Estimate  Est.Error        Q2.5       Q97.5</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="c1">#&gt; Intercept 17.40913139 9.96990040 -3.01219958 37.57619153</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="c1">#&gt; wt        -3.20417139 0.94568225 -4.98073192 -1.29575873</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="c1">#&gt; hp        -0.01801657 0.01461242 -0.04755709  0.01124505</span>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="c1">#&gt; qsec       0.80701586 0.46487332 -0.12740591  1.74774618</span>
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="c1">#&gt; am1        2.97567564 1.51970719 -0.01908289  5.92563120</span>
+</span></code></pre></div>
+<p>So we specified the priors as distributions, and <code>brms</code> multiplied them with our likelihood distribution in order to update our posterior distributions. We can visualize the shift of using our more informative priors by plotting the marginal distribution of <code>weight</code> again:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nf">tibble</span><span class="p">(</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="s">&quot;flat prior&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">samples</span><span class="o">$</span><span class="n">b_wt</span><span class="p">,</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="s">&quot;N(0,10) prior&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">samples_fit2</span><span class="o">$</span><span class="n">b_wt</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">  </span><span class="n">tidyr</span><span class="o">::</span><span class="nf">gather</span><span class="p">(</span><span class="n">prior</span><span class="p">,</span><span class="w"> </span><span class="n">sample</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">  </span><span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">sample</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">  </span><span class="nf">geom_density</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">fill</span><span class="o">=</span><span class="n">prior</span><span class="p">),</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">.</span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">  </span><span class="nf">ggtitle</span><span class="p">(</span><span class="s">&quot;Shift in posterior density of weight wt&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p><img alt="samples" src="../../assets/images/clt_post/shift_distri.png" /></p>
+<p>Not much of a shift, but you get the point ;) Do more research to define better priors!</p>
+<p>One of the upsides of having distributions instead of exact estimates for our coefficients is that we can build many visualizations showing our uncertainties in estimations and predictions. The <code>bmrs</code> package has a lot built in, and the <a href="http://mjskay.github.io/tidybayes/">tidybayes</a> offers many more. As an example, here is a plot of how weight <code>wt</code> influence the miles per gallon <code>mpg</code>, including our 95% uncertainty interval:</p>
+<div class="language-r highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nf">plot</span><span class="p">(</span><span class="nf">marginal_effects</span><span class="p">(</span><span class="n">fit2</span><span class="p">,</span><span class="w"> </span><span class="n">effects</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;wt&quot;</span><span class="p">))</span>
+</span></code></pre></div>
+<p><img alt="samples" src="../../assets/images/clt_post/marginal_effects_wt.png" /></p>
+<p>Finally, it can be hard to define good priors. It <a href="https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations">is recommend</a> to scale predictors and outcomes in order to make it easier to define priors. Selecting the feature set can also be challenging. In our non-bayesian LR we explained features selection can be done by adding or dropping non-significant features (features that are likely to be zero) using forward- or backward selection. In the bayesian world there are other techniques you can explore for this, such as <a href="https://www.coursera.org/lecture/bayesian/bayesian-model-averaging-adz4Y">bayesian model averaging</a>.</p>
+<h2 id="discussion">Discussion</h2>
+<p>We've come a long way and seen how the central limit theorem and Bayes' theorem relate. There has a been a lot of discussion historically about which is the better approach (<a href="https://xkcd.com/1132/">frequentists vs bayesians</a>). Interestingly we've seen both theorems were invented by the same man: mathematician Pierre LaPlace. Both theorems have their uses, and their up and downsides.</p>
+<p>Downsides Central Limit Theorem:</p>
+<ul>
+<li>Assumes your data is a sample from some much bigger population. This puts a lot of pressure on your dataset, in terms of size and how random your sample was. It assumes there are enough measurements to say something meaningful about <span class="arithmatex">\(\beta\)</span>.</li>
+<li>We often use the 5% significance level to state that some hypothesis is 'true'. But this would also imply that by chance 5% of our scientific research is wrong!</li>
+<li>The <span class="arithmatex">\(p\)</span>-values and significance tests rely on 'imaginary repetitions' (<a href="https://en.wikipedia.org/wiki/Harold_Jeffreys">Harold Jeffreys</a>)</li>
+</ul>
+<p>Bayes's Theorem also has downsides:</p>
+<ul>
+<li>Defining priors is very subjective as every scientist can define different priors for the same data. Critics say it is "ignorance coined into science" while CLT can be used for everything. However <a href="https://en.wikipedia.org/wiki/Frank_P._Ramsey">Frank Ramsey</a> says as more data comes in scientists will tend to agree more (because the influence of priors will become smaller).</li>
+<li>You really have to put thought into your priors</li>
+<li>Calculating <span class="arithmatex">\(\text{likelihood} * \text{prior}\)</span> is slow. MCMC Sampling requires a lot of computation.</li>
+<li>MCMC Sampling does not always converge.</li>
+</ul>
+<p>I believe bayesian models can really help for certain types of problems, especially because it offers you a way to encode your domain knowledge. In the end we still don't know for sure exactly how our features influence the mileage in cars, but we've learned techniques to communicate and visualize our estimates and their uncertainty.</p>
+<p>Hope you've learned something new. <a href="../../about/">Let me know</a> if you have any feedback!</p>
+<p>If you're interested: <a href="https://gitlab.com/snippets/1855201">code for this blogpost</a></p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+  
+
+
+  <form class="md-feedback" name="feedback" hidden>
+    <fieldset>
+      <legend class="md-feedback__title">
+        Was this page helpful?
+      </legend>
+      <div class="md-feedback__inner">
+        <div class="md-feedback__list">
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="This page was helpful" data-md-value="1">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m7 0c0 .8-.7 1.5-1.5 1.5S14 10.3 14 9.5 14.7 8 15.5 8s1.5.7 1.5 1.5m-5 7.73c-1.75 0-3.29-.73-4.19-1.81L9.23 14c.45.72 1.52 1.23 2.77 1.23s2.32-.51 2.77-1.23l1.42 1.42c-.9 1.08-2.44 1.81-4.19 1.81"/></svg>
+            </button>
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="This page could be improved" data-md-value="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10m-6.5-4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m2 4.5c1.75 0 3.29.72 4.19 1.81l-1.42 1.42C14.32 16.5 13.25 16 12 16s-2.32.5-2.77 1.23l-1.42-1.42C8.71 14.72 10.25 14 12 14"/></svg>
+            </button>
+          
+        </div>
+        <div class="md-feedback__note">
+          
+            <div data-md-value="1" hidden>
+              
+              
+                
+              
+              Thanks for your feedback!
+            </div>
+          
+            <div data-md-value="0" hidden>
+              
+              
+                
+              
+              Thanks for your feedback!
+            </div>
+          
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>
+      
+        <script src="../../js/mkdocs-charts-plugin.js"></script>
+      
+        <script src="../../assets/js/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+      
+    
+  </body>
+</html>

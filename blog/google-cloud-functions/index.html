@@ -1,0 +1,1173 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal site and blog of Tim Vink">
+      
+      
+        <meta name="author" content="Tim Vink">
+      
+      
+        <link rel="canonical" href="https://timvink.nl/blog/google-cloud-functions/">
+      
+      
+      
+        <link rel="next" href="../closest-coordinates/">
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.36">
+    
+    
+      
+        <title>How to develop Python Google Cloud Functions - TimVink.nl</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.06209087.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-2CM8V82P6Z"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-2CM8V82P6Z",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-2CM8V82P6Z",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+      
+        <meta  property="og:type"  content="website" >
+      
+        <meta  property="og:title"  content="How to develop Python Google Cloud Functions - TimVink.nl" >
+      
+        <meta  property="og:description"  content="Personal site and blog of Tim Vink" >
+      
+        <meta  property="og:image"  content="https://timvink.nl/assets/images/social/blog/posts/2019-01-11-google-cloud-functions.png" >
+      
+        <meta  property="og:image:type"  content="image/png" >
+      
+        <meta  property="og:image:width"  content="1200" >
+      
+        <meta  property="og:image:height"  content="630" >
+      
+        <meta  property="og:url"  content="https://timvink.nl/blog/google-cloud-functions/" >
+      
+        <meta  name="twitter:card"  content="summary_large_image" >
+      
+        <meta  name="twitter:title"  content="How to develop Python Google Cloud Functions - TimVink.nl" >
+      
+        <meta  name="twitter:description"  content="Personal site and blog of Tim Vink" >
+      
+        <meta  name="twitter:image"  content="https://timvink.nl/assets/images/social/blog/posts/2019-01-11-google-cloud-functions.png" >
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#how-to-develop-python-google-cloud-functions" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TimVink.nl" class="md-header__button md-logo" aria-label="TimVink.nl" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m23 11.5-3.05-1.13c-.26-1.15-.91-1.81-.91-1.81a4.19 4.19 0 0 0-5.93 0l-1.48 1.48L5 3c-1 4 0 8 2.45 11.22L2 19.5s8.89 2 14.07-2.05c2.76-2.16 3.38-3.42 3.77-4.75zm-5.29.22c-.39.39-1.03.39-1.42 0a.996.996 0 0 1 0-1.41c.39-.39 1.03-.39 1.42 0s.39 1.02 0 1.41"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TimVink.nl
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              How to develop Python Google Cloud Functions
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="light-blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  Homepage
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../about/" class="md-tabs__link">
+        
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TimVink.nl" class="md-nav__button md-logo" aria-label="TimVink.nl" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m23 11.5-3.05-1.13c-.26-1.15-.91-1.81-.91-1.81a4.19 4.19 0 0 0-5.93 0l-1.48 1.48L5 3c-1 4 0 8 2.45 11.22L2 19.5s8.89 2 14.07-2.05c2.76-2.16 3.38-3.42 3.77-4.75zm-5.29.22c-.39.39-1.03.39-1.42 0a.996.996 0 0 1 0-1.41c.39-.39 1.03-.39 1.42 0s.39 1.02 0 1.41"/></svg>
+
+    </a>
+    TimVink.nl
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Homepage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Blog
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Blog
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tim's blog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Archive
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Archive
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2024/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2023/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2023
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2022/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2022
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2021/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2021
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2020/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2020
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2019/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2019
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      The basics
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integrate-with-cloud-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integrate with Cloud Storage
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debugging-your-cloud-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Debugging your Cloud Functions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-cloud-functions-locally" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing Cloud Functions locally
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#zombie-deployments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Zombie deployments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting permissions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connection-reset-by-peer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Connection reset by peer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finished-with-status-timeout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Finished with status 'timeout'
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-with-status-500" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error with status 500
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bonus-static-sites-with-serverless-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bonus: Static sites with serverless backend
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <img src="https://github.com/timvink.png" alt="Tim Vink">
+                    </span>
+                    <span class="md-profile__description">
+                      <strong>
+                        
+                          Tim Vink
+                        
+                      </strong>
+                      <br>
+                      Author
+                    </span>
+                  </div>
+                
+              </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2019-01-11 00:00:00" class="md-ellipsis">January 11, 2019</time>
+                      </div>
+                    </li>
+                    
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              8 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+
+
+<h1 id="how-to-develop-python-google-cloud-functions">How to develop Python Google Cloud Functions</h1>
+<p>I've been using Google's <a href="https://cloud.google.com/functions/">Cloud Functions</a> for a project recently. My use case was building a small webscraper that periodically downloads excel files from a list of websites, parses them and write the structured data into a BigQuery database. In this blogpost I'll show you why going serverless with cloud functions is so amazing and cost-effective. And I'll discuss some practical problems that have solutions
+you can't easily find in the <a href="https://cloud.google.com/functions/docs/">documentation</a> or stackoverflow. </p>
+<!-- more -->
+
+<p>In this blog:</p>
+<ul>
+<li><a href="#the-basics">The basics</a></li>
+<li><a href="#integrate-with-cloud-storage">Integrate with Cloud Storage</a></li>
+<li><a href="#debugging-your-cloud-functions">Debugging your Cloud Functions</a></li>
+<li><a href="#testing-cloud-functions-locally">Testing Cloud Functions locally</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+<li><a href="#bonus-static-sites-with-serverless-backend">Bonus: Static sites with serverless backend</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+</ul>
+<h2 id="the-basics">The basics</h2>
+<blockquote>
+<p>Cloud Functions are small pieces of code that execute in an event-driven manner. They do one small thing very efficiently in reaction to a trigger — usually an HTTP request. The neat thing is you manage zero infrastructure and usually only pay for the execution of your function and a few seconds of compute. You may have heard of other Functions-as-a-Service offerings such as AWS Lambda. (<a href="https://medium.com/@timhberry/getting-started-with-python-for-google-cloud-functions-646a8cddbb33">source</a>)</p>
+</blockquote>
+<p>This means you can write a python 3.7 function and deploy it without handling infrastructure, OS or networking. Google takes care of scaling, whether you call your function once a month or millions of times a day. You only pay per 100ms of functions running, which means using Cloud Functions is much cheaper than deploying on your own servers (see <a href="https://cloud.google.com/functions/pricing">pricing</a>), with a generous free tier as well.</p>
+<p>Let's try it out. Create a project on <a href="http://console.cloud.google.com">Cloud Console</a> and setup billing (don't worry; all examples below are in free tier). Install the <a href="https://cloud.google.com/sdk/docs/">Google Cloud SDK</a> (<code>brew cask install google-cloud-sdk</code> on macOS), login and setup some defaults:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>gcloud<span class="w"> </span>auth<span class="w"> </span>login
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>gcloud<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>project<span class="w"> </span>&lt;PROJECT_ID&gt;
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>gcloud<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>compute/region<span class="w"> </span>europe-west1
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>gcloud<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>compute/zone<span class="w"> </span>europe-west1-b
+</span></code></pre></div>
+<p>Cloud Functions have their own independent environment, so we put them in
+their own folder (tip: use the function name). The folder should have a <code>main.py</code> file
+and optionally if you need extra packages a <code>requirements.txt</code> file. Here is a simple project structure:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>tree<span class="w"> </span>myproject
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1">#&gt; myproject</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1">#&gt; ├── README.md</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1">#&gt; └── functions</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1">#&gt;     └── hello_world</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1">#&gt;         └── main.py</span>
+</span></code></pre></div>
+<p>Cloud functions are called either by events in your project cloud environment, or
+by certain triggers (<a href="https://cloud.google.com/functions/docs/concepts/events-triggers">docs</a>). We'll focus on HTTP trigger functions. Google uses <a href="http://flask.pocoo.org/">Flask</a> in their python runtime to handle incoming requests. This means the input for our function should be Flask request object, and the output should be a valid Flask response:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># main.py</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">def</span> <span class="nf">hello_world</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  <span class="k">return</span> <span class="s1">&#39;Hello World!&#39;</span>
+</span></code></pre></div>
+<p>Deployment is a breeze:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">cd</span><span class="w"> </span>functions/hello_world
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>gcloud<span class="w"> </span>beta<span class="w"> </span>functions<span class="w"> </span>deploy<span class="w"> </span>hello_world<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span>--runtime<span class="w"> </span>python37<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span>--trigger-http<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span>--region<span class="w"> </span>europe-west1
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="c1">#&gt; Deploying function (may take a while - up to 2 minutes)...done.</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1">#&gt; availableMemoryMb: 256</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="c1">#&gt; entryPoint: hello_world</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="c1">#&gt; httpsTrigger:</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="c1">#&gt;   url: https://us-central1-&lt;YOUR PROJECT_ID&gt;.cloudfunctions.net/hello_world</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="c1">#&gt; ...</span>
+</span></code></pre></div>
+<p>Visit the httpsTrigger URL to view the output in your browser, or use <code>gcloud functions call hello_world</code> in your terminal.</p>
+<h2 id="integrate-with-cloud-storage">Integrate with Cloud Storage</h2>
+<p>As an example we'll demonstrate how to integrate with a <a href="https://cloud.google.com/storage/docs/creating-buckets">Cloud Storage bucket</a> and create a cloud function that downloads a file for us. I'll use <code>gsutil</code> to create
+a bucket and upload an image of the SpaceX starship test vehicle.  </p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>gsutil<span class="w"> </span>mb<span class="w"> </span>-l<span class="w"> </span>europe-west1<span class="w"> </span>gs://&lt;your_bucket_name&gt;
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>gsutil<span class="w"> </span>cp<span class="w"> </span>~/Downloads/starship.jpeg<span class="w"> </span>gs://&lt;your_bucket_name&gt;
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1">#&gt; / [1 files][  5.9 KiB/  5.9 KiB]</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1">#&gt; Operation completed over 1 objects/5.9 KiB.</span>
+</span></code></pre></div>
+<p>We could just make this bucket public, or share a <em>signed URL</em> to download this specific file. But for practice, we'll write the cloud function that will let us download the file. To get the image from the bucket into the python cloud function environment, we could
+use <code>tempfile.gettempdir()</code> to download it to the <code>/tmp</code> directory, an <em>in-memory</em> mount of the cloud function (<a href="https://stackoverflow.com/a/42719827">source</a>). Instead, we'll use <code>io.BytesIO</code> to create an object in memory directly. We'll use the <code>flask.send_file()</code> to return the image as a file:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># main.py</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">send_file</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="kn">from</span> <span class="nn">google.cloud</span> <span class="kn">import</span> <span class="n">storage</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">storage_client</span> <span class="o">=</span> <span class="n">storage</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="k">def</span> <span class="nf">download_file</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    <span class="n">bucket</span> <span class="o">=</span> <span class="n">storage_client</span><span class="o">.</span><span class="n">get_bucket</span><span class="p">(</span><span class="s1">&#39;&lt;your bucket name&gt;&#39;</span><span class="p">)</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    <span class="n">blob</span> <span class="o">=</span> <span class="n">bucket</span><span class="o">.</span><span class="n">get_blob</span><span class="p">(</span><span class="s1">&#39;starship.jpeg&#39;</span><span class="p">)</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    <span class="n">file</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">(</span><span class="n">blob</span><span class="o">.</span><span class="n">download_as_string</span><span class="p">())</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    <span class="k">return</span> <span class="n">send_file</span><span class="p">(</span><span class="n">file</span><span class="p">,</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>        <span class="n">attachment_filename</span> <span class="o">=</span> <span class="n">blob</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>        <span class="n">as_attachment</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>        <span class="n">mimetype</span><span class="o">=</span><span class="s1">&#39;image/jpeg&#39;</span><span class="p">)</span>
+</span></code></pre></div>
+<p>To interface with the bucket from python, I'm using the <a href="https://pypi.org/project/google-cloud-storage/">google-cloud-storage</a> package. This is not installed in the python runtime so we need to add it to a <code>requirements.txt</code> file:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># requirements.txt</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="l l-Scalar l-Scalar-Plain">google-cloud-storage</span>
+</span></code></pre></div>
+<p>You file structure should now look like:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>tree<span class="w"> </span>myproject
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="c1">#&gt; myproject</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="c1">#&gt; ├── README.md</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1">#&gt; └── functions</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="c1">#&gt;     ├── download_file</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="c1">#&gt;     │   └── main.py</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="c1">#&gt;     │   └── requirements.txt</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="c1">#&gt;     └── hello_world</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="c1">#&gt;         └── main.py</span>
+</span></code></pre></div>
+<p>And then deploy with:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">cd</span><span class="w"> </span>functions/download_file
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>gcloud<span class="w"> </span>beta<span class="w"> </span>functions<span class="w"> </span>deploy<span class="w"> </span>download_file<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span>--runtime<span class="w"> </span>python37<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span>--trigger-http<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">  </span>--region<span class="w"> </span>europe-west1
+</span></code></pre></div>
+<p>Visit the URL to download the image!</p>
+<h2 id="debugging-your-cloud-functions">Debugging your Cloud Functions</h2>
+<p>So far it's easy sailing. But what happens if you cloud functions starts returning
+<code>Error: could not handle the request</code> ?</p>
+<p>To find the mistake, you have some options. In your project's cloud console, go to
+cloud functions and click on your function.</p>
+<ul>
+<li>In the <em>general</em> tab you can see the latest errors.</li>
+<li>In the <em>testing</em> tab you can run your functions and see some logs.</li>
+<li>The <em>View Logs</em> button shows python logs of your function.</li>
+</ul>
+<p>This workflow becomes annoying very quickly: it can take up to 2 minutes to deploy
+a new cloud function. And it does not always pinpoint the problem. In my logs I had a
+<code>finished with status: 'connection error'</code> and a test run returned that <code>Error: cannot communicate with function.</code>, both of which did not help me find the error. But there's a better way!</p>
+<h2 id="testing-cloud-functions-locally">Testing Cloud Functions locally</h2>
+<p>Google <a href="https://cloud.google.com/functions/docs/bestpractices/testing">describes</a> how to use <code>unittest</code> to mock Flask and test a HTTP-trigger python function. This is great for unit testing, but for development I preferred to write a simple Flask app so I could call my functions locally:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># DevelopmentFlaskApp.py (in root of project)</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kn">import</span> <span class="nn">os</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;GOOGLE_APPLICATION_CREDENTIALS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;serviceaccount.json&quot;</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">send_from_directory</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="kn">from</span> <span class="nn">functions.download_file</span> <span class="kn">import</span> <span class="n">main</span> <span class="k">as</span> <span class="n">f_download_file</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/download_file&#39;</span><span class="p">)</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="k">def</span> <span class="nf">flask_download_file</span><span class="p">():</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>    <span class="k">return</span> <span class="n">f_download_file</span><span class="o">.</span><span class="n">download_file</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</span></code></pre></div>
+<p>Notice I set an environment variable pointing to a JSON. Our <code>google-cloud-storage</code> package uses these credentials to authenticate. We want to use the same permissions as the cloud function would have at runtime:</p>
+<blockquote>
+<p>At runtime, Cloud Functions uses the service account PROJECT_ID@appspot.gserviceaccount.com, which has the Editor role on the project. You can change the roles of this service account to limit or extend the permissions for your running functions. (<a href="https://cloud.google.com/functions/docs/concepts/iam">source</a>)</p>
+</blockquote>
+<p>Let's download these credentials to the root of our project (and if you use git, don't forgot to update <code>.gitignore</code>):</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>gcloud<span class="w"> </span>iam<span class="w"> </span>service-accounts<span class="w"> </span>keys<span class="w"> </span>create<span class="w"> </span>serviceaccount.json<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span>--iam-account<span class="w"> </span>&lt;PROJECT_ID&gt;@appspot.gserviceaccount.com
+</span></code></pre></div>
+<p>To run our flask app:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>pip<span class="w"> </span>install<span class="w"> </span>flask
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">FLASK_APP</span><span class="o">=</span>DevelopmentFlaskApp.py
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">FLASK_ENV</span><span class="o">=</span>development
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>flask<span class="w"> </span>run
+</span></code></pre></div>
+<p>You can then visit <code>localhost:5000/download_file</code> to see if you cloud function works, without having to wait 2 minutes to deploy! And with the credentials json already downloaded, you could also opt to develop some functionality in a notebook.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p>In practice, you can run into all sorts of problems. Some of them were hard to debug and fix, so sharing them here:</p>
+<h3 id="zombie-deployments">Zombie deployments</h3>
+<p>I had a lot of trouble getting one of my cloud functions to work. It worked perfect <em>locally</em>.
+I spent a lot of time reading about permissions, but it turns out <em>the function was not overwritten after deployment</em> (!!). Luckily, I'm not alone in this problem (<a href="https://github.com/firebase/functions-samples/issues/118">github issue</a>). Even deleting my function wouldn't stop the URL from working. The solution for me was re-deploying using a different name.</p>
+<h3 id="setting-permissions">Setting permissions</h3>
+<p>If you happen to have a permission problem, it's fairly easy to solve. In Google Cloud, a <em>policy binding</em> is where a <em>member</em> (user or serviceaccount) gets attached to a <em>role</em> (which contains 1 or more <em>permissions</em>). Remember, for cloud functions the <em>member</em> will be the app engine service account. Next, find an appropriate <a href="https://cloud.google.com/iam/docs/overview#iam_support_for_cloud_platform_services">predefined role for a cloud product</a>. Here's an example of adding a <em>policy binding</em> using <code>gcloud</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>gcloud<span class="w"> </span>projects<span class="w"> </span>add-iam-policy-binding<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">        </span>--member<span class="w"> </span>serviceAccount:&lt;PROJECT_ID&gt;@appspot.gserviceaccount.com<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">        </span>--role<span class="w"> </span>roles/storage.admin
+</span></code></pre></div>
+<p>Sometimes, <code>gcloud</code> will ask you to enable a certain API. Here's an example for BigQuery:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>gcloud<span class="w"> </span>services<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>bigquery-json.googleapis.com
+</span></code></pre></div>
+<h3 id="connection-reset-by-peer">Connection reset by peer</h3>
+<p>You might find an <code>ConnectionResetError: [Errno 104] Connection reset by peer</code> error in your logs, and it's not helpful at all. In my case, it had to do with creating clients for storage buckets and bigquery.
+This <a href="https://stackoverflow.com/questions/52129628/python-google-cloud-function-connection-reset-by-peer">SO post</a> confirmed my suspicion, that in ~10% of the cases creating the connection throws a connection reset error. The solution is a simple retry with some random wait time:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kn">from</span> <span class="nn">google.cloud</span> <span class="kn">import</span> <span class="n">storage</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="kn">from</span> <span class="nn">google.cloud</span> <span class="kn">import</span> <span class="n">bigquery</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="kn">from</span> <span class="nn">retrying</span> <span class="kn">import</span> <span class="n">retry</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="nd">@retry</span><span class="p">(</span><span class="n">stop_max_attempt_number</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">wait_random_min</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">wait_random_max</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="k">def</span> <span class="nf">get_google_client</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>    <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;storage&#39;</span><span class="p">:</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>        <span class="k">return</span> <span class="n">storage</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>    <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;bigquery&#39;</span><span class="p">:</span>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>        <span class="k">return</span> <span class="n">bigquery</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>
+</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="n">storage_client</span> <span class="o">=</span> <span class="n">get_google_client</span><span class="p">(</span><span class="s1">&#39;storage&#39;</span><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="finished-with-status-timeout">Finished with status 'timeout'</h3>
+<p>If you call your HTTP function and get the very generic <code>Error: could not handle the request</code>, dive into the logs. You might find a <code>Function execution took 60003 ms, finished with status: 'timeout'</code>. I had missed it from reading the documentation, but cloud functions are capped to at most 60 seconds execution time. You can <a href="https://cloud.google.com/functions/docs/concepts/exec#timeout">increase the timeout</a> to up to 9 minutes. Alternatively, you need to split up your function. In my case, I had to create a separate cloud function to download and process each file on a webpage.</p>
+<h3 id="error-with-status-500">Error with status 500</h3>
+<p>Another error that took me some time to figure out. I was invocating many functions at the same time using <code>asyncio</code>, and got really vague status 500 errors. Cause: Google Cloud Functions have many different <a href="https://cloud.google.com/functions/quotas">types of limits and quotas</a>, and: <em>A function returns an HTTP 500 error code when one of the resources is over quota and the function cannot execute</em>. For me it was that I was not using global variables to reuse objects in future invocations (see the <a href="https://cloud.google.com/functions/docs/bestpractices/tips">best practices</a>). Another way to solve it could be to move to background functions listening to pub/sub events, or increasing the quotas for your project.</p>
+<h2 id="bonus-static-sites-with-serverless-backend">Bonus: Static sites with serverless backend</h2>
+<p>In my case I was <a href="https://cloud.google.com/appengine/docs/standard/python/getting-started/hosting-a-static-website">hosting a static website with app engine</a> and using cloud functions on the backend. I wanted to test and develop the site locally as a Flask app. In order to change the URL locally, you can use some javascript:</p>
+<div class="language-javascript highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nx">jQuery</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">gcf_download_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://us-central1-PROJECT_ID.cloudfunctions.net/download_file&quot;</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">location</span><span class="p">.</span><span class="nx">hostname</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;localhost&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">location</span><span class="p">.</span><span class="nx">hostname</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">gcf_download_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;/download_file&quot;</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="w">  </span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#my-download-link&#39;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">gcf_download_file</span><span class="p">);</span>
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="p">});</span>
+</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span></code></pre></div>
+<h2 id="conclusion">Conclusion</h2>
+<p>Cloud functions are extremely flexible and offer myriad possibilities. And because each invocation of a function has it's own environment, you can easily scale your code horizontally. If you want to build something a bit more complex, I recommend looking using <a href="https://cloud.google.com/functions/docs/calling/pubsub">pub/sub</a> and letting cloud functions process a message queue.</p>
+<p>Good luck!</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+  
+
+
+  <form class="md-feedback" name="feedback" hidden>
+    <fieldset>
+      <legend class="md-feedback__title">
+        Was this page helpful?
+      </legend>
+      <div class="md-feedback__inner">
+        <div class="md-feedback__list">
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="This page was helpful" data-md-value="1">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m7 0c0 .8-.7 1.5-1.5 1.5S14 10.3 14 9.5 14.7 8 15.5 8s1.5.7 1.5 1.5m-5 7.73c-1.75 0-3.29-.73-4.19-1.81L9.23 14c.45.72 1.52 1.23 2.77 1.23s2.32-.51 2.77-1.23l1.42 1.42c-.9 1.08-2.44 1.81-4.19 1.81"/></svg>
+            </button>
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="This page could be improved" data-md-value="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10m-6.5-4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m2 4.5c1.75 0 3.29.72 4.19 1.81l-1.42 1.42C14.32 16.5 13.25 16 12 16s-2.32.5-2.77 1.23l-1.42-1.42C8.71 14.72 10.25 14 12 14"/></svg>
+            </button>
+          
+        </div>
+        <div class="md-feedback__note">
+          
+            <div data-md-value="1" hidden>
+              
+              
+                
+              
+              Thanks for your feedback!
+            </div>
+          
+            <div data-md-value="0" hidden>
+              
+              
+                
+              
+              Thanks for your feedback!
+            </div>
+          
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>
+      
+        <script src="../../js/mkdocs-charts-plugin.js"></script>
+      
+        <script src="../../assets/js/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1105 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal site and blog of Tim Vink">
+      
+      
+        <meta name="author" content="Tim Vink">
+      
+      
+        <link rel="canonical" href="https://timvink.nl/blog/introducing-skorecard/">
+      
+      
+        <link rel="prev" href="../mkdocs-for-tech-doc/">
+      
+      
+        <link rel="next" href="../reproducible-reports-with-mkdocs/">
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.36">
+    
+    
+      
+        <title>Introducing Skorecard for building better logistic regression models - TimVink.nl</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.06209087.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-2CM8V82P6Z"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-2CM8V82P6Z",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-2CM8V82P6Z",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+      
+        <meta  property="og:type"  content="website" >
+      
+        <meta  property="og:title"  content="Introducing Skorecard for building better logistic regression models - TimVink.nl" >
+      
+        <meta  property="og:description"  content="Personal site and blog of Tim Vink" >
+      
+        <meta  property="og:image"  content="https://timvink.nl/assets/images/social/blog/posts/2021-12-24-introducing-skorecard.png" >
+      
+        <meta  property="og:image:type"  content="image/png" >
+      
+        <meta  property="og:image:width"  content="1200" >
+      
+        <meta  property="og:image:height"  content="630" >
+      
+        <meta  property="og:url"  content="https://timvink.nl/blog/introducing-skorecard/" >
+      
+        <meta  name="twitter:card"  content="summary_large_image" >
+      
+        <meta  name="twitter:title"  content="Introducing Skorecard for building better logistic regression models - TimVink.nl" >
+      
+        <meta  name="twitter:description"  content="Personal site and blog of Tim Vink" >
+      
+        <meta  name="twitter:image"  content="https://timvink.nl/assets/images/social/blog/posts/2021-12-24-introducing-skorecard.png" >
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introducing-skorecard-for-building-better-logistic-regression-models" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TimVink.nl" class="md-header__button md-logo" aria-label="TimVink.nl" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m23 11.5-3.05-1.13c-.26-1.15-.91-1.81-.91-1.81a4.19 4.19 0 0 0-5.93 0l-1.48 1.48L5 3c-1 4 0 8 2.45 11.22L2 19.5s8.89 2 14.07-2.05c2.76-2.16 3.38-3.42 3.77-4.75zm-5.29.22c-.39.39-1.03.39-1.42 0a.996.996 0 0 1 0-1.41c.39-.39 1.03-.39 1.42 0s.39 1.02 0 1.41"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TimVink.nl
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introducing Skorecard for building better logistic regression models
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="light-blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  Homepage
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../about/" class="md-tabs__link">
+        
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TimVink.nl" class="md-nav__button md-logo" aria-label="TimVink.nl" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m23 11.5-3.05-1.13c-.26-1.15-.91-1.81-.91-1.81a4.19 4.19 0 0 0-5.93 0l-1.48 1.48L5 3c-1 4 0 8 2.45 11.22L2 19.5s8.89 2 14.07-2.05c2.76-2.16 3.38-3.42 3.77-4.75zm-5.29.22c-.39.39-1.03.39-1.42 0a.996.996 0 0 1 0-1.41c.39-.39 1.03-.39 1.42 0s.39 1.02 0 1.41"/></svg>
+
+    </a>
+    TimVink.nl
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Homepage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Blog
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Blog
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tim's blog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Archive
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Archive
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2024/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2023/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2023
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2022/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2022
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2021/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2021
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2020/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2020
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2019/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2019
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#bucketing-features-is-a-great-idea" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bucketing features is a great idea
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bucketing-in-skorecard" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bucketing in skorecard
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#weight-of-evidence-encoding-can-improve-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Weight of Evidence encoding can improve performance
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#skorecard-as-a-stronger-baseline-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      skorecard as a stronger baseline model
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <img src="https://github.com/timvink.png" alt="Tim Vink">
+                    </span>
+                    <span class="md-profile__description">
+                      <strong>
+                        
+                          Tim Vink
+                        
+                      </strong>
+                      <br>
+                      Author
+                    </span>
+                  </div>
+                
+              </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2021-12-24 13:00:00" class="md-ellipsis">December 24, 2021</time>
+                      </div>
+                    </li>
+                    
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              6 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+
+
+<h1 id="introducing-skorecard-for-building-better-logistic-regression-models">Introducing Skorecard for building better logistic regression models</h1>
+<p><a href="https://github.com/ing-bank/skorecard"><code>skorecard</code></a> is an open source python package that provides scikit-learn compatible tools for bucketing categorical and numerical features and building traditional credit risk acceptance models (scorecards) on top of them. These tools have applications outside of the context of scorecards and this blogpost will show you how to use them to potentially improve your own machine learning models.</p>
+<!-- more -->
+
+<h2 id="bucketing-features-is-a-great-idea">Bucketing features is a great idea</h2>
+<p>Bucketing is a common technique to discretize the values of a continuous or categorical variable into numeric bins. It is also known as discretisation, quantization, partitioning, binning, grouping or encoding. It's a powerful technique that can help reduce model complexity, speed up model training, and help increase understanding of non-linear dependencies between a variable and a given target. Bucketing and then one-hot encoding features can introduce non-linearity to linear models. Even modern algorithms use bucketing, for example LightGBM that buckets continuous feature values into discrete bins and uses them to construct feature histograms during training (<a href="https://papers.nips.cc/paper/6907-lightgbm-a-highly-efficient-gradient-boosting-decision-tree">paper</a>). Bucketing is also widely used in credit risk modelling (where linear models are often used) as an essential tool to help differentiate between high-risk and low-risk clients.</p>
+<p>Bucketing is a great idea to improve the quality of your features, especially if you are limited to linear models. With 'the right features a linear model can become a beast', as argued in <a href="https://towardsdatascience.com/staying-competitive-with-linear-models-19444bc3698e">Staying competitive with linear models</a>. A good example is the <a href="https://github.com/interpretml/interpret#introducing-the-explainable-boosting-machine-ebm">explainable boosting machine</a> (EBM) algorithm developed by Microsoft. It uses a novel way to detect interaction terms to breathe new life into generalized additive models, with performance comparable to state-of-the-art techniques like <a href="https://xgboost.readthedocs.io/en/latest/">XGBoost</a> (<a href="https://arxiv.org/pdf/1909.09223.pdf">paper</a>).</p>
+<p>Bucketing can be done univariately and can be unsupervised or supervised, and done on categorical or numerical values. Some examples:</p>
+<ul>
+<li>Unsupervised &amp; numerical: <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.KBinsDiscretizer.html#sklearn.preprocessing.KBinsDiscretizer"><code>sklearn.preprocessing.KBinsDiscretizer</code></a> that bins a continuous feature into <code>k</code> bins using different strategies.</li>
+<li>Unsupervised &amp; categorical: <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OrdinalEncoder.html#sklearn.preprocessing.OrdinalEncoder"><code>sklearn.preprocessing.OrdinalEncoder</code></a> that encodes each unique value of a categorical feature into an ordinal integer.</li>
+<li>Supervised &amp; numerical: <a href="https://ing-bank.github.io/skorecard/api/bucketers/DecisionTreeBucketer/"><code>skorecard.bucketers.DecisionTreeBucketer</code></a> trains a DecisionTreeClassifier on a single feature and uses the tree output to determine the bucket boundaries</li>
+<li>Supervised &amp; categorical: <a href="https://ing-bank.github.io/skorecard/api/bucketers/OrdinalCategoricalBucketer/"><code>skorecard.bucketers.OrdinalCategoricalBucketer</code></a> will create an ordinal bucket number sorted by the mean of the target per unique value, where the most common values will have a lower bucket number.</li>
+</ul>
+<h2 id="bucketing-in-skorecard">Bucketing in skorecard</h2>
+<p><a href="https://github.com/ing-bank/skorecard"><code>skorecard</code></a> offers a range of so-called bucketers that support pandas dataframes. There is support for different strategies to treat missing values as well as the possibility to define 'specials': certain values you would like to ensure get put into a separate bucket. And there are tools to inspect the resulting bucketing. Here's a simple example:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span> <span class="nn">skorecard.bucketers</span> <span class="kn">import</span> <span class="n">EqualWidthBucketer</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;feature1&#39;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="p">})</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">bucketer</span> <span class="o">=</span> <span class="n">EqualWidthBucketer</span><span class="p">(</span><span class="n">n_bins</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">df</span> <span class="o">=</span> <span class="n">bucketer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">bucketer</span><span class="o">.</span><span class="n">bucket_table</span><span class="p">(</span><span class="s1">&#39;feature1&#39;</span><span class="p">)</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1">#&gt;    bucket        label  Count  Count (%)</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1">#&gt; 0      -1      Missing    0.0        0.0</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1">#&gt; 1       0  (-inf, 1.8]    2.0       20.0</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="c1">#&gt; 2       1   (1.8, 3.6]    2.0       20.0</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="c1">#&gt; 3       2   (3.6, 5.4]    2.0       20.0</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="c1">#&gt; 4       3   (5.4, 7.2]    2.0       20.0</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="c1">#&gt; 5       4   (7.2, inf]    2.0       20.0</span>
+</span></code></pre></div>
+<p>When using bucketing in an actual use case like credit decision modelling, there are often all kinds of constraints that you would like to impose, like the minimal relative size of each bucket or monotonicity in the target rate per bucket. It's also common to discuss and incorporate domain expert knowledge into the bucketing of features. This manual 'fine tuning' of the bucketing is an interplay between art and science. <a href="https://github.com/ing-bank/skorecard"><code>skorecard</code></a> offers support for bucketing under constraints (see <a href="https://ing-bank.github.io/skorecard/api/bucketers/OptimalBucketer/">OptimalBucketer</a>) as well as a novel <code>.fit_interactive()</code> method that starts a <a href="https://plotly.com/dash/">dash</a> webapp in your notebook or browser to interactively explore and edit buckets. Expanding on the example above, we can also do:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">bucketer</span><span class="o">.</span><span class="n">fit_interactive</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</span></code></pre></div>
+<p><img alt="interactive bucketing" src="../../assets/images/posts/skorecard/dash_app_unsupervised_bucketer.png" /></p>
+<h2 id="weight-of-evidence-encoding-can-improve-performance">Weight of Evidence encoding can improve performance</h2>
+<p>After bucketing, Weight of Evidence (WoE) encoding can help to improve binary logistic regression models. WoE encoding is a supervised transformation replaces each bucket (category) in a feature with their corresponding weight of evidence. You can find the weight of evidence for a bucket by taking the natural logarithm of the ratio of goods (ones) over the ratio of bads (zeros). So, if a certain bucket has 60% ones and 40% bads, the WoE would be <code>ln(0.6/0.4)</code> = 0.405. More formally:</p>
+<div class="arithmatex">\[
+\mathrm{WOE}=\ln \left(\frac{\% \text { of non-events }}{\% \text { of events }}\right)
+\]</div>
+<p>The higher the WoE, the higher the probability of observing <code>Y=1</code>. If the WoE for an observation is positive then the probability is above average, if it's negative, it is below average. Using WoE encoding after bucketing means you can build models that are robust to outliers and missing values (which are bucketed separately). The natural logarithm helps to compare transformed features by creating the same scale and it helps to build a strict linear (monotonic) relationship with log odds. When combined with a logistic regression this method has also been called the 'semi-naive bayes classifier' because of it's close ties with naive bayes (this <a href="https://multithreaded.stitchfix.com/blog/2015/08/13/weight-of-evidence/">blogpost</a> for more details).</p>
+<p>A downside of WoE encoding is that you need buckets that have observations with both classes in the training data, otherwise you might encounter a zero division error. That's why <code>skorecard</code> bucketers have a <code>min_bin_size</code> parameter that defaults to 5%. In practice, it means you'll want to bucket features to max ~10-20 buckets. And if you're using cross validation, you need to make sure the bucketing and WoE encoder are part of the model pipeline.</p>
+<p>The WoE encoder is quite common and there are many python implementations available online. Instead of implementing another one, <code>skorecard</code> uses scikit-learn contrib's <a href="https://contrib.scikit-learn.org/category_encoders/woe.html">category_encoders.woe.WOEEncoder</a>:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span> <span class="nn">skorecard</span> <span class="kn">import</span> <span class="n">datasets</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">from</span> <span class="nn">category_encoders.woe</span> <span class="kn">import</span> <span class="n">WOEEncoder</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_uci_credit_card</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">we</span> <span class="o">=</span> <span class="n">WOEEncoder</span><span class="p">(</span><span class="n">cols</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="n">we</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</span></code></pre></div>
+<h2 id="skorecard-as-a-stronger-baseline-model">skorecard as a stronger baseline model</h2>
+<p>A good data scientist will <a href="https://blog.insightdatascience.com/always-start-with-a-stupid-model-no-exceptions-3a22314b9aaa">start with a stupid model</a> because a good baseline model can tell you if your data has some signal and if your final shiny model actually provides a performance increase worth the additional complexity. You want to apply <a href="https://en.wikipedia.org/wiki/Occam%27s_razor">Occam's razor</a> to machine learning: prefer the simpler model over the complex one if performance is more or less equal. But a big complex model that has spent a lot of compute on hyperparameter tuning will likely outperform a humble quick LogisticRegression model. Before declaring victory, applying some smart auto-bucketing and weight of evidence encoding might offer a more performant and fair comparison. And it's a one-liner in <code>skorecard</code>:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span> <span class="nn">skorecard</span> <span class="kn">import</span> <span class="n">Skorecard</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">baseline_model</span> <span class="o">=</span> <span class="n">Skorecard</span><span class="p">()</span>
+</span></code></pre></div>
+<p>I ran a benchmark using the <a href="https://archive.ics.uci.edu/ml/datasets/adult">UCI Adult</a>, <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_breast_cancer.html">Breast Cancer</a>, <a href="https://ing-bank.github.io/skorecard/api/datasets/load_uci_credit_card/#skorecard.datasets.load_uci_credit_card">skorecard UCI creditcard</a>, <a href="https://www.kaggle.com/ronitf/heart-disease-uci">UCI heart disease</a> and <a href="https://www.kaggle.com/blastchar/telco-customer-churn*">Kaggle Telco customer churn</a> datasets. We compare a <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html">LogisticRegression</a> with <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html">one hot encoding</a> of categorical columns (lr-ohe), a variant with <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OrdinalEncoder.html">ordinal encoding</a> of categoricals (lr-ordinal), a typical <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html">RandomForest</a> with 100 trees  (rf-100), a <a href="https://xgboost.readthedocs.io/en/latest/python/python_intro.html">XGBoost</a> model (xgb) and of course a <a href="https://github.com/ing-bank/skorecard">Skorecard</a> model with default settings.</p>
+<table>
+<thead>
+<tr>
+<th>dataset_name</th>
+<th>model_name</th>
+<th>test_score_mean</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>telco_churn</td>
+<td>lr_ordinal</td>
+<td>nan</td>
+</tr>
+<tr>
+<td>telco_churn</td>
+<td>xgb</td>
+<td>0.825</td>
+</tr>
+<tr>
+<td>telco_churn</td>
+<td>rf-100</td>
+<td>0.824</td>
+</tr>
+<tr>
+<td>telco_churn</td>
+<td>lr_ohe</td>
+<td>0.809</td>
+</tr>
+<tr>
+<td>telco_churn</td>
+<td>skorecard</td>
+<td>0.764</td>
+</tr>
+<tr>
+<td>heart</td>
+<td>skorecard</td>
+<td>0.911</td>
+</tr>
+<tr>
+<td>heart</td>
+<td>lr_ohe</td>
+<td>0.895</td>
+</tr>
+<tr>
+<td>heart</td>
+<td>lr_ordinal</td>
+<td>0.895</td>
+</tr>
+<tr>
+<td>heart</td>
+<td>rf-100</td>
+<td>0.89</td>
+</tr>
+<tr>
+<td>heart</td>
+<td>xgb</td>
+<td>0.851</td>
+</tr>
+<tr>
+<td>breast-cancer</td>
+<td>skorecard</td>
+<td>0.996</td>
+</tr>
+<tr>
+<td>breast-cancer</td>
+<td>lr_ohe</td>
+<td>0.994</td>
+</tr>
+<tr>
+<td>breast-cancer</td>
+<td>lr_ordinal</td>
+<td>0.994</td>
+</tr>
+<tr>
+<td>breast-cancer</td>
+<td>rf-100</td>
+<td>0.992</td>
+</tr>
+<tr>
+<td>breast-cancer</td>
+<td>xgb</td>
+<td>0.992</td>
+</tr>
+<tr>
+<td>adult</td>
+<td>xgb</td>
+<td>0.927</td>
+</tr>
+<tr>
+<td>adult</td>
+<td>lr_ohe</td>
+<td>0.906</td>
+</tr>
+<tr>
+<td>adult</td>
+<td>rf-100</td>
+<td>0.903</td>
+</tr>
+<tr>
+<td>adult</td>
+<td>skorecard</td>
+<td>0.888</td>
+</tr>
+<tr>
+<td>adult</td>
+<td>lr_ordinal</td>
+<td>0.855</td>
+</tr>
+<tr>
+<td>UCI-creditcard</td>
+<td>skorecard</td>
+<td>0.627</td>
+</tr>
+<tr>
+<td>UCI-creditcard</td>
+<td>lr_ohe</td>
+<td>0.621</td>
+</tr>
+<tr>
+<td>UCI-creditcard</td>
+<td>lr_ordinal</td>
+<td>0.621</td>
+</tr>
+<tr>
+<td>UCI-creditcard</td>
+<td>xgb</td>
+<td>0.596</td>
+</tr>
+<tr>
+<td>UCI-creditcard</td>
+<td>rf-100</td>
+<td>0.588</td>
+</tr>
+</tbody>
+</table>
+<p><em>Table 1: Benchmarking skorecard with other baseline models. See also <a href="https://github.com/ing-bank/skorecard/blob/main/docs/discussion/benchmark_with_EBM.ipynb">benchmark notebook</a> if you want to reproduce the results.</em></p>
+<p>The table shows that <code>Skorecard</code> frequently outperforms <code>LogisticRegression</code> and even more complex algorithms (that haven't been tuned yet), but in line with the <a href="https://en.wikipedia.org/wiki/No_free_lunch_theorem">no free lunch theorem</a> <em>not always</em>. So while <code>skorecard</code> is a great baseline model, you will always want to use a range of simple models to get a sense of the performance of your final model.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Bucketing features is a powerful technique that can help model performance and improve the interpretability of features. Bucketing in combination with weight of evidence encoding can make a logistic regression model much more powerful. <code>skorecard</code> has bucketing transformers you can use in your own modelling pipelines and a <code>Skorecard()</code> estimator that helps automate the bucketing+woe encoding technique and can be more competitive than LogisticRegression. <code>skorecard</code> is a strong approach that you could consider adding to your baseline models.</p>
+<p>In the <a href="https://github.com/ing-bank/skorecard"><code>skorecard</code> documentation</a> there are more interesting features to explore such as support for missing values (<a href="https://ing-bank.github.io/skorecard/tutorials/missing_values/">tutorial</a>), special values for bucketing (<a href="https://ing-bank.github.io/skorecard/tutorials/specials/">tutorial</a>), a two step bucketing approach (<a href="https://ing-bank.github.io/skorecard/tutorials/using-bucketing-process/">tutorial</a>) and the interactive bucketing app (<a href="https://ing-bank.github.io/skorecard/tutorials/interactive_bucketing/">tutorial</a>).</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+  
+
+
+  <form class="md-feedback" name="feedback" hidden>
+    <fieldset>
+      <legend class="md-feedback__title">
+        Was this page helpful?
+      </legend>
+      <div class="md-feedback__inner">
+        <div class="md-feedback__list">
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="This page was helpful" data-md-value="1">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m7 0c0 .8-.7 1.5-1.5 1.5S14 10.3 14 9.5 14.7 8 15.5 8s1.5.7 1.5 1.5m-5 7.73c-1.75 0-3.29-.73-4.19-1.81L9.23 14c.45.72 1.52 1.23 2.77 1.23s2.32-.51 2.77-1.23l1.42 1.42c-.9 1.08-2.44 1.81-4.19 1.81"/></svg>
+            </button>
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="This page could be improved" data-md-value="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10m-6.5-4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m2 4.5c1.75 0 3.29.72 4.19 1.81l-1.42 1.42C14.32 16.5 13.25 16 12 16s-2.32.5-2.77 1.23l-1.42-1.42C8.71 14.72 10.25 14 12 14"/></svg>
+            </button>
+          
+        </div>
+        <div class="md-feedback__note">
+          
+            <div data-md-value="1" hidden>
+              
+              
+                
+              
+              Thanks for your feedback!
+            </div>
+          
+            <div data-md-value="0" hidden>
+              
+              
+                
+              
+              Thanks for your feedback!
+            </div>
+          
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>
+      
+        <script src="../../js/mkdocs-charts-plugin.js"></script>
+      
+        <script src="../../assets/js/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1001 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal site and blog of Tim Vink">
+      
+      
+        <meta name="author" content="Tim Vink">
+      
+      
+        <link rel="canonical" href="https://timvink.nl/blog/is-xgboost-all-we-need/">
+      
+      
+        <link rel="prev" href="../post-balanced-trees/">
+      
+      
+        <link rel="next" href="../databricks-query-speed/">
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.36">
+    
+    
+      
+        <title>Is XGBoost really all we need? - TimVink.nl</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.06209087.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-2CM8V82P6Z"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-2CM8V82P6Z",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-2CM8V82P6Z",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+      
+        <meta  property="og:type"  content="website" >
+      
+        <meta  property="og:title"  content="Is XGBoost really all we need? - TimVink.nl" >
+      
+        <meta  property="og:description"  content="Personal site and blog of Tim Vink" >
+      
+        <meta  property="og:image"  content="https://timvink.nl/assets/images/social/blog/posts/2022-09-19-is-xgboost-all-we-need.png" >
+      
+        <meta  property="og:image:type"  content="image/png" >
+      
+        <meta  property="og:image:width"  content="1200" >
+      
+        <meta  property="og:image:height"  content="630" >
+      
+        <meta  property="og:url"  content="https://timvink.nl/blog/is-xgboost-all-we-need/" >
+      
+        <meta  name="twitter:card"  content="summary_large_image" >
+      
+        <meta  name="twitter:title"  content="Is XGBoost really all we need? - TimVink.nl" >
+      
+        <meta  name="twitter:description"  content="Personal site and blog of Tim Vink" >
+      
+        <meta  name="twitter:image"  content="https://timvink.nl/assets/images/social/blog/posts/2022-09-19-is-xgboost-all-we-need.png" >
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#is-xgboost-really-all-we-need" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TimVink.nl" class="md-header__button md-logo" aria-label="TimVink.nl" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m23 11.5-3.05-1.13c-.26-1.15-.91-1.81-.91-1.81a4.19 4.19 0 0 0-5.93 0l-1.48 1.48L5 3c-1 4 0 8 2.45 11.22L2 19.5s8.89 2 14.07-2.05c2.76-2.16 3.38-3.42 3.77-4.75zm-5.29.22c-.39.39-1.03.39-1.42 0a.996.996 0 0 1 0-1.41c.39-.39 1.03-.39 1.42 0s.39 1.02 0 1.41"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TimVink.nl
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Is XGBoost really all we need?
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="light-blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  Homepage
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../about/" class="md-tabs__link">
+        
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TimVink.nl" class="md-nav__button md-logo" aria-label="TimVink.nl" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m23 11.5-3.05-1.13c-.26-1.15-.91-1.81-.91-1.81a4.19 4.19 0 0 0-5.93 0l-1.48 1.48L5 3c-1 4 0 8 2.45 11.22L2 19.5s8.89 2 14.07-2.05c2.76-2.16 3.38-3.42 3.77-4.75zm-5.29.22c-.39.39-1.03.39-1.42 0a.996.996 0 0 1 0-1.41c.39-.39 1.03-.39 1.42 0s.39 1.02 0 1.41"/></svg>
+
+    </a>
+    TimVink.nl
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Homepage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Blog
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Blog
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tim's blog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Archive
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Archive
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2024/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2023/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2023
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2022/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2022
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2021/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2021
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2020/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2020
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2019/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2019
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-illusion-of-progress" class="md-nav__link">
+    <span class="md-ellipsis">
+      The illusion of progress
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The illusion of progress">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-law-of-marginal-improvements" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Law of marginal improvements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-simple-classifiers-are-very-effective" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Simple classifiers are very effective
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-population-bias" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Population bias
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-problem-bias" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Problem bias
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-flawed-benchmarks" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Flawed benchmarks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#counter-arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Counter arguments
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusions
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <img src="https://github.com/timvink.png" alt="Tim Vink">
+                    </span>
+                    <span class="md-profile__description">
+                      <strong>
+                        
+                          Tim Vink
+                        
+                      </strong>
+                      <br>
+                      Author
+                    </span>
+                  </div>
+                
+              </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2022-09-19 08:00:00" class="md-ellipsis">September 19, 2022</time>
+                      </div>
+                    </li>
+                    
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              7 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+
+
+<h1 id="is-xgboost-really-all-we-need">Is XGBoost really all we need?</h1>
+<p>If you have experience building machine learning models on tabular data you will have experienced that gradient boosting based algorithms like <a href="https://catboost.ai/">catboost</a>, <a href="https://lightgbm.readthedocs.io/">lightgbm</a> and <a href="https://xgboost.readthedocs.io/">xgboost</a> are almost always superior.</p>
+<p>It's not for nothing Bojan Tunguz (a quadruple kaggle grandmaster employed by Nvidia) states:</p>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">XGBoost Is All You Need<br><br>Deep Neural Networks and Tabular Data: A Survey<a href="https://t.co/Z2KsHP3fvp">https://t.co/Z2KsHP3fvp</a> <a href="https://t.co/uh5NLS1fVP">pic.twitter.com/uh5NLS1fVP</a></p>&mdash; Bojan Tunguz (@tunguz) <a href="https://twitter.com/tunguz/status/1509197350576672769?ref_src=twsrc%5Etfw">March 30, 2022</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>... but aren't we all fooling ourselves?</p>
+<!-- more -->
+
+<h2 id="the-illusion-of-progress">The illusion of progress</h2>
+<p>In his 2006 paper <a href="https://projecteuclid.org/journals/statistical-science/volume-21/issue-1/Classifier-Technology-and-the-Illusion-of-Progress/10.1214/088342306000000060.full">Classifier Technology and the Illusion
+of Progress</a> David J. Hand argues that the 'apparent superiority of more sophisticated methods may be something of an illusion' and that 'simple methods typically yield performance almost as good as more sophisticated methods' and the difference in performance 'may be swamped by other sources
+of uncertainty that generally are not considered in the classical supervised
+classification paradigm'.</p>
+<p>Let's dive into his main arguments:</p>
+<h3 id="1-law-of-marginal-improvements">1. Law of marginal improvements</h3>
+<p>The extra performance achieved by more sophisticated algorithms beyond those from simple methods, is small. </p>
+<p>There is a law of diminishing returns: Simple models will learn the basic, most apparent data structures that lead to greater improvements in predictive performance, while newer approaches learn the more complicated structures.</p>
+<p>The same goes for the number of features. For regression: If a set of features are all somewhat correlated with the target, there will be mutual correlation between them. We usually select those features with the highest target correlation first (for example with <a href="https://towardsdatascience.com/mrmr-explained-exactly-how-you-wished-someone-explained-to-you-9cf4ed27458b">MRMR</a>). Hand shows that (for regression) even with a low mutual correlation a small number of predictors will already explain most of the variance in the target. For classification a similar argument can be made: each feature added has a smaller maximum reduction in misclassification rate.</p>
+<p>So the proportion of gains attributable to the early steps is big: both in data structures learned by simple models, and with the first couple most promising features.</p>
+<h3 id="2-simple-classifiers-are-very-effective">2. Simple classifiers are very effective</h3>
+<p>"In many problems the bayes error rate is high, meaning that no decision surface can separate the distributions of such problems very well." But it is "common to find that the centroids of the predictor variable distributions of the classes are different, so that a simple linear surface can do surprisingly well as an estimate of the true decision surface.".</p>
+<p>To prove this, Hand not only refers to other studies, but also does his own. He takes 10 different datasets and defines the achieve performance in predictive accuracy for each as the difference between the best known model (in 2006 of course) and a majority-class vote baseline model. He then shows that simple classifiers are able to reach 85-95% of the achievable improvement for those datasets, with most over 90%.</p>
+<p>Another argument used for this is the "flat maximum effect" for linear models. When the correlations between features are high, often most of the gains can be made by simply assigning equal weights to each feature, without spending any time on optimizing the weights. In order words: quite large deviations from the optimal set of weights would yield performance not much worse than the optimal weights. This is because the simple average would be highly correlated with any other weighted sum: the choice of weight makes little difference to the scores.</p>
+<h3 id="3-population-bias">3. Population bias</h3>
+<p>Hand calls it "design sample selection" and basically argues it's unlikely our assumption holds that our train splits are representative of the distribution we will use our model on. </p>
+<p>If there's a time component, the future data our model will use in production is unlikely to have the same distribution as our historic training data (f.e. predicting loan defaults of new customers using previous customers as training data). Things change in the future, and if you want your model to keep working, don't make it fit the training data too well. Hand quotes Eric Hoffer saying "In times of change, learners inherit the Earth, while the learned find them-selves beautifully equipped to deal with a world that no longer exists.". </p>
+<p>If there's a sampling component, it's unlikely the population is the same. For example medical screening of new cases using a sample of previous patients: it's hard to find a sample where you are confident it sufficiently represents the entire population. Another example is in credit risk, where you are using training data of <em>accepted</em> client loans to predict whether new customer will default, but you will never know what historic <em>rejected</em> clients would have done (a problem which even has it's own name, <em>reject inference</em>.)</p>
+<p>So again, simple models pick up the bigger patterns which generalize better, while complex models are more susceptible to population bias and 'effort spent on overrefining the model is probably wasted effort'. Even computationally expensive sampling techniques such as repeated, grouped K-fold cross validation (see Sebastian Raschka's 2018 paper <a href="https://arxiv.org/abs/1811.12808">Model Evaluation, Model Selection, and Algorithm Selection in Machine Learning</a>) cannot not fix population bias.</p>
+<h3 id="4-problem-bias">4. Problem bias</h3>
+<p>We often just assume there are no errors in the labels (<code>y</code>). Errors in the label means the variance of the estimated decision surface will be greater: it's better to stick to simpler models because the decision surface is flatter. </p>
+<p>The <a href="https://arxiv.org/abs/2103.14749">2021 paper by Northcut et al</a> confirm Hand and actually show errors in tests sets are numerous and widespread: on average ~3.4% across <em>benchmark ML test sets</em>! (see <a href="https://labelerrors.com/about">labelerrors.com</a>). They conclude:</p>
+<blockquote>
+<p>"Surprisingly, we find lower capacity models may be practically more useful than higher capacity models in real-world datasets with high proportions of erroneously labeled data." </p>
+</blockquote>
+<p>Label definition is another example of problem bias. The rules to create labels can be somewhat arbitrary, such as 3 months missed payments to define a 'default', grades above an 8 to define 'gifted' students and business rules to define 'good' and 'bad' customers. If the definitions are somewhat arbitrary, they can change over time, so there is no point in creating an overrefined model. </p>
+<p>When building models, often the metric used to select models is different than the metric to optimize the model (loss function), and both are different from the performance metric that actually matters in production. This simplification is often used (cost-based metrics are not common) but we should accept it introduces a bias. </p>
+<h3 id="5-flawed-benchmarks">5. Flawed benchmarks</h3>
+<p>Finally, Hand argues that all algorithms require fine-tuning, which requires expertise in the methods. Obviously inventors know their own method best, so their papers and benchmarks are biased. Furthermore, average performance on standardized datasets like <a href="https://archive.ics.uci.edu/ml/datasets.php">UCI</a> are not representative for real-world machine learning problems. Different algorithms also require different pre-processing to perform best. And finally, as for the reasons explained above, "small differences in error rate ... may vanish when problem uncertainties are taken into account".</p>
+<p>Another argument from the paper is that method 1 may be 3x better than method 2, but if the error rate is already (very) low this might correspond to only a small proportion of the new data points. In order words, making 5 or 15 mistakes doesn't really matter when you're right 10.000 times. </p>
+<h2 id="counter-arguments">Counter arguments</h2>
+<p>Hand offers many convincing arguments, but does that mean we should always go for simple models? Is XGBoost <em>not</em> all we need?</p>
+<p>Things have changed a lot since 2006. </p>
+<p>Let's start with the <em>law of marginal improvements</em> (1). This is true of course, but anno 2022 our problems usually have a lot more data available. I would argue that for many real-life problems with large datasets GBM algorithms (like XGBoost) are often on the sweet spot between model complexity and the ability to generalize. Let's consider even more complex algorithms. The <a href="https://arxiv.org/pdf/2110.01889.pdf">2022 paper by Borisov et al.</a> has an overview of the state-of-the-art deep learning methods for tabular data. They found that "In general, however, our results are consistent with the inferior performance of deep learning techniques in comparison to approaches based on decision tree ensembles (such as gradient boosting decision trees) on tabular data that was observed in various Kaggle competitions".</p>
+<p>Then there's the <em>flawed benchmarks</em> (5) argument. Creating different model and data preprocessing pipelines is now <em>much</em> easier because of better ML tools. Consider that <a href="https://scikit-learn.org/stable/">scikit-learn</a> was created in 2007 and had it's first beta release in 2010 (<a href="https://en.wikipedia.org/wiki/Scikit-learn">wiki</a>). Regarding bias introduced by hyperparameter tuning: We now have much more compute power for hyperparameter tuning and better tools to run them: We can easily create fair benchmarks by using more compute. In the 2022 paper <a href="https://arxiv.org/pdf/2207.08815.pdf">Why do tree-based models still outperform deep
+learning on tabular data?</a> Grinszatjn et al build a standardized benchmark on many different datasets and give each algorithm a fair 20.000 hours of hyperparameter tuning. Not only is their code open source (Github only in <a href="https://en.wikipedia.org/wiki/GitHub">started in 2007</a>!), there are many great tools to build comparable benchmarks with hyperparameter tuning (like <a href="https://optuna.readthedocs.io/en/stable/">optuna</a> or the tool the authors used <a href="https://wandb.ai/site">weights&amp;biases</a>). Furthermore, <a href="https://www.kaggle.com/">Kaggle</a> (only <a href="https://en.wikipedia.org/wiki/Kaggle">started in 2010</a>) was built around data science competitions but contains a huge amount of reproducable, diverse experiments on many different datasets. I would argue that the arguments for flawed benchmarks do not hold any longer in 2022.</p>
+<h2 id="conclusions">Conclusions</h2>
+<p>Hand argued in 2006 that simple methods typically yield performance almost as good as more sophisticated methods. In 2022 we have larger datasets, more compute, better tooling and libraries that make it easier to write data and model pipelines. They help to address some of Hand's arguments and many benchmarks confirm that Gradient boosting based methods like XGBoost offer superior performance on tabular data.</p>
+<p>There are still important lessons to be learned from Hand. His arguments on <em>population bias</em> (3) and <em>problem bias</em> (4) are as relevant as ever. And <em>simple classifiers are</em> still <em>very effective</em> (2) and have a place in our toolkit.</p>
+<p>A data scientist should think and study the problem domain and the use of the data deeply before implementing a model. Some advice:</p>
+<ul>
+<li>If there are enough sources of uncertainty / variability, the 'principle of parsimony' (aka <a href="https://www.geeksforgeeks.org/occams-razor/">occam's razor</a>) applies: stick to simple models</li>
+<li>If model explainability is a thing -- consider simple models</li>
+<li>If model deployment is difficult -- consider simple models</li>
+<li>Consider <em>population bias</em> seriously. For example, on which data should you <em>not</em> make a prediction? See the talk <a href="https://www.youtube.com/watch?v=Z8MEFI7ZJlA">How to constrain artificial stupidity</a>.</li>
+<li>Don't trust your labels, <em>especially</em> when using complex algorithms. Consider using tools like <a href="https://github.com/cleanlab/cleanlab">cleanlab</a> (<a href="https://calmcode.io/bad-labels/introduction.html">intro video</a>) and <a href="https://github.com/koaning/doubtlab">doubtlab</a> to detect them.</li>
+<li>Model monitoring and model retraining pipelines are important, and even more so for complex algorithms</li>
+<li>Building robust models is all about error analysis</li>
+<li>'Good enough' is good enough. Don't go crazy optimizing a model. Grid searching hyperparameters can be a trap. See the excellent blog series <a href="https://koaning.io/posts/enjoy-the-silence/">Gridsearch is not enough</a> by Vincent Warmerdam.</li>
+</ul>
+<p>So is XGBoost all you need? Probably not.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+  
+
+
+  <form class="md-feedback" name="feedback" hidden>
+    <fieldset>
+      <legend class="md-feedback__title">
+        Was this page helpful?
+      </legend>
+      <div class="md-feedback__inner">
+        <div class="md-feedback__list">
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="This page was helpful" data-md-value="1">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m7 0c0 .8-.7 1.5-1.5 1.5S14 10.3 14 9.5 14.7 8 15.5 8s1.5.7 1.5 1.5m-5 7.73c-1.75 0-3.29-.73-4.19-1.81L9.23 14c.45.72 1.52 1.23 2.77 1.23s2.32-.51 2.77-1.23l1.42 1.42c-.9 1.08-2.44 1.81-4.19 1.81"/></svg>
+            </button>
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="This page could be improved" data-md-value="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10m-6.5-4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m2 4.5c1.75 0 3.29.72 4.19 1.81l-1.42 1.42C14.32 16.5 13.25 16 12 16s-2.32.5-2.77 1.23l-1.42-1.42C8.71 14.72 10.25 14 12 14"/></svg>
+            </button>
+          
+        </div>
+        <div class="md-feedback__note">
+          
+            <div data-md-value="1" hidden>
+              
+              
+                
+              
+              Thanks for your feedback!
+            </div>
+          
+            <div data-md-value="0" hidden>
+              
+              
+                
+              
+              Thanks for your feedback!
+            </div>
+          
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>
+      
+        <script src="../../js/mkdocs-charts-plugin.js"></script>
+      
+        <script src="../../assets/js/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+      
+    
+  </body>
+</html>
