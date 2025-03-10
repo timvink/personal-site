@@ -1,5 +1,4 @@
-install:
-	uv export -o requirements.txt --no-hashes
+.PHONY: all docs
 
 docs:
 	uv run mkdocs serve
