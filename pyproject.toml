@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "mkdocs-charts-plugin>=0.0.11",
+    "mkdocs-glightbox>=0.4.0",
     "mkdocs-material[imaging]>=9.5.36",
     "mkdocs-redirects>=1.2.1",
     "mkdocs-rss-plugin>=1.15.0",
@@ -15,4 +16,5 @@ dependencies = [
 [tool.uv]
 dev-dependencies = [
     "ipykernel>=6.29.5",
+    "marimo>=0.11.22",
 ]
