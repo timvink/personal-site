@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Predicting accident frequency is challenging due to changing patterns. Our advanced multi-seasonality time series models adapt daily to provide accurate traffic congestion forecasts in the Netherlands." />
+    <title>Traffic Congestion Forecast - Improve Your Insurance Models</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <script>
+        async function fetchAndVisualizeCSV() {
+            const response = await fetch('forecasts.csv');
+            const csvData = await response.text();
+
+            const rows = csvData.split('\n').slice(1); // Skip the header row
+            const labels = [];
+            const yhatData = [];
+            const avg1yData = [];
+            const forwardAvg1yData = [];
+
+            rows.forEach(row => {
+                const [date, yhat, avg1y, forwardAvg1y] = row.split(',');
+                labels.push(date);
+                yhatData.push(parseFloat(yhat));
+                avg1yData.push(parseFloat(avg1y));
+                forwardAvg1yData.push(parseFloat(forwardAvg1y));
+            });
+
+            const ctx = document.getElementById('forecastChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Predicted',
+                            data: yhatData,
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderWidth: 1,
+                            pointStyle: false,
+                        },
+                        {
+                            label: 'Actual',
+                            data: forwardAvg1yData,
+                            borderColor: 'rgba(255, 159, 64, 1)',
+                            backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                            borderWidth: 1,
+                            pointStyle: false,
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Average Traffic Congestion for next 12 months',
+                        },
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Date',
+                            },
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Average congestion',
+                            },
+                        },
+                    },
+                },
+            });
+        }
+    </script>
+</head>
+<body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+
+    <div class="min-h-screen flex flex-col items-center justify-center px-4 pt-8">
+
+
+        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8 max-w-2xl text-center">
+            <h1 class="text-3xl font-bold">Predicting Accident Frequency is Hard</h1>
+            <p class="mt-4">Accident risk depends on traffic patterns, which change over time due to seasonality, economic shifts, and road policies. Traditional models struggle to keep up.</p>
+        </div>
+        
+        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8 max-w-2xl text-center mt-6">
+            <h2 class="text-2xl font-bold">A Smarter Forecasting Solution</h2>
+            <p class="mt-4">Our multi-seasonality time series forecasting models update daily to capture evolving trends, giving insurers a precise understanding of future congestion risks.</p>
+                <div class="mt-6">
+        <canvas id="forecastChart" class="w-full h-auto rounded-lg shadow-md"></canvas>
+    </div>
+        </div>
+        
+        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8 max-w-2xl text-center mt-6">
+            <h2 class="text-2xl font-bold">Try it Yourself</h2>
+            <p class="mt-4">Explore historical congestion data to see how it correlates with accident risk. Download a free sample dataset below.</p>
+            <a href="forecasts.csv" class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg text-lg font-semibold hover:bg-blue-700 inline-block mt-4 flex items-center justify-center w-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M7 10l5 5m0 0l5-5m-5 5V3" />
+                </svg>
+                Download Forecasts CSV
+            </a>
+            <p class="mt-4 text-sm">Dataset columns:</p>
+            <table class="text-sm text-left mt-2 border-collapse border border-gray-300 dark:border-gray-700 w-full">
+                <thead>
+                    <tr>
+                        <th class="border border-gray-300 dark:border-gray-700 px-2 py-1">Column</th>
+                        <th class="border border-gray-300 dark:border-gray-700 px-2 py-1">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-gray-300 dark:border-gray-700 px-2 py-1"><strong>Date</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-700 px-2 py-1">Timestamp of measurement</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-300 dark:border-gray-700 px-2 py-1"><strong>yhat</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-700 px-2 py-1">Predicted congestion level</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-300 dark:border-gray-700 px-2 py-1"><strong>avg_1y</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-700 px-2 py-1">Average congestion over the last year</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-300 dark:border-gray-700 px-2 py-1"><strong>forward_avg_1y</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-700 px-2 py-1">Forecasted average congestion over the next year</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8 max-w-2xl text-center mt-6">
+            <h2 class="text-2xl font-bold">Get Access to Realtime Predictions</h2>
+            <p class="mt-4">Integrate our realtime traffic congestion predictions into your applications. Use the example below to get started:</p>
+            <div class="mt-4">
+                <div class="flex border-b border-gray-300 dark:border-gray-700">
+                    <button id="tab-input" class="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 border-b-2 border-blue-600">Input</button>
+                    <button id="tab-response" class="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-300">Example Response</button>
+                </div>
+                <div id="content-input" class="mt-4">
+                    <pre class="bg-gray-100 dark:bg-gray-900 text-left p-4 rounded-lg shadow-md text-sm overflow-x-auto"><code class="language-bash">curl -X GET "https://api.example.com/congestion/predictions" \
+-H "Authorization: Bearer YOUR_API_KEY" \
+-H "Content-Type: application/json"
+</code></pre>
+                </div>
+                <div id="content-response" class="mt-4 hidden">
+                    <pre class="bg-gray-100 dark:bg-gray-900 text-left p-4 rounded-lg shadow-md text-sm overflow-x-auto"><code class="language-json">{
+    "date": "2023-10-01",
+    "predicted_congestion": 75.3,
+    "actual_congestion": 72.1
+}
+</code></pre>
+                </div>
+            </div>
+            <p class="mt-4">Interested in accessing our API? Contact <a href="mailto:vinktim@gmail.com" class="text-blue-600 hover:underline">Tim Vink</a> for more information.</p>
+        </div>
+    </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchAndVisualizeCSV();
+        hljs.highlightAll();
+
+        document.getElementById('tab-input').addEventListener('click', () => {
+            document.getElementById('content-input').classList.remove('hidden');
+            document.getElementById('content-response').classList.add('hidden');
+            document.getElementById('tab-input').classList.add('border-blue-600');
+            document.getElementById('tab-response').classList.remove('border-blue-600');
+        });
+
+        document.getElementById('tab-response').addEventListener('click', () => {
+            document.getElementById('content-response').classList.remove('hidden');
+            document.getElementById('content-input').classList.add('hidden');
+            document.getElementById('tab-response').classList.add('border-blue-600');
+            document.getElementById('tab-input').classList.remove('border-blue-600');
+        });
+    });
+</script>
+</body>
+</html>
