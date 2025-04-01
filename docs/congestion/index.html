@@ -79,13 +79,27 @@
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
+                    devicePixelRatio: 2,
                     plugins: {
                         legend: {
                             position: 'top',
+                            labels: {
+                                font: {
+                                    size: function(context) {
+                                        return window.innerWidth < 768 ? 10 : 12;
+                                    }
+                                }
+                            }
                         },
                         title: {
                             display: true,
                             text: 'Average Traffic Congestion for next 12 months',
+                            font: {
+                                size: function(context) {
+                                    return window.innerWidth < 768 ? 12 : 16;
+                                }
+                            }
                         },
                     },
                     scales: {
@@ -93,13 +107,40 @@
                             title: {
                                 display: true,
                                 text: 'Date',
+                                font: {
+                                    size: function(context) {
+                                        return window.innerWidth < 768 ? 10 : 12;
+                                    }
+                                }
                             },
+                            ticks: {
+                                maxRotation: 45,
+                                minRotation: 45,
+                                font: {
+                                    size: function(context) {
+                                        return window.innerWidth < 768 ? 8 : 10;
+                                    }
+                                },
+                                maxTicksLimit: window.innerWidth < 768 ? 6 : 12
+                            }
                         },
                         y: {
                             title: {
                                 display: true,
                                 text: 'Average congestion',
+                                font: {
+                                    size: function(context) {
+                                        return window.innerWidth < 768 ? 10 : 12;
+                                    }
+                                }
                             },
+                            ticks: {
+                                font: {
+                                    size: function(context) {
+                                        return window.innerWidth < 768 ? 8 : 10;
+                                    }
+                                }
+                            }
                         },
                     },
                 },
