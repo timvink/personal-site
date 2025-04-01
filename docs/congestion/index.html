@@ -9,6 +9,28 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <style>
+        @media (max-width: 768px) {
+            #forecastChart {
+                height: 400px !important;
+            }
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    spacing: {
+                        'screen-padding': '1rem',
+                    },
+                    maxWidth: {
+                        'centered': '100%',
+                        'mobile': '95%',
+                    },
+                },
+            },
+        };
+    </script>
     <script>
         async function fetchAndVisualizeCSV() {
             const response = await fetch('forecasts.csv');
@@ -86,11 +108,8 @@
     </script>
 </head>
 <body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
-
-    <div class="min-h-screen flex flex-col items-center justify-center px-4 pt-8">
-
-
-        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8 max-w-2xl text-center">
+    <div class="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 pt-8 mx-auto">
+        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8 w-full mx-auto max-w-2xl text-center">
             <h1 class="text-3xl font-bold">Supercharge insurance models using congestion data</h1>
             <p class="mt-4">
                 Car insurance companies predict accident frequency to use in their pricing engines.
@@ -114,7 +133,7 @@
             </p>
         </div>
         
-        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8 max-w-2xl text-center mt-6">
+        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8 w-full mx-auto max-w-2xl text-center mt-6">
             <h2 class="text-2xl font-bold">A Congestion Forecasting Solution</h2>
             <p class="mt-4">
                 We've sourced congestion data from <a href="https://www.ndw.nu/" class="text-white-600 italic hover:underline">Nationaal Dataportaal Wegverkeer</a> and built a multi-seasonality time series forecasting model.
@@ -132,7 +151,7 @@
             </div>
         </div>
         
-        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8 max-w-2xl text-center mt-6">
+        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8 w-full mx-auto max-w-2xl text-center mt-6">
             <h2 class="text-2xl font-bold">Use our data</h2>
             <p class="mt-4">Use the historical predicted congestion data to see how it correlates with historic accident risk in your insurance portfolio. We've seen that the <code>yhat</code> feature can be one of the most important for insurance accident frequency models.</p>
             <a href="forecasts.csv" class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg text-lg font-semibold hover:bg-blue-700 inline-block mt-4 flex items-center justify-center w-auto">
@@ -173,74 +192,10 @@
             </div>
         </div>
         
-        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8 max-w-2xl text-center mt-6">
-            <h2 class="text-2xl font-bold">Get Access to Realtime Predictions</h2>
-            <p class="mt-4">
-                You can integrate our near realtime traffic congestion predictions into your pricing engine to stay ahead of market trends.
-                For example, if you use <a href="https://www.wtwco.com/en-nl/solutions/products/radar" class="text-blue-600 hover:underline">Radar</a>, 
-                you can use an external callout to call our API.
-                
-                Here's an example of how to call our API using <code>curl</code>:
-            </p>
-
-            <div class="border-b border-gray-200 dark:border-gray-700 mt-4">
-                <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
-                    <li class="me-2">
-                        <a href="#input-tab" class="inline-flex items-center justify-center p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500 group" aria-current="page">
-                            Input
-                        </a>
-                    </li>
-                    <li class="me-2">
-                        <a href="#response-tab" class="inline-flex items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
-                            Example Response
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <div id="input-tab" class="mt-4">
-                <pre class="bg-gray-100 dark:bg-gray-900 text-left p-4 rounded-lg shadow-md text-sm overflow-x-auto"><code class="language-bash">curl -X GET "https://api.example.com/congestion/predictions" \
-    -H "Authorization: Bearer YOUR_API_KEY" \
-    -H "Content-Type: application/json" \
-    -H "model_version: 1"
-</code></pre>
-            </div>
-
-            <div id="response-tab" class="hidden mt-4">
-                <pre class="bg-gray-100 dark:bg-gray-900 text-left p-4 rounded-lg shadow-md text-sm overflow-x-auto"><code class="language-json">{
-    "date": "2023-10-01",
-    "model_version": 1,
-    "prediction": 55374
-}
-</code></pre>
-            </div>
-
-            <script>
-                document.addEventListener('DOMContentLoaded', () => {
-                    const tabs = document.querySelectorAll('.border-b a');
-                    const tabContents = document.querySelectorAll('#input-tab, #response-tab');
-
-                    tabs.forEach(tab => {
-                        tab.addEventListener('click', (e) => {
-                            e.preventDefault();
-
-                            tabs.forEach(t => t.classList.remove('text-blue-600', 'border-blue-600', 'dark:text-blue-500', 'dark:border-blue-500', 'active'));
-                            tabContents.forEach(content => content.classList.add('hidden'));
-
-                            tab.classList.add('text-blue-600', 'border-blue-600', 'dark:text-blue-500', 'dark:border-blue-500', 'active');
-                            document.querySelector(tab.getAttribute('href')).classList.remove('hidden');
-                        });
-                    });
-                });
-            </script>
-
-            <p class="mt-4">Interested in accessing our API? Contact <a href="mailto:vinktim@gmail.com" class="text-blue-600 hover:underline">Tim Vink</a> for pricing and options.</p>
-        </div>
-
-        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8 max-w-2xl text-left mt-6">
+        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8 w-full mx-auto max-w-2xl text-left mt-6">
             <h2 class="text-2xl font-bold">About</h2>
-            <div class="flex flex-row items-start mt-4">
-                
+            <div class="mt-4 relative">
+                <img src="/assets/images/tim.jfif" alt="Tim Vink" class="w-32 h-32 rounded-full ml-4 mb-4 float-right">
                 <div>
                     <p class="text-sm text-gray-600 dark:text-gray-300">
                         I'm Tim, a data-literate digital native. With over 11 years of experience in building machine learning solutions
@@ -251,7 +206,6 @@
                         Let's work together! You can contact me at <a href="mailto:vinktim@gmail.com" class="text-blue-500 hover:underline">vinktim@gmail.com</a>.
                     </p>
                 </div>
-                <img src="/assets/images/tim.jfif" alt="Tim Vink" class="w-32 h-32 rounded-full mb-4 ml-4">
             </div>
         </div>
     </div>
