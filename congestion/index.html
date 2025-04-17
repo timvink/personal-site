@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Predicting accident frequency is challenging due to changing patterns. Our advanced multi-seasonality time series models adapt daily to provide accurate traffic congestion forecasts in the Netherlands." />
+    <title>Traffic Congestion Forecast - Improve Your Insurance Models</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <style>
+        @media (max-width: 768px) {
+            #forecastChart {
+                height: 400px !important;
+            }
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    spacing: {
+                        'screen-padding': '1rem',
+                    },
+                    maxWidth: {
+                        'centered': '100%',
+                        'mobile': '95%',
+                    },
+                },
+            },
+        };
+    </script>
+    <script>
+        async function fetchAndVisualizeCSV() {
+            const response = await fetch('forecasts.csv');
+            const csvData = await response.text();
+
+            const rows = csvData.split('\n').slice(1); // Skip the header row
+            const labels = [];
+            const yhatData = [];
+            const avg1yData = [];
+            const forwardAvg1yData = [];
+
+            rows.forEach(row => {
+                const [date, yhat, avg1y, forwardAvg1y] = row.split(',');
+                labels.push(date);
+                yhatData.push(parseFloat(yhat));
+                avg1yData.push(parseFloat(avg1y));
+                forwardAvg1yData.push(parseFloat(forwardAvg1y));
+            });
+
+            const ctx = document.getElementById('forecastChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels.map(label => {
+                        const date = new Date(label);
+                        return date.toLocaleString('en-US', { month: 'short', year: 'numeric' });
+                    }),
+                    datasets: [
+                        {
+                            label: 'Predicted',
+                            data: yhatData,
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderWidth: 1,
+                            pointStyle: false,
+                        },
+                        {
+                            label: 'Actual',
+                            data: forwardAvg1yData,
+                            borderColor: 'rgba(255, 159, 64, 1)',
+                            backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                            borderWidth: 1,
+                            pointStyle: false,
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    devicePixelRatio: 2,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    size: function(context) {
+                                        return window.innerWidth < 768 ? 10 : 12;
+                                    }
+                                }
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Average Traffic Congestion for next 12 months',
+                            font: {
+                                size: function(context) {
+                                    return window.innerWidth < 768 ? 12 : 16;
+                                }
+                            }
+                        },
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Date',
+                                font: {
+                                    size: function(context) {
+                                        return window.innerWidth < 768 ? 10 : 12;
+                                    }
+                                }
+                            },
+                            ticks: {
+                                maxRotation: 45,
+                                minRotation: 45,
+                                font: {
+                                    size: function(context) {
+                                        return window.innerWidth < 768 ? 8 : 10;
+                                    }
+                                },
+                                maxTicksLimit: window.innerWidth < 768 ? 6 : 12
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Average congestion',
+                                font: {
+                                    size: function(context) {
+                                        return window.innerWidth < 768 ? 10 : 12;
+                                    }
+                                }
+                            },
+                            ticks: {
+                                font: {
+                                    size: function(context) {
+                                        return window.innerWidth < 768 ? 8 : 10;
+                                    }
+                                }
+                            }
+                        },
+                    },
+                },
+            });
+        }
+    </script>
+</head>
+<body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+    <div class="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 pt-8 mx-auto">
+        <!-- Hero Section with Gradient -->
+        <div class="bg-gradient-to-br from-blue-600 to-blue-800 dark:from-blue-800 dark:to-blue-950 shadow-lg rounded-2xl p-8 w-full mx-auto max-w-2xl text-center mb-6 text-white">
+            <h1 class="text-3xl md:text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-100 tracking-tight">
+                Supercharge Insurance Models
+            </h1>
+            <p class="mt-4 text-lg text-blue-100">
+                Using congestion data to predict accident risk with precision
+            </p>
+            <div class="w-24 h-1 bg-white mx-auto my-4 rounded-full opacity-50"></div>
+            
+            <p class="mt-4 text-blue-50">
+                Car insurance companies predict accident frequency to use in their pricing engines.
+                Actual accident frequency changes over time, and is influenced by many factors like 
+                economic developments, infrastructure improvements and advances in car safety of modern vehicles.
+            </p>
+            <p class="mt-4 text-blue-50">
+                When accident trends changes, insurers need to adjust their pricing models. However they are slow to react to trends.
+            </p> 
+            
+            <div class="mt-6 bg-white/10 backdrop-blur-sm p-4 rounded-lg">
+                <h3 class="font-semibold text-white mb-2">Why insurers react slowly:</h3>
+                <ol class="text-left text-blue-50 space-y-1">
+                    <li class="flex items-center"><span class="inline-block w-5 h-5 mr-2 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm">1</span> They need to wait for sufficient claims to develop.</li>
+                    <li class="flex items-center"><span class="inline-block w-5 h-5 mr-2 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm">2</span> It can take months before claims are processed.</li>
+                    <li class="flex items-center"><span class="inline-block w-5 h-5 mr-2 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm">3</span> Pricing models are typically not updated with a high frequency.</li>
+                </ol>
+            </div>
+
+            <p class="mt-6 text-blue-50">
+                Accident frequency models can improve significantly by using the predicted congestion for the exposure period of an insurance policy (the next 12 months).
+                Better frequency models lead to a more accurate estimated technical price, which enables more competitive market pricing.
+            </p>
+        </div>
+        
+        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8 w-full mx-auto max-w-2xl text-center mt-6">
+            <h2 class="text-2xl font-bold">A Congestion Forecasting Solution</h2>
+            <p class="mt-4">
+                We've sourced congestion data from <a href="https://www.ndw.nu/" class="text-white-600 italic hover:underline">Nationaal Dataportaal Wegverkeer</a> and built a multi-seasonality time series forecasting model.
+                This model adapts daily to capture evolving trends, providing insurers with a much more precise understanding of future congestion risks. 
+            </p>
+            <p class="mt-4">
+                All models are wrong, but some are useful. As you can see in the chart, the model isn't perfect, but it is able capture the general and seasonal trends of congestion levels. 
+                For example, the model fails to predict in March 2019 onwards that a year later the corona lockdown will cause a significant drop in congestion, but it does adapt quickly to the new trend.
+            </p>
+            <div class="mt-6">
+                <canvas id="forecastChart" class="w-full h-auto rounded-lg"></canvas>
+            </div>
+            <div class="mt-4 text-xs text-gray-500 dark:text-gray-400 italic">
+                <p>Note: You can clearly see the average 12-month congestion start going down 1 year before the March 2020 corona lockdown. After the lockdown, there is a steady increase in congestion levels, reflecting the gradual return to normal traffic patterns.</p>
+            </div>
+        </div>
+        
+        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8 w-full mx-auto max-w-2xl text-center mt-6">
+            <h2 class="text-2xl font-bold">Use our data</h2>
+            <p class="mt-4">Use the historical predicted congestion data to see how it correlates with historic accident risk in your insurance portfolio. We've seen that the <code>yhat</code> feature can be one of the most important for insurance accident frequency models.</p>
+            <a href="forecasts.csv" class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg text-lg font-semibold hover:bg-blue-700 inline-block mt-4 flex items-center justify-center w-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M7 10l5 5m0 0l5-5m-5 5V3" />
+                </svg>
+                Download CSV
+            </a>
+
+            <div class="relative overflow-x-auto mt-6">
+                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400 text-center">Table: Dataset Columns and Descriptions</p>
+                <table class="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-4 py-2 rounded-tl-lg">Column</th>
+                            <th scope="col" class="px-4 py-2 rounded-tr-lg">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <th scope="row" class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">Date</th>
+                            <td class="px-4 py-2">Date in <code>YYYY-MM-DD</code> format</td>
+                        </tr>
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <th scope="row" class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">yhat</th>
+                            <td class="px-4 py-2">Predicted (<em>ŷ</em>) average daily congestion level (length*time, so units are in in kilometer minutes) over the next 12 months</td>
+                        </tr>
+                        <tr class="bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <th scope="row" class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">avg_1y</th>
+                            <td class="px-4 py-2">Average daily congestion level (length*time, so units are in in kilometer minutes) over the <strong>last</strong> 12 months</td>
+                        </tr>
+                        <tr class="bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <th scope="row" class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">forward_avg_1y</th>
+                            <td class="px-4 py-2">Average daily congestion level (length*time, so units are in in kilometer minutes) over the <strong>next</strong> 12 months</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+
+        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8 max-w-2xl text-center mt-6">
+            <h2 class="text-2xl font-bold">Get Access to Realtime Predictions</h2>
+            <p class="mt-4">
+                You can integrate our near realtime traffic congestion predictions into your pricing engine to stay ahead of market trends.
+                For example, if you use <a href="https://www.wtwco.com/en-nl/solutions/products/radar" class="text-blue-600 hover:underline">Radar</a>, 
+                you can use an external callout to call our API.
+                
+                Here's an example of how to call our API using <code>curl</code>:
+            </p>
+
+            <div class="border-b border-gray-200 dark:border-gray-700 mt-4">
+                <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+                    <li class="me-2">
+                        <a href="#input-tab" class="inline-flex items-center justify-center p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500 group" aria-current="page">
+                            Input
+                        </a>
+                    </li>
+                    <li class="me-2">
+                        <a href="#response-tab" class="inline-flex items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
+                            Example Response
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="input-tab" class="mt-4">
+                <pre class="bg-gray-100 dark:bg-gray-900 text-left p-4 rounded-lg shadow-md text-sm overflow-x-auto"><code class="language-bash">
+curl \
+    -H "x-api-key: your-api-key" \
+    https://congestion-api.timvink.nl/daily.json"
+</code></pre>
+            </div>
+
+            <div id="response-tab" class="hidden mt-4">
+                <pre class="bg-gray-100 dark:bg-gray-900 text-left p-4 rounded-lg shadow-md text-sm overflow-x-auto"><code class="language-json">{
+    "date": "2025-03-27",
+    "model_version": 1,
+    "prediction": 55375
+}
+</code></pre>
+            </div>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    const tabs = document.querySelectorAll('.border-b a');
+                    const tabContents = document.querySelectorAll('#input-tab, #response-tab');
+
+                    tabs.forEach(tab => {
+                        tab.addEventListener('click', (e) => {
+                            e.preventDefault();
+
+                            tabs.forEach(t => t.classList.remove('text-blue-600', 'border-blue-600', 'dark:text-blue-500', 'dark:border-blue-500', 'active'));
+                            tabContents.forEach(content => content.classList.add('hidden'));
+
+                            tab.classList.add('text-blue-600', 'border-blue-600', 'dark:text-blue-500', 'dark:border-blue-500', 'active');
+                            document.querySelector(tab.getAttribute('href')).classList.remove('hidden');
+                        });
+                    });
+                });
+            </script>
+
+            <p class="mt-4">Interested in accessing our API? Contact <a href="mailto:vinktim@gmail.com" class="text-blue-600 hover:underline">Tim Vink</a> for pricing and options.</p>
+        </div>
+
+
+
+        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8 w-full mx-auto max-w-2xl text-left mt-6">
+            <h2 class="text-2xl font-bold">About</h2>
+            <div class="mt-4 relative">
+                <img src="/assets/images/tim.jfif" alt="Tim Vink" class="w-32 h-32 rounded-full ml-4 mb-4 float-right">
+                <div>
+                    <p class="text-sm text-gray-600 dark:text-gray-300">
+                        I'm Tim, a data-literate digital native. With over 11 years of experience in building machine learning solutions
+                        and a proven track record managing ML teams at <a href="https://www.ing.com" class="text-blue-500 hover:underline">ING Bank</a> and <a href="https://www.allianzdirect.nl/" class="text-blue-500 hover:underline">Allianz Direct</a>, 
+                        I specialize in leveraging data to drive innovation in insurance.
+                    </p>
+                    <p class="text-sm text-gray-600 dark:text-gray-300 mt-2">
+                        Let's work together! You can contact me at <a href="mailto:vinktim@gmail.com" class="text-blue-500 hover:underline">vinktim@gmail.com</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-gray-900 text-gray-400 py-4 mt-12 text-center text-xs">
+        <p>Tim Vink Consultancy | KvK nummer 83595910 | <a href="https://www.timvink.nl" class="text-blue-500 hover:underline">www.timvink.nl</a> | contact: <a href="mailto:vinktim@gmail.com" class="text-blue-500 hover:underline">vinktim@gmail.com</a></p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchAndVisualizeCSV();
+            hljs.highlightAll();
+        });
+    </script>
+</body>
+</html>
