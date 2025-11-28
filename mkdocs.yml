@@ -123,3 +123,4 @@ extra_javascript:
 
 extra_css:
   - assets/stylesheets/extra.css
+  - assets/stylesheets/keyboard-demo.css
