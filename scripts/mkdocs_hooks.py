@@ -6,6 +6,6 @@ def on_page_context(context, **kwargs):
     """
     context['blog_pages'] = []
     for page in context['pages']:
-        if page.page.meta.get('template') == "blog-post.html":
+        if page.page.meta.get('template') == "blog-post.html" and not page.page.meta.get('draft'):
             context['blog_pages'].append(page.page)
 
