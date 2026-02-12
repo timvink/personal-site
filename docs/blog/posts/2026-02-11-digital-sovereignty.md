@@ -30,7 +30,7 @@ Signal has a lot going for it. It's fully open source. It's a non-profit. It has
 
 Yes. This one hurts. And it's a lot of work. Hear me out.
 
-I've been using Google's Gmail for more than 20 years. But not only is my data being used for ads, I don't want to risk losing access to such a critical service. We're in luck as there is a really good alternative to Gmail, Hotmail, Outlook, etc: [Proton Mail](https://proton.me/mail). It's European, has a generous free tier, has great design, is open source and it's fully encrypted. The Proton company recently [became a non-profit foundation](https://proton.me/blog/proton-non-profit-foundation) to *'serve the interests of all society'*.
+I've used Google's Gmail for more than 20 years. But not only is my data being used for ads, I don't want to risk losing access to such a critical service. We're in luck as there is a really good alternative to Gmail, Hotmail, Outlook, etc: [Proton Mail](https://proton.me/mail). It's European, has a generous free tier, has great design, is open source and it's fully encrypted. The Proton company recently [became a non-profit foundation](https://proton.me/blog/proton-non-profit-foundation) to *'serve the interests of all society'*. Other good email options you can consider: [Tuta](https://tuta.com/), [startmail](https://www.startmail.com/) and [mailbox](https://mailbox.org/en/). 
 
 Moving from email provider *is* a bit of a pain. Migrating over all your emails and contacts, and setting up an auto-forwarding rule on your old email is [just a couple clicks](https://proton.me/easyswitch). But you'll need to update all your digital accounts to use your new email address. Couple of tips:
 
@@ -49,9 +49,7 @@ The problem here is *Engine Monopoly*: Most of the world's browsers run on Chrom
 
 All your important accounts have two-factor authentication (2FA) set up... right? If not, get that in order! A simple username/password is too insecure and your digital identity too important.
 
-That 2FA app holds the keys to your digital identity. If you use an American Authenticator app like the one from Google or Microsoft, you risk digital lockout. Switch to a secure European one, and make sure you have a regular secure backup as well as a recovery procedure (like for when your phone breaks). All this sounds complicated but you'll be up and running again in 5 minutes. I personally recommend [Proton Authenticator](https://proton.me/authenticator) (free). 
-
-If you're on an iPhone you're in bad luck though.. Apple expects you to stay in their walled garden.
+That 2FA app holds the keys to your digital identity. If you use an American Authenticator app like the one from Google or Microsoft, you risk digital lockout. Switch to a secure European one, and make sure you have a regular secure backup as well as a recovery procedure (like for when your phone breaks). All this sounds complicated but you'll be up and running again in 5 minutes. I personally recommend [Proton Authenticator](https://proton.me/authenticator) (free). Other good alternatives: [Ente Auth](https://ente.io/auth/), [Aegis](https://getaegis.app/), [2FAS](https://2fas.com/), or consider a hardware key like [yubikey](https://www.yubico.com/).
 
 ## Start using different services
 
@@ -66,8 +64,8 @@ Using Google's Android is still a better, more open option than Apple's walled g
 There are many more digital cloud services we use everyday. Consider moving to secure european services for:
 
 - Files sync: Replace dropbox, google drive. I recommend [Proton Drive](https://proton.me/drive)
-- Calendar: First own calendar data, and add it as a feed to whatever (web) app you like best. I recommend [Proton Calendar](https://proton.me/calendar).
-- Password manager. This is critical infrastructure, choose wisely. I recommend [Proton Pass](https://proton.me/pass) or self-hosting.
+- Calendar: First own your calendar data, and then add it as a feed to whatever (web) app you like best. I recommend [Proton Calendar](https://proton.me/calendar).
+- Password manager. This is critical infrastructure, choose wisely. I recommend [Proton Pass](https://proton.me/pass) or self-hosting. Other good alternatives: [enpass](https://www.enpass.io/), [KeePassXC](https://keepassxc.org/), [bitwarden](https://bitwarden.com/) and [vaultwarden](https://github.com/dani-garcia/vaultwarden) (self-hosted).
 
 ## Why you should run a home server
 
