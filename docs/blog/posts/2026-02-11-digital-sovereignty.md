@@ -96,6 +96,21 @@ The cool thing is that you can host these services and then share them with your
 
 ## Conclusion
 
-Don't wait and see. Sure, probably everything will be fine. Except that one time when it's not. For me digital sovereignty is not a bad thing, it's a push toward progress. A way out of complacency. The diversity and decentralization of these services is going to make all our digital lives better and more exciting.
+Don't wait and see. Sure, probably everything will be fine. Except that one time when it's not. You don't need to do everything at once. Start at the first row from the table below and do it this weekend. Then pick another next week. Each switch you make will help digital sovereignty.
 
+Here's a quick overview of the switches discussed in this post:
 
+| What | Replace | With | Effort |
+|---|---|---|---|
+| Messaging | WhatsApp | [Signal](https://signal.org/) | Low |
+| Browser | Chrome | [Firefox](https://www.mozilla.org/firefox/) | Low |
+| Search engine | Google | [Startpage](https://www.startpage.com/), [DuckDuckGo](https://duckduckgo.com/) | Low |
+| 2FA app | Google/Microsoft Authenticator | [Proton Authenticator](https://proton.me/authenticator) | Low |
+| File sync | Google Drive, Dropbox | [Proton Drive](https://proton.me/drive) or self-host | Low |
+| Calendar | Google Calendar | [Proton Calendar](https://proton.me/calendar) or self-host | Low |
+| Password manager | LastPass, 1Password | [Proton Pass](https://proton.me/pass), [Vaultwarden](https://github.com/dani-garcia/vaultwarden) | Medium |
+| Email | Gmail, Outlook | [Proton Mail](https://proton.me/mail) | High |
+| Photos | Google/Apple Photos | [Immich](https://immich.app/) (self-hosted) | High |
+| Mobile OS | iPhone | Android / [Fairphone](https://shop.fairphone.com/nl/about-us) | High |
+
+For me, digital sovereignty is not a sacrifice -- it's a push toward progress. A way out of complacency. The alternatives are often better designed, more private, and more respectful of your attention. The diversity and decentralization of these services is going to make all our digital lives better and more exciting. When you're set up, make sure to share what you've learned with friends and family.
