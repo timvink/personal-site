@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+.md-header__topic .md-ellipsis {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+}
+
+.md-header__topic:first-child {
+  font-weight: 400;
+}
+
+.md-header__button.md-logo {
+  margin-right: 0;
+}
+
+[dir=ltr] .md-header__title {
+  margin-left: 0.6rem;
+}
+
+.homepage_icon {
+    fill: #fff;
+    width: 3rem;
+    display: inline-block;
+    transition: all 0.2s ease-in-out;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+  }
+  
+.homepage_icon:hover {
+  fill: #ccc;
+  transform: scale(1.2);
+}
+
+.homepage_arrow {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.5;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-0.2rem);
+  }
+  100% {
+    opacity: 0.5;
+    transform: translateY(0);
+  }
+}
+
+/* mailchimp signup form on blog page */
+#mc_embed_signup{
+  clear:left; 
+  width: 400px;
+}
