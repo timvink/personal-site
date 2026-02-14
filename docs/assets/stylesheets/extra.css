@@ -1,3 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+.md-header__topic .md-ellipsis {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+}
+
+.md-header__topic:first-child {
+  font-weight: 400;
+}
+
+.md-header__button.md-logo {
+  margin-right: 0;
+}
+
+[dir=ltr] .md-header__title {
+  margin-left: 0.6rem;
+}
+
 .homepage_icon {
     fill: #fff;
     width: 3rem;
