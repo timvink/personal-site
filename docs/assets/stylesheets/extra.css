@@ -50,8 +50,48 @@
   }
 }
 
-/* mailchimp signup form on blog page */
-#mc_embed_signup{
-  clear:left; 
-  width: 400px;
+/* Subscribe box on blog page */
+.subscribe-box {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 1.5rem;
+  background: var(--md-code-bg-color);
+}
+
+.subscribe-form-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.subscribe-icon {
+  line-height: 0;
+  color: var(--md-accent-fg-color);
+  flex-shrink: 0;
+}
+
+.subscribe-email {
+  flex: 1;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.25rem;
+  font-size: 0.85rem;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  outline: none;
+  font-family: inherit;
+  min-width: 0;
+}
+
+.subscribe-email:focus {
+  border-color: var(--md-accent-fg-color);
+}
+
+.subscribe-button {
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 0.85rem !important;
+  padding: 0.4rem 1rem !important;
+  border-radius: 0.25rem !important;
 }

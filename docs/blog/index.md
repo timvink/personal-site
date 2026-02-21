@@ -1,31 +1,16 @@
 # Tim's blog
 
-<div class="result"> <details class="tip"> <summary>Get notified of new posts</summary>
-
-
-<div id="mc_embed_shell">
-      <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
-<div id="mc_embed_signup" class="md-typeset">
-    <form action="https://timvink.us20.list-manage.com/subscribe/post?u=c3681ed076a325f316d8da807&amp;id=ea31642b5a&amp;f_id=000354e6f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" style="margin: 0 0 1rem 0;" class="validate" target="_self" novalidate="">
-        <div id="mc_embed_signup_scroll">
-            <div class="mc-field-group"><label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label><input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required="" value=""></div>
-        <div id="mce-responses" class="clear foot">
-            <div class="response" id="mce-error-response" style="display: none;"></div>
-            <div class="response" id="mce-success-response" style="display: none;"></div>
-        </div>
+<div class="subscribe-box" id="subscribe">
+  <form action="https://timvink.us20.list-manage.com/subscribe/post?u=c3681ed076a325f316d8da807&amp;id=ea31642b5a&amp;f_id=000354e6f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate subscribe-form-row" target="_self" novalidate="">
+    <span class="subscribe-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6m-2 0-8 5-8-5h16m0 12H4V8l8 5 8-5v10Z"/></svg></span>
+    <input type="email" name="EMAIL" class="required email subscribe-email" id="mce-EMAIL" required="" value="" placeholder="your@email.com">
+    <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="subscribe-button md-button md-button--primary" value="Subscribe">
+    <div id="mce-responses" class="clear foot" style="display:none;">
+      <div class="response" id="mce-error-response"></div>
+      <div class="response" id="mce-success-response"></div>
+    </div>
     <div aria-hidden="true" style="position: absolute; left: -5000px;">
-        /* real people should not fill this in and expect good things - do not remove this or risk form bot signups */
-        <input type="text" name="b_c3681ed076a325f316d8da807_ea31642b5a" tabindex="-1" value="">
+      <input type="text" name="b_c3681ed076a325f316d8da807_ea31642b5a" tabindex="-1" value="">
     </div>
-        <div class="optionalParent">
-            <div class="clear foot">
-                <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button .md-button" value="Subscribe to new updates">
-                <p style="margin: 0px auto;"><a href="http://eepurl.com/iACZ6w" title="Mailchimp - email marketing made easy and fun"><span style="display: inline-block; background-color: transparent; border-radius: 4px;"><img class="refferal_badge" src="https://digitalasset.intuit.com/render/content/dam/intuit/mc-fe/en_us/images/intuit-mc-rewards-text-dark.svg" alt="Intuit Mailchimp" style="width: 220px; height: 40px; display: flex; padding: 2px 0px; justify-content: center; align-items: center;"></span></a></p>
-            </div>
-        </div>
-    </div>
-</form>
+  </form>
 </div>
-</div>
-
-</details> </div>

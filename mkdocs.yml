@@ -86,7 +86,7 @@ plugins:
 nav:
   - Homepage: index.md
   - Blog:
-    - blog/index.md 
+    - blog/index.md
   - about.md
 
 markdown_extensions:
