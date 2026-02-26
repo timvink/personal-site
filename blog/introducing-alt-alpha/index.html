@@ -1,0 +1,1472 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal site and blog of Tim Vink">
+      
+      
+        <meta name="author" content="Tim Vink">
+      
+      
+        <link rel="canonical" href="https://timvink.nl/blog/introducing-alt-alpha/">
+      
+      
+        <link rel="prev" href="../introducing-sudoku-solver/">
+      
+      
+        <link rel="next" href="../my-opus-moment/">
+      
+      
+        
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>Introducing Alt Alpha: Explore alternative keyboard layouts - ~/timvink/</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/keyboard-demo.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-2CM8V82P6Z"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-2CM8V82P6Z",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-2CM8V82P6Z",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+  
+<meta property="og:type" content="website">
+<meta property="og:title" content="Introducing Alt Alpha: Explore alternative keyboard layouts - ~/timvink/">
+<meta property="og:description" content="Personal site and blog of Tim Vink">
+<meta property="og:image" content="https://timvink.nl/assets/images/social/blog/introducing-alt-alpha.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://timvink.nl/blog/introducing-alt-alpha/">
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:title" content="Introducing Alt Alpha: Explore alternative keyboard layouts - ~/timvink/">
+<meta property="twitter:description" content="Personal site and blog of Tim Vink">
+<meta property="twitter:image" content="https://timvink.nl/assets/images/social/blog/introducing-alt-alpha.png">
+<link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introducing-alt-alpha-explore-alternative-keyboard-layouts" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="~/timvink/" class="md-header__button md-logo" aria-label="~/timvink/" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m23 11.5-3.05-1.13c-.26-1.15-.91-1.81-.91-1.81a4.19 4.19 0 0 0-5.93 0l-1.48 1.48L5 3c-1 4 0 8 2.45 11.22L2 19.5s8.89 2 14.07-2.05c2.76-2.16 3.38-3.42 3.77-4.75zm-5.29.22c-.39.39-1.03.39-1.42 0a.996.996 0 0 1 0-1.41c.39-.39 1.03-.39 1.42 0s.39 1.02 0 1.41"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ~/timvink/
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introducing Alt Alpha: Explore alternative keyboard layouts
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="light-blue" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="light-blue" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Homepage
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="~/timvink/" class="md-nav__button md-logo" aria-label="~/timvink/" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m23 11.5-3.05-1.13c-.26-1.15-.91-1.81-.91-1.81a4.19 4.19 0 0 0-5.93 0l-1.48 1.48L5 3c-1 4 0 8 2.45 11.22L2 19.5s8.89 2 14.07-2.05c2.76-2.16 3.38-3.42 3.77-4.75zm-5.29.22c-.39.39-1.03.39-1.42 0a.996.996 0 0 1 0-1.41c.39-.39 1.03-.39 1.42 0s.39 1.02 0 1.41"></path></svg>
+
+    </a>
+    ~/timvink/
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Homepage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Blog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tim's blog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archive
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Archive
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2026/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2025/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2024/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2024
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2023/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2023
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2022/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2022
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2021/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2021
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2020/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2020
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2019/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2019
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-to-qwerty" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives to QWERTY
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#thumb-layouts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Thumb layouts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-pick-a-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to pick a layout?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introducing-alt-alpha-ranker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducing Alt Alpha Ranker
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-its-built" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It's Built
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How It's Built">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visualization-parsing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visualization &amp; Parsing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scraping-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scraping metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-typing-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Typing Test
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#let-users-add-layouts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Let users add layouts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tracing-rkeyboardlayouts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tracing r/KeyboardLayouts
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusion
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <img src="https://github.com/timvink.png" alt="Tim Vink">
+                    </span>
+                    <span class="md-profile__description">
+                      <strong>
+                        
+                          Tim Vink
+                        
+                      </strong>
+                      <br>
+                      Author
+                    </span>
+                  </div>
+                
+              </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"></path></svg>
+                        <time datetime="2025-11-28 18:00:00+00:00" class="md-ellipsis">November 28, 2025</time>
+                      </div>
+                    </li>
+                    
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"></path></svg>
+                          <span class="md-ellipsis">
+                            
+                              4 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+            
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+
+
+
+
+<h1 id="introducing-alt-alpha-explore-alternative-keyboard-layouts">Introducing Alt Alpha: Explore alternative keyboard layouts</h1>
+<script>
+/**
+ * Standalone Keyboard Visualization for Blog Post
+ * Renders a static split keyboard layout
+ */
+
+(function() {
+    // Key dimensions
+    const KEY_W = 50;
+    const KEY_H = 50;
+    const GAP = 5;
+    const KS = KEY_W + GAP;
+
+    // Columnar stagger (vertical offset for each column)
+    const STAGGER = [20, 20, 10, 0, 10, 20];
+
+    // Hand offsets
+    const LEFT_HAND_X = 50;
+    const LEFT_HAND_Y = 10;
+    const RIGHT_HAND_X = 425;
+    const RIGHT_HAND_Y = 10;
+    const THUMB_Y_OFFSET = 180;
+
+    // Home position key indices (columns 1-4 of home row)
+    const HOME_POSITIONS = [13, 14, 15, 16, 19, 20, 21, 22];
+
+    // Key positions for columnar staggered layout
+    function getKeyPositions() {
+        return [
+            // Left Hand - Top row (0-5)
+            { x: LEFT_HAND_X + KS * 0, y: LEFT_HAND_Y + KS * 0 + STAGGER[0], w: KEY_W, h: KEY_H },
+            { x: LEFT_HAND_X + KS * 1, y: LEFT_HAND_Y + KS * 0 + STAGGER[1], w: KEY_W, h: KEY_H },
+            { x: LEFT_HAND_X + KS * 2, y: LEFT_HAND_Y + KS * 0 + STAGGER[2], w: KEY_W, h: KEY_H },
+            { x: LEFT_HAND_X + KS * 3, y: LEFT_HAND_Y + KS * 0 + STAGGER[3], w: KEY_W, h: KEY_H },
+            { x: LEFT_HAND_X + KS * 4, y: LEFT_HAND_Y + KS * 0 + STAGGER[4], w: KEY_W, h: KEY_H },
+            { x: LEFT_HAND_X + KS * 5, y: LEFT_HAND_Y + KS * 0 + STAGGER[5], w: KEY_W, h: KEY_H },
+
+            // Right Hand - Top row (6-11)
+            { x: RIGHT_HAND_X + KS * 0, y: RIGHT_HAND_Y + KS * 0 + STAGGER[5], w: KEY_W, h: KEY_H },
+            { x: RIGHT_HAND_X + KS * 1, y: RIGHT_HAND_Y + KS * 0 + STAGGER[4], w: KEY_W, h: KEY_H },
+            { x: RIGHT_HAND_X + KS * 2, y: RIGHT_HAND_Y + KS * 0 + STAGGER[3], w: KEY_W, h: KEY_H },
+            { x: RIGHT_HAND_X + KS * 3, y: RIGHT_HAND_Y + KS * 0 + STAGGER[2], w: KEY_W, h: KEY_H },
+            { x: RIGHT_HAND_X + KS * 4, y: RIGHT_HAND_Y + KS * 0 + STAGGER[1], w: KEY_W, h: KEY_H },
+            { x: RIGHT_HAND_X + KS * 5, y: RIGHT_HAND_Y + KS * 0 + STAGGER[0], w: KEY_W, h: KEY_H },
+
+            // Left Hand - Home row (12-17)
+            { x: LEFT_HAND_X + KS * 0, y: LEFT_HAND_Y + KS * 1 + STAGGER[0], w: KEY_W, h: KEY_H },
+            { x: LEFT_HAND_X + KS * 1, y: LEFT_HAND_Y + KS * 1 + STAGGER[1], w: KEY_W, h: KEY_H },
+            { x: LEFT_HAND_X + KS * 2, y: LEFT_HAND_Y + KS * 1 + STAGGER[2], w: KEY_W, h: KEY_H },
+            { x: LEFT_HAND_X + KS * 3, y: LEFT_HAND_Y + KS * 1 + STAGGER[3], w: KEY_W, h: KEY_H },
+            { x: LEFT_HAND_X + KS * 4, y: LEFT_HAND_Y + KS * 1 + STAGGER[4], w: KEY_W, h: KEY_H },
+            { x: LEFT_HAND_X + KS * 5, y: LEFT_HAND_Y + KS * 1 + STAGGER[5], w: KEY_W, h: KEY_H },
+
+            // Right Hand - Home row (18-23)
+            { x: RIGHT_HAND_X + KS * 0, y: RIGHT_HAND_Y + KS * 1 + STAGGER[5], w: KEY_W, h: KEY_H },
+            { x: RIGHT_HAND_X + KS * 1, y: RIGHT_HAND_Y + KS * 1 + STAGGER[4], w: KEY_W, h: KEY_H },
+            { x: RIGHT_HAND_X + KS * 2, y: RIGHT_HAND_Y + KS * 1 + STAGGER[3], w: KEY_W, h: KEY_H },
+            { x: RIGHT_HAND_X + KS * 3, y: RIGHT_HAND_Y + KS * 1 + STAGGER[2], w: KEY_W, h: KEY_H },
+            { x: RIGHT_HAND_X + KS * 4, y: RIGHT_HAND_Y + KS * 1 + STAGGER[1], w: KEY_W, h: KEY_H },
+            { x: RIGHT_HAND_X + KS * 5, y: RIGHT_HAND_Y + KS * 1 + STAGGER[0], w: KEY_W, h: KEY_H },
+
+            // Left Hand - Bottom row (24-29)
+            { x: LEFT_HAND_X + KS * 0, y: LEFT_HAND_Y + KS * 2 + STAGGER[0], w: KEY_W, h: KEY_H },
+            { x: LEFT_HAND_X + KS * 1, y: LEFT_HAND_Y + KS * 2 + STAGGER[1], w: KEY_W, h: KEY_H },
+            { x: LEFT_HAND_X + KS * 2, y: LEFT_HAND_Y + KS * 2 + STAGGER[2], w: KEY_W, h: KEY_H },
+            { x: LEFT_HAND_X + KS * 3, y: LEFT_HAND_Y + KS * 2 + STAGGER[3], w: KEY_W, h: KEY_H },
+            { x: LEFT_HAND_X + KS * 4, y: LEFT_HAND_Y + KS * 2 + STAGGER[4], w: KEY_W, h: KEY_H },
+            { x: LEFT_HAND_X + KS * 5, y: LEFT_HAND_Y + KS * 2 + STAGGER[5], w: KEY_W, h: KEY_H },
+
+            // Right Hand - Bottom row (30-35)
+            { x: RIGHT_HAND_X + KS * 0, y: RIGHT_HAND_Y + KS * 2 + STAGGER[5], w: KEY_W, h: KEY_H },
+            { x: RIGHT_HAND_X + KS * 1, y: RIGHT_HAND_Y + KS * 2 + STAGGER[4], w: KEY_W, h: KEY_H },
+            { x: RIGHT_HAND_X + KS * 2, y: RIGHT_HAND_Y + KS * 2 + STAGGER[3], w: KEY_W, h: KEY_H },
+            { x: RIGHT_HAND_X + KS * 3, y: RIGHT_HAND_Y + KS * 2 + STAGGER[2], w: KEY_W, h: KEY_H },
+            { x: RIGHT_HAND_X + KS * 4, y: RIGHT_HAND_Y + KS * 2 + STAGGER[1], w: KEY_W, h: KEY_H },
+            { x: RIGHT_HAND_X + KS * 5, y: RIGHT_HAND_Y + KS * 2 + STAGGER[0], w: KEY_W, h: KEY_H },
+
+            // Thumbs (36-39)
+            { x: LEFT_HAND_X + KS * 4, y: LEFT_HAND_Y + THUMB_Y_OFFSET + STAGGER[4], w: KEY_W, h: KEY_H },
+            { x: LEFT_HAND_X + KS * 5, y: LEFT_HAND_Y + THUMB_Y_OFFSET + STAGGER[5], w: KEY_W, h: KEY_H },
+            { x: RIGHT_HAND_X + KS * 0, y: RIGHT_HAND_Y + THUMB_Y_OFFSET + STAGGER[5], w: KEY_W, h: KEY_H },
+            { x: RIGHT_HAND_X + KS * 1, y: RIGHT_HAND_Y + THUMB_Y_OFFSET + STAGGER[4], w: KEY_W, h: KEY_H }
+        ];
+    }
+
+    // Parse Cyanophage URL layout string to flat array
+    function parseLayoutString(layoutString) {
+        const decoded = decodeURIComponent(layoutString);
+        const flatLayout = Array(40).fill(' ');
+
+        // Cyanophage key mapping
+        const keyMap = [];
+
+        // Positions 0-10: row 0, cols 1-11
+        for (let i = 0; i <= 10; i++) {
+            if (i <= 4) keyMap[i] = i + 1;           // Left: cols 1-5 -> indices 1-5
+            else keyMap[i] = i + 1;                   // Right: cols 6-11 -> indices 6-11
+        }
+
+        // Positions 11-21: row 1, cols 1-11  
+        for (let i = 0; i <= 10; i++) {
+            if (i <= 4) keyMap[11 + i] = 13 + i;     // Left home row: indices 13-17
+            else keyMap[11 + i] = 18 + (i - 5);      // Right home row: indices 18-23
+        }
+
+        // Positions 22-31: row 2, cols 1-10
+        for (let i = 0; i <= 9; i++) {
+            if (i <= 4) keyMap[22 + i] = 25 + i;     // Left bottom: indices 25-29
+            else keyMap[22 + i] = 30 + (i - 5);      // Right bottom: indices 30-35
+        }
+
+        // Position 32: left bottom outer pinky (index 24)
+        keyMap[32] = 24;
+        // Position 34: left home outer pinky (index 12)
+        keyMap[34] = 12;
+
+        // Map the 32 main keys
+        for (let i = 0; i < 32; i++) {
+            if (decoded[i]) {
+                const physicalKeyIndex = keyMap[i];
+                if (physicalKeyIndex !== undefined) {
+                    flatLayout[physicalKeyIndex] = decoded[i].toLowerCase();
+                }
+            }
+        }
+
+        // Map outer pinky keys
+        if (decoded.length > 32 && decoded[32] !== '\\') {
+            flatLayout[24] = decoded[32].toLowerCase();
+        }
+        if (decoded.length > 34 && decoded[34] !== '^') {
+            flatLayout[12] = decoded[34].toLowerCase();
+        }
+
+        // Handle thumb key (position 33)
+        if (decoded.length > 33) {
+            const thumbChar = decoded[33].toLowerCase();
+            if (/^[a-z]$/.test(thumbChar)) {
+                flatLayout[39] = thumbChar; // Right inner thumb
+            }
+        }
+
+        return flatLayout;
+    }
+
+    // Create SVG key element
+    function createKey(id, x, y, w, h, isThumb, char) {
+        const ns = "http://www.w3.org/2000/svg";
+        const isHomePosition = HOME_POSITIONS.includes(id);
+        const isAssigned = char !== ' ' && char !== '';
+
+        const group = document.createElementNS(ns, 'g');
+        group.setAttribute('id', `key-group-${id}`);
+
+        let groupClass = 'key';
+        if (isThumb) groupClass += ' thumb-key';
+        if (isHomePosition) groupClass += ' home-position-key';
+        if (!isAssigned) groupClass += ' unassigned-key';
+        group.setAttribute('class', groupClass);
+
+        // Apply rotation for thumb keys
+        if (isThumb) {
+            let angle = 0;
+            if (id === 36) angle = 6;
+            if (id === 37) angle = 12;
+            if (id === 38) angle = -12;
+            if (id === 39) angle = -6;
+
+            const centerX = x + w / 2;
+            const centerY = y + h / 2;
+            group.setAttribute('transform', `rotate(${angle} ${centerX} ${centerY})`);
+        }
+
+        const rect = document.createElementNS(ns, 'rect');
+        rect.setAttribute('x', x);
+        rect.setAttribute('y', y);
+        rect.setAttribute('width', w);
+        rect.setAttribute('height', h);
+        rect.setAttribute('class', 'key-rect');
+        rect.setAttribute('rx', '6');
+
+        const text = document.createElementNS(ns, 'text');
+        text.setAttribute('x', x + w / 2);
+        text.setAttribute('y', y + h / 2);
+        text.setAttribute('class', 'key-legend');
+        text.textContent = char;
+
+        group.appendChild(rect);
+        group.appendChild(text);
+
+        return group;
+    }
+
+    // Render keyboard to SVG element
+    function renderKeyboard(svgElement, layoutArray) {
+        const positions = getKeyPositions();
+
+        // Calculate viewBox
+        let maxX = 0, maxY = 0;
+        positions.forEach((pos) => {
+            maxX = Math.max(maxX, pos.x + pos.w);
+            maxY = Math.max(maxY, pos.y + pos.h);
+        });
+
+        svgElement.setAttribute('viewBox', `0 0 ${maxX + 20} ${maxY + 20}`);
+        svgElement.innerHTML = '';
+
+        positions.forEach((pos, i) => {
+            const isThumb = i >= 36;
+            const char = layoutArray[i] || ' ';
+            const key = createKey(i, pos.x, pos.y, pos.w, pos.h, isThumb, char);
+            svgElement.appendChild(key);
+        });
+    }
+
+    // Initialize keyboard demo
+    function init() {
+        const containers = document.querySelectorAll('.keyboard-container');
+        if (!containers.length) return;
+
+        containers.forEach(container => {
+            const layoutString = container.dataset.layout;
+            if (!layoutString) return;
+
+            const layoutArray = parseLayoutString(layoutString);
+
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.style.maxWidth = '100%';
+            svg.style.height = 'auto';
+
+            renderKeyboard(svg, layoutArray);
+            container.appendChild(svg);
+        });
+    }
+
+    // Run on DOM ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+
+</script>
+
+<p>Almost a year ago I switched to the <a href="https://www.zsa.io/voyager">ZSA Voyager</a>, a programmable, ergonomic split keyboard that features four thumb buttons per hand instead of the single spacebar found on traditional keyboards. After having a lot of fun optimizing <a href="https://configure.zsa.io/voyager/layouts/bZ5m5/latest/0">my keyboard layout</a> and <a href="https://github.com/timvink/dotfiles">customizing shortcuts</a>, I got interested in alternative alpha keyboard layouts. The '<abbr title="Alternative Keyboard Layouts">AKL</abbr>' scene is still actively developing new layouts with many great new options in the last two years. I found it hard to choose and fun to compare, so in this post I'll introduce a new tool I built: <a href="https://altalpha.timvink.nl">altalpha.timvink.nl</a></p>
+<!-- more -->
+
+<h2 id="alternatives-to-qwerty">Alternatives to QWERTY</h2>
+<p>We all know QWERTY is flawed. It was designed in 1873 for typewriters, not ergonomic comfort. It requires frequent, uncomfortable finger stretches and high same-finger utilization. While you can certainly type fast on QWERTY (<a href="https://www.youtube.com/watch?v=GGwKCi4FX84">world record of 305 wpm</a>), it requires more effort than necessary.</p>
+<p>Alternative layouts aim to fix this. There are many great options. I highly recommend Pascal Getreuer's <a href="https://getreuer.info/posts/keyboards/alt-layouts/index.html">Guide to alt keyboard layouts</a> which recommends as a very solid pick the 2024 <a href="https://github.com/GalileoBlues/Gallium">gallium</a> layout:</p>
+<figure class="keyboard-demo">
+<div class="keyboard-container" data-layout="bldcvjyou%2C-nrtsgphaei%2Fxqmwzkf%27%3B.%5C%5E"></div>
+<figcaption>The <a href="https://github.com/GalileoBlues/Gallium">gallium</a> (2024) layout as visualized by <a href="https://altalpha.timvink.nl/">altalpha.timvink.nl</a></figcaption>
+</figure>
+
+<p>But is that the best one? And what about those thumb buttons?</p>
+<h2 id="thumb-layouts">Thumb layouts</h2>
+<p>Having a keyboard with multiple thumb buttons opens up an interesting opportunity: <strong>What if you assign a letter to a thumb key?</strong>. The <a href="https://precondition.github.io/pressing-e-with-the-thumb">Pressing E with the Thumb</a> article explores this concept in depth. For example, the <a href="https://www.valorance.org/night/">night</a> (2024) 'thumb' layout assigns the <code>r</code> to one of the left thumb buttons:</p>
+<figure class="keyboard-demo">
+<div class="keyboard-container" data-layout="bflkqpgou.%3Dnshtmycaei%3Bxvjdz%27w-%2F%2C%5Cr"></div>
+<figcaption>The <a href="https://www.valorance.org/night/">night</a> (2024) layout as visualized by <a href="https://altalpha.timvink.nl/">altalpha.timvink.nl</a></figcaption>
+</figure>
+
+<p>These thumb layouts only make it harder to choose a layout.</p>
+<h2 id="how-to-pick-a-layout">How to pick a layout?</h2>
+<p>Note that creating a new layout is non-trivial. There are <span class="arithmatex">\(26! \approx 4.03 \times 10^{26}\)</span> possible combinations for the 26 letters of the English alphabet. If it took 1 nanosecond to review a layout, it would take ~3.17 billion years to review them all. The alternative keyboard layout community is vibrant, with enthusiasts using optimizers and statistical analysis to design better layouts. In recent years there has been significant progress with new layouts performing very well on a range of metrics. Examples include layouts like <a href="https://github.com/sunaku/enthium">Enthium v11</a>, <a href="https://www.reddit.com/r/KeyboardLayouts/comments/1oqqfql/%F0%96%A3%82nordrassils_rejuvenation%EF%BE%9F_a_refinement_of_the/">nordrassil rejuvened</a> or the <a href="https://sites.google.com/alanreiser.com/handsdown/home/hands-down-neu">Hands Down Neu variants</a>.</p>
+<p>Learning a new layout is not an easy undertaking. It's worth it according to many who have made the investment. But making a good choice is hard.
+Now it's true that <em>any</em> reasonable choice is going to be a huge upgrade from QWERTY. The relative differences between good layouts are a lot smaller. That said, it's still very interesting to search for a layout that fits best for your personal preferences. </p>
+<h2 id="introducing-alt-alpha-ranker">Introducing Alt Alpha Ranker</h2>
+<p>I decided to deep dive into this rabbit hole and build my own tool to compare and test these layouts: <strong><a href="https://altalpha.timvink.nl">altalpha.timvink.nl</a></strong>. 
+It has a ranking board for layouts, but you can also use a typing test to try what a layout 'feels' like, without learning it! The trick there is to translate the corresponding characters to a keyboard layout you can already touch type.</p>
+<div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+    <div style="text-align: center;">
+        <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="/assets/images/posts/altalpha/ranker.png" data-desc-position="bottom"><img src="/assets/images/posts/altalpha/ranker.png" width="400px" style="border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"></a>
+        <p><em>Layout Rankings</em></p>
+    </div>
+    <div style="text-align: center;">
+        <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="/assets/images/posts/altalpha/typingtest.png" data-desc-position="bottom"><img src="/assets/images/posts/altalpha/typingtest.png" width="400px" style="border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"></a>
+        <p><em>Typing Test</em></p>
+    </div>
+</div>
+
+<p>The tool focuses on Latin-language layouts and intentionally excludes esoteric concepts like <a href="https://layouts.wiki/reference/terminology/magic/">Magic Keys</a> or Repeat Keys to keep comparisons fair and approachable.</p>
+<h2 id="how-its-built">How It's Built</h2>
+<p>For those technically inclined, here are a few highlights of the project:</p>
+<h3 id="visualization-parsing">Visualization &amp; Parsing</h3>
+<p>I wrote a custom <a href="https://github.com/timvink/alt_alpha_ranker/blob/main/site/keyboard.js"><code>keyboard.js</code></a> class to manage layout definitions. This powers the <a href="https://github.com/timvink/alt_alpha_ranker/blob/main/site/keyboard_visualization.js"><code>keyboard_visualization.js</code></a> renderer and <a href="https://github.com/timvink/alt_alpha_ranker/blob/main/site/cyanophage.js"><code>cyanophage.js</code></a>, a module that generates URLs for the <a href="https://cyanophage.github.io/">Cyanophage layout playground</a>.</p>
+<h3 id="scraping-metrics">Scraping metrics</h3>
+<p>Cyanophage has built an excellent <a href="https://cyanophage.github.io/">keyboard layout ranking engine</a>. We use the generated Cyanophage url for a layout and then scrape the corresponding metrics.</p>
+<h3 id="the-typing-test">The Typing Test</h3>
+<p>The typing test interface was inspired by <a href="https://github.com/monkeytypegame/monkeytype">Monkeytype</a>. I even used their open-source 1k word language datasets to ensure the test content is representative of real-world usage.</p>
+<h3 id="let-users-add-layouts">Let users add layouts</h3>
+<p>Layouts are constantly evolving. To keep up, I built an automated workflow:</p>
+<ol>
+<li>The <a href="https://altalpha.timvink.nl/new_layout.html">Add new layout</a> page includes a parser that converts text-based layouts into a configuration format.</li>
+<li>Clicking "Create GitHub issue" pre-fills the issue body with the correct YAML configuration.</li>
+<li>The issue is assigned to <strong>GitHub Copilot</strong>, which automatically opens a Pull Request to update <a href="https://github.com/timvink/alt_alpha_ranker/blob/main/config/layouts.yml"><code>config/layouts.yml</code></a>.</li>
+<li>Once merged, a GitHub Action runs <a href="https://github.com/timvink/alt_alpha_ranker/blob/main/scripts/scrape_stats.py"><code>scripts/scrape_stats.py</code></a> to scrape any missing layout data and commits it to <code>data.json</code>, triggering a redeploy of the website.</li>
+</ol>
+<h3 id="tracing-rkeyboardlayouts">Tracing <code>r/KeyboardLayouts</code></h3>
+<p>Many new layouts are announced on Reddit. So I built a scraper (<a href="https://github.com/timvink/alt_alpha_ranker/blob/main/scripts/scrape_reddit.py"><code>scripts/scrape_reddit.py</code></a>) for <code>r/KeyboardLayouts</code> that uses Reddit's RSS feed to extract posts and comments. Those are then passed to an LLM. If the post or comment is deemed a new layout, a new GitHub issue will be created and assigned to me to review it.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I still haven't picked a layout to learn! But building the tool was a lot of fun. Hopefully it's useful for the community.</p>
+<p>If you want to dive deeper, here are some good starting points:</p>
+<ul>
+<li><a href="https://layouts.wiki/guides/start/recommendations">layout wiki's recommendations</a></li>
+<li>Pascal Getreuer's <a href="https://getreuer.info/posts/keyboards/alt-layouts/index.html">Guide to alt keyboard layouts</a> </li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+  
+
+
+  <form class="md-feedback" name="feedback" hidden>
+    <fieldset>
+      <legend class="md-feedback__title">
+        Was this page helpful?
+      </legend>
+      <div class="md-feedback__inner">
+        <div class="md-feedback__list">
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="This page was helpful" data-md-value="1">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m7 0c0 .8-.7 1.5-1.5 1.5S14 10.3 14 9.5 14.7 8 15.5 8s1.5.7 1.5 1.5m-5 7.73c-1.75 0-3.29-.73-4.19-1.81L9.23 14c.45.72 1.52 1.23 2.77 1.23s2.32-.51 2.77-1.23l1.42 1.42c-.9 1.08-2.44 1.81-4.19 1.81"></path></svg>
+            </button>
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="This page could be improved" data-md-value="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10m-6.5-4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m2 4.5c1.75 0 3.29.72 4.19 1.81l-1.42 1.42C14.32 16.5 13.25 16 12 16s-2.32.5-2.77 1.23l-1.42-1.42C8.71 14.72 10.25 14 12 14"></path></svg>
+            </button>
+          
+        </div>
+        <div class="md-feedback__note">
+          
+            <div data-md-value="1" hidden>
+              
+              
+                
+              
+              
+              
+                
+                
+              
+              Thanks for your feedback!
+            </div>
+          
+            <div data-md-value="0" hidden>
+              
+              
+                
+              
+              
+              
+                
+                
+              
+              Thanks for your feedback!
+            </div>
+          
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+        <script src="../../js/mkdocs-charts-plugin.js"></script>
+      
+        <script src="../../assets/js/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+.md-header__topic .md-ellipsis {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+}
+
+.md-header__topic:first-child {
+  font-weight: 400;
+}
+
+.md-header__button.md-logo {
+  margin-right: 0;
+}
+
+[dir=ltr] .md-header__title {
+  margin-left: 0.6rem;
+}
+
+.homepage_icon {
+    fill: #fff;
+    width: 3rem;
+    display: inline-block;
+    transition: all 0.2s ease-in-out;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+  }
+  
+.homepage_icon:hover {
+  fill: #ccc;
+  transform: scale(1.2);
+}
+
+.homepage_arrow {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.5;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-0.2rem);
+  }
+  100% {
+    opacity: 0.5;
+    transform: translateY(0);
+  }
+}
+
+/* Subscribe box on blog page */
+.subscribe-box {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 1.5rem;
+  background: var(--md-code-bg-color);
+}
+
+.subscribe-form-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.subscribe-icon {
+  line-height: 0;
+  color: var(--md-accent-fg-color);
+  flex-shrink: 0;
+}
+
+.subscribe-email {
+  flex: 1;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.25rem;
+  font-size: 0.85rem;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  outline: none;
+  font-family: inherit;
+  min-width: 0;
+}
+
+.subscribe-email:focus {
+  border-color: var(--md-accent-fg-color);
+}
+
+.subscribe-button {
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 0.85rem !important;
+  padding: 0.4rem 1rem !important;
+  border-radius: 0.25rem !important;
+}
