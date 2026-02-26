@@ -9,14 +9,11 @@ hide:
 
 <img src="/assets/images/tim.jfif" style = "width: 300px; padding: 1em; float: right; border-radius: 50%;"/>
 
-I’m a data literate digital native. 
-I dream about a future where technology will help create an abundant future for mankind. 
-Technology is changing the world for the better. 
-My goal is to be part of the change and help shape our future. 
+Strategic AI/ML leader with 14 years of experience in strategy and deep technical execution. I
+specialize in building high-performing machine learning teams and designing scalable platforms that
+turn pilots into tangible business ROI.
 
-I have 13 years of experience building machine learning models, of which 6 years managing machine learning teams at <a href="https://www.allianzdirect.nl/">Allianz Direct</a> and <a href="https://www.ing.com">ING Bank</a>. I have worked as a data scientist in different countries, and worked as a consultant in the healthcare industry building simulations models.
-
-<p>You can contact me at <a href="mailto:vinktim@gmail.com">vinktim@gmail.com</a>.</p>
+<p>You can contact me at <a href="mailto:vinktim@proton.me">vinktim@proton.me</a>.</p>
 
 ## Open source projects
 
