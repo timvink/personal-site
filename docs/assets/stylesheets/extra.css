@@ -50,6 +50,24 @@
   }
 }
 
+/* Human-written disclaimer on blog posts */
+.human-written {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.7rem;
+  font-style: italic;
+  color: var(--md-default-fg-color--lighter);
+  margin-bottom: 0.5rem;
+}
+
+.human-written svg {
+  width: 1rem;
+  height: 1rem;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
 /* Subscribe box on blog page */
 .subscribe-box {
   border: 1px solid var(--md-default-fg-color--lightest);
