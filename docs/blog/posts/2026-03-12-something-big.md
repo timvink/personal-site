@@ -9,7 +9,7 @@ authors:
 
 Remember February 2020, watching the covid virus spread overseas and wondering what would happen? Matt Schumer writes [something big is happening](https://shumer.dev/something-big-is-happening): *"I think we're in the 'this seems overblown' phase of something much, much bigger than Covid."* He's an AI developer and entrepreneur, talking about how shocked he is with the last few months of AI developments.
 
-I no longer have to write code, instead I build on a higher abstraction level, describing in plain English what I want. I wrote about the tipping point for me last November ([My Opus Moment](./2026-01-11-my-opus-moment.md)). This new 'discipline' of writing software is being called ['*agentic engineering*'](https://simonwillison.net/tags/agentic-engineering/). But it's not just software that will be affected by these new AI models. I'm still recalibrating and wrapping my head around all the implications. This post collects some of my current thoughts.
+Shumer's article has been [criticized as alarmist](https://www.businessinsider.com/gary-marcus-response-something-big-is-happening-ai-essay-shumer-2026-2). We don't know yet *how* jobs will be affected. But the reality right now is: I no longer have to write code. Instead I build on a higher abstraction level, describing in plain English what I want. I wrote about the tipping point for me last November ([My Opus Moment](./2026-01-11-my-opus-moment.md)). This new 'discipline' of writing software is being called ['*agentic engineering*'](https://simonwillison.net/tags/agentic-engineering/). But it's not just software that will be affected by these new AI models. I'm still recalibrating and wrapping my head around all the implications. There's more reason for hope rather than fear. This post collects some of my current thoughts.
 
 <!-- more -->
 
@@ -35,7 +35,9 @@ The **external transaction costs** are dropping. For example agents can do searc
 
 The **internal coordination costs** are *also* dropping. One example is that companies can deploy internal agents that know about all internal processes and systems. It's like having that helpful colleague sitting next to you who's been around for years and knows everything, who knows who to ask and in what system to make which request, and will do it for you real quick. All without maintaining a documentation jungle like confluence.
 
-So the question is, which one drops more rapidly? Will we see larger or smaller corporations? One thing that hasn't changed is the cost of coordination between humans. It's still $\frac{n(n-1)}{2}$, where $n$ is the number of humans in a group. If developers are now 10x more productive, human coordination becomes even more of a bottleneck. My prediction is small teams $\gg$ large teams. I think we'll start seeing more very successful small teams. At the same time large companies can continue to do very well.
+So the question is, which one drops more rapidly? Will we see larger or smaller corporations? One thing that hasn't changed is the cost of coordination between humans. It's still $\frac{n(n-1)}{2}$, where $n$ is the number of humans in a group. If developers are now 10x more productive, human coordination becomes even more of a bottleneck. Avery Pennarun (CEO of Tailscale) wrote an insightful article stating [Every layer of review makes you 10x slower](https://apenwarr.ca/log/20260316). AI can't fix this. Avery argues the only way to sustainably go faster is to do fewer reviews. And *"Bigger companies are gonna have a harder time, because their slow review systems are baked in, and deleting them would cause complete chaos."*.
+
+My prediction is small teams $\gg$ large teams. We'll start seeing more very successful small teams. At the same time large companies can continue to do very well.
 
 ## New business opportunities
 
