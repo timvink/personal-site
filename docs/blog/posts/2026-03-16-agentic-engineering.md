@@ -10,6 +10,11 @@ authors:
 
 potential new post?
 
+
+Nate: Describes example of high-performer quitting company and building a prodcut with paying customers in 1 month. "How did we spend the last thirty years building organizations that make extraordinary people look ordinary?".  https://natesnewsletter.substack.com/p/executive-briefing-one-solo-founder?publication_id=1373231&post_id=190757490&isFreemail=true&r=7ekpeq&triedRedirect=true&utm_source=substack&utm_medium=email
+
+"Every layer of review makes you 10x slower" https://apenwarr.ca/log/20260316. This rings so true.
+
 <!-- more -->
 
 ## Building with AI: Agentic engineering
