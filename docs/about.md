@@ -7,7 +7,7 @@ hide:
 
 # About
 
-<img src="/assets/images/tim.jfif" style = "width: 300px; padding: 1em; float: right; border-radius: 50%;"/>
+<img src="/assets/images/tim.jfif" class="about-photo" style="width: 300px; padding: 1em; float: right; border-radius: 50%;"/>
 
 Strategic AI/ML leader with 14 years of experience in strategy and deep technical execution. I
 specialize in building high-performing machine learning teams and designing scalable platforms that

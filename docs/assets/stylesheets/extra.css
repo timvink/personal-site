@@ -31,6 +31,21 @@
   transform: scale(1.2);
 }
 
+@media screen and (max-width: 480px) {
+  .homepage_icon {
+    width: 1.75rem;
+    margin-left: 0.6rem;
+    margin-right: 0.6rem;
+  }
+
+  .about-photo {
+    float: none !important;
+    display: block !important;
+    margin: 0 auto !important;
+    width: 200px !important;
+  }
+}
+
 
 /* Human-written disclaimer on blog posts */
 .human-written {
