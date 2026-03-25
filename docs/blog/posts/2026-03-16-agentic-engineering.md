@@ -34,4 +34,6 @@ Some people are worried about skill atrophy. If you have a very smart friend who
 As [Nate Jones summarized](https://natesnewsletter.substack.com/p/cursors-coding-agents-solved-a-math): "The skill that survives this transition isn’t doing the work. It’s evaluating whether the work is correct."
 
 
+## Other relevant links
 
+- no cambrian explosion of software visible?! https://www.answer.ai/posts/2026-03-12-so-where-are-all-the-ai-apps.html
