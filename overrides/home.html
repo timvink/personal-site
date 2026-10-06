@@ -7,14 +7,14 @@
       box-shadow: none !important;
       transition: background-color 250ms;
     }
-    .md-header[data-md-state="shadow"] {
+    .md-header--shadow {
       background-color: var(--md-primary-fg-color) !important;
       box-shadow: 0 0 0.4rem rgba(0,0,0,0.1), 0 0.4rem 0.8rem rgba(0,0,0,0.2) !important;
     }
     /* Ensure header elements are white when transparent */
-    .md-header:not([data-md-state="shadow"]) .md-header__button,
-    .md-header:not([data-md-state="shadow"]) .md-header__title,
-    .md-header:not([data-md-state="shadow"]) .md-nav__link {
+    .md-header:not(.md-header--shadow) .md-header__button,
+    .md-header:not(.md-header--shadow) .md-header__title,
+    .md-header:not(.md-header--shadow) .md-nav__link {
       color: white !important;
     }
     .md-tabs {
