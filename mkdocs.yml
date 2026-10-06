@@ -9,6 +9,7 @@ theme:
   custom_dir: overrides
   features:
     - navigation.tabs
+  favicon: assets/images/favicon.svg
   icon:
       logo: material/bird
   palette:
