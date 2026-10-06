@@ -1,0 +1,1181 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal site and blog of Tim Vink">
+      
+      
+        <meta name="author" content="Tim Vink">
+      
+      
+        <link rel="canonical" href="https://timvink.nl/blog/malleable-dev-setup/">
+      
+      
+        <link rel="prev" href="../thinking-big/">
+      
+      
+        <link rel="next" href="../progress/">
+      
+      
+        
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../assets/images/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>My Malleable Dev Setup - ~/timvink/</title>
+      
+    
+    
+  
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+  <style>.md-feedback { display: none; }</style>
+
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/keyboard-demo.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-2CM8V82P6Z"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-2CM8V82P6Z",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-2CM8V82P6Z",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+  
+<meta property="og:type" content="website">
+<meta property="og:title" content="My Malleable Dev Setup - ~/timvink/">
+<meta property="og:description" content="Personal site and blog of Tim Vink">
+<meta property="og:image" content="https://timvink.nl/assets/images/social/blog/malleable-dev-setup.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://timvink.nl/blog/malleable-dev-setup/">
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:title" content="My Malleable Dev Setup - ~/timvink/">
+<meta property="twitter:description" content="Personal site and blog of Tim Vink">
+<meta property="twitter:image" content="https://timvink.nl/assets/images/social/blog/malleable-dev-setup.png">
+<link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#my-malleable-dev-setup" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="~/timvink/" class="md-header__button md-logo" aria-label="~/timvink/" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m23 11.5-3.05-1.13c-.26-1.15-.91-1.81-.91-1.81a4.19 4.19 0 0 0-5.93 0l-1.48 1.48L5 3c-1 4 0 8 2.45 11.22L2 19.5s8.89 2 14.07-2.05c2.76-2.16 3.38-3.42 3.77-4.75zm-5.29.22c-.39.39-1.03.39-1.42 0a.996.996 0 0 1 0-1.41c.39-.39 1.03-.39 1.42 0s.39 1.02 0 1.41"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ~/timvink/
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              My Malleable Dev Setup
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="light-blue" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="light-blue" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Homepage
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden="">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="~/timvink/" class="md-nav__button md-logo" aria-label="~/timvink/" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m23 11.5-3.05-1.13c-.26-1.15-.91-1.81-.91-1.81a4.19 4.19 0 0 0-5.93 0l-1.48 1.48L5 3c-1 4 0 8 2.45 11.22L2 19.5s8.89 2 14.07-2.05c2.76-2.16 3.38-3.42 3.77-4.75zm-5.29.22c-.39.39-1.03.39-1.42 0a.996.996 0 0 1 0-1.41c.39-.39 1.03-.39 1.42 0s.39 1.02 0 1.41"></path></svg>
+
+    </a>
+    ~/timvink/
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Homepage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Blog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+    
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tim's blog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archive
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Archive
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2026/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2025/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2024/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2024
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2023/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2023
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2022/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2022
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2021/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2021
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2020/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2020
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2019/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2019
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#why-vscode-wasnt-cutting-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why VSCode wasn't cutting it
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wait-whats-neovim-whats-tmux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wait, what's neovim, what's tmux?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#replicating-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Replicating features
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Replicating features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agents-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agents status
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worktrees-and-isolated-workspaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worktrees and isolated workspaces
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#navigating-workspaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Navigating workspaces
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#managing-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Managing servers
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#final-thoughts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Final thoughts
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <img src="https://github.com/timvink.png" alt="Tim Vink">
+                    </span>
+                    <span class="md-profile__description">
+                      <strong>
+                        
+                          Tim Vink
+                        
+                      </strong>
+                      <br>
+                      Author
+                    </span>
+                  </div>
+                
+              </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"></path></svg>
+                        <time datetime="2026-06-06 17:11:00+00:00" class="md-ellipsis">June 6, 2026</time>
+                      </div>
+                    </li>
+                    
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"></path></svg>
+                          <span class="md-ellipsis">
+                            
+                              7 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+            
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        <aside class="human-written">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m6.95 14.93 4.24-5.66 8.49-7.07c.39-.39 1.04-.39 1.41 0l.71.71c.39.37.39 1.02 0 1.41l-7.07 8.49-5.66 4.24zm1.41 2.83-2.12-2.12-2.83 1.41L2 21.29l2.12-2.12c.2-.17.51-.17.71 0 .17.2.17.51 0 .71L2.71 22l4.24-1.41z"></path></svg>
+          Written by hand by an actual human
+        </aside>
+        
+  
+
+
+
+
+<h1 id="my-malleable-dev-setup">My Malleable Dev Setup</h1>
+<p>David Heinemeier Hansson framed it eloquently: AI is making <a href="https://world.hey.com/dhh/the-malleable-computer-7c187a9b">computers malleable</a> at a ferocious rate. <em>"Users can make systems their own with the help of AI and be utterly delighted by the outcome."</em></p>
+<p>I finally switched my development environment from VSCode to tmux+neovim. I'm utterly delighted. Let me share why.</p>
+<!-- more -->
+
+<h2 id="why-vscode-wasnt-cutting-it">Why VSCode wasn't cutting it</h2>
+<p>Working with code agents meant I was juggling many different terminals per project. Usually 1-5 terminals with agents, 1 or 2 terminals with servers and another general terminal. I also noticed I was working across 2-5 projects at a time. The context switch was leading to brain fry.</p>
+<p>Microsoft's focus on Copilot seems to have led to more bugs in the core system. I regularly had Claude Code characters get jumbled and <code>source .venv/..</code> commands sent accidentally to Claude by VSCode.</p>
+<p>I had invested heavily in customized shortcuts for VSCode, and I was not eager to give up my flow managing windows. 
+However, I already used vim inside VSCode, and had already mimicked many common shortcuts from <a href="https://neovim.io/">neovim</a> to prepare to make the jump. But I never did, because I don't want to spend hours every week fighting my neovim config to get arbitrary things like Python dev setup (LSP) working, or fix broken LazyVim plugins after an update. But now the equation has changed: you can just point an agent at it with a quick <em>"fix it"</em> or <em>add x, y, z</em>.</p>
+<p>I tried tools like <a href="https://cmux.com/">cmux</a> and <a href="https://www.conductor.build/">conductor</a>. They cut out the editor and focused instead on managing agents. I'm not ready to give up all control; I want an editor to view the directory structure, read code and -god forbid- even manually write some code with my bare hands.</p>
+<p>Then I realized the fancy new AI IDEs like <a href="https://devswarm.ai/">swarm</a> aren't that fancy at all. I could use AI to take the best ideas and reimplement them in plain old proven and blazing fast tmux + neovim.</p>
+<h2 id="wait-whats-neovim-whats-tmux">Wait, what's neovim, what's tmux?</h2>
+<p>tmux (<em>terminal multiplexer</em>) allows you to have persistent sessions in a terminal, and each session can have tabs. A session is like a workspace, think VSCode project.
+One of the tabs in a session could run <code>neovim</code>. This is a modern, fully text-based IDE that also has a vim text editor. Here's me using neovim with tmux to write this blog:</p>
+<figure>
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/tmux_setup/tmux_neovim.png" data-desc-position="bottom"><img src="../../assets/images/tmux_setup/tmux_neovim.png" alt="the future"></a>
+</figure>
+<h2 id="replicating-features">Replicating features</h2>
+<p>Combine tmux and neovim and you have everything you need to replicate any fancy new agent-native IDE. Go through the list of features, consider what you like, and build it for yourself. You get full control, your agent has all the context to debug and tweak your setup, and you don't have to switch tools and re-learn workflows and shortcuts.</p>
+<p>Some highlights of my setup:</p>
+<h3 id="agents-status">Agents status</h3>
+<p>Modern agent orchestrators' main claim to fame is agent notifications. I set that up by creating Codex and Claude hooks. Tabs get a colored dot based on their status:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Dot</th>
+<th style="text-align: left;">State</th>
+<th style="text-align: left;">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span style="display:inline-block;width:48px;height:28px;line-height:28px;text-align:center;background:#181825;border-radius:4px"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#89b4fa;vertical-align:middle"></span></span></td>
+<td style="text-align: left;"><code>running</code></td>
+<td style="text-align: left;">The agent is working — producing output, or waiting on a tool. The challenge is to keep those agents working as much as possible.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span style="display:inline-block;width:48px;height:28px;line-height:28px;text-align:center;background:#181825;border-radius:4px"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#f38ba8;vertical-align:middle"></span></span></td>
+<td style="text-align: left;"><code>needs-input</code></td>
+<td style="text-align: left;">The agent is blocked on a question or an approval. Attention is needed.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span style="display:inline-block;width:48px;height:28px;line-height:28px;text-align:center;background:#181825;border-radius:4px"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;border:4px solid #f9e2af;box-sizing:border-box;vertical-align:middle"></span></span></td>
+<td style="text-align: left;"><code>idle</code></td>
+<td style="text-align: left;">Turn complete, awaiting a prompt.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span style="display:inline-block;width:48px;height:28px;line-height:28px;text-align:center;background:#181825;border-radius:4px"></span></td>
+<td style="text-align: left;"><code>none</code></td>
+<td style="text-align: left;">Tab with no agent running. Plain shells, <code>nvim</code>, and fresh claude code sessions don't need a state.</td>
+</tr>
+</tbody>
+</table>
+<p>The state is set by Claude Code and Codex lifecycle hooks, which calls a <code>agent-state</code> script that flips an <code>@agent_state</code> tmux option on the window. The status bar updates with the right colored dot per tab. I re-use this <code>@agent_state</code> across various custom tmux overviews.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/tmux_setup/tmux_claude_tabs.png" data-desc-position="bottom"><img alt="tmux claude tabs" src="../../assets/images/tmux_setup/tmux_claude_tabs.png"></a></p>
+<p>You can take it further if you want. You could use AI to implement native system notifications. Or have an agent ping you using voice over your speaker (see f.e. <a href="https://github.com/steipete/sag/">sag</a>).</p>
+<h3 id="worktrees-and-isolated-workspaces">Worktrees and isolated workspaces</h3>
+<p>Another frequent claim of "AI IDEs" is <em>isolated workspaces</em>, which is usually just a layer on top of git worktrees. git worktrees are great, especially when working in parallel with multiple agents. But managing worktrees through the git cli is verbose and clunky. An abstraction on top makes sense, but it's just as easy to have an agent manage git worktrees for you.</p>
+<p>No need for custom software, or even a custom skill: Claude Code supports <code>claude --worktree &lt;name&gt;</code> out of the box. However, I usually just say "use a git worktree", or add an entry to a project's <code>CLAUDE.md</code> requiring the use of worktrees before making changes. I set up a global skill that requests every project using worktrees to set up a <code>.gitworktreesinclude</code> (so certain .gitignore-ed files like <code>.env</code> get copied) and a <code>make setup</code> command to set up a fresh project state (like running <code>uv sync</code> to set up the <code>.venv</code>). And my tmux statusline also shows the current git branch in the active tab.</p>
+<h3 id="navigating-workspaces">Navigating workspaces</h3>
+<p>I have shortcuts set up so I can navigate between tabs using <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-h">H</kbd></span> (left) and <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-l">L</kbd></span> (right). <span class="keys"><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-h">H</kbd></span>/<span class="keys"><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-l">L</kbd></span> moves a tab left/right.
+With <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-j">J</kbd></span> and <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-k">K</kbd></span> I can move between sessions. The mental model is that you move up/down between rows of sessions (workspaces), and each session has 'columns' of tabs. Here's a session with two tabs:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/tmux_setup/tmux_tabs.png" data-desc-position="bottom"><img alt="tmux tabs" src="../../assets/images/tmux_setup/tmux_tabs.png"></a></p>
+<p><span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-r">R</kbd></span> renames a tab. I might type <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-r">R</kbd></span> <code>cc tmux</code> <span class="keys"><kbd class="key-enter">Enter</kbd></span> to quickly rename a tab <code>cc tmux</code>. This way I remember what the agent is doing, e.g. tweaking my tmux setup.
+Similarly <span class="keys"><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-r">R</kbd></span> renames the session, which by default has the name of the working directory. <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-q">Q</kbd></span> breaks down the session closing all tabs, unless there is unsaved work or running agents. </p>
+<p>I also implemented <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-f">F</kbd></span> to open a fuzzy finder across open sessions, but also across my projects in <code>~/workspace/</code>. If I choose a project that doesn't have a session open, it creates a new session and opens two tabs: a <code>cc</code> tab with Claude Code, and a <code>nvim</code> tab with the file tree open. I absolutely love this feature, and because I have <a href="https://precondition.github.io/home-row-mods">home row mods</a> set up, it's a super quick hold on <code>s</code>
++ tap on <code>f</code>. No longer do I have to juggle 8 different VSCode applications and figure out which project is open in each.</p>
+<figure>
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/tmux_setup/tmux_fuzzy_project_picker.png" data-desc-position="bottom"><img src="../../assets/images/tmux_setup/tmux_fuzzy_project_picker.png" alt="fuzzy project finder"></a>
+<br>
+<figcaption>Fuzzy project finder</figcaption>
+</figure>
+<p>I also created a custom overview for tmux (<span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-b">B</kbd></span> for tmux prefix + <span class="keys"><kbd class="key-o">O</kbd></span> for overview) which shows all sessions and tabs in a single overview. Because why not :)</p>
+<h3 id="managing-servers">Managing servers</h3>
+<p>I've seen too many <code>OSError: [Errno 48] Address already in use</code>. It meant I had to scan all my open projects and figure out which tabs were serving, and on what port. What I implemented instead is a port scanner and a wrapper that catches <code>make serve</code> and <code>make docs</code>. It's reliable, and adds the port(s) used by a tab next to the tmux tab. I also implemented a custom tmux window you can open with <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-b">B</kbd></span> (the tmux prefix) + <span class="keys"><kbd class="key-u">U</kbd></span>:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/tmux_setup/tmux_url_finder.png" data-desc-position="bottom"><img alt="tmux url finder" src="../../assets/images/tmux_setup/tmux_url_finder.png"></a></p>
+<p>The url finder detects urls in the current pane, and shows running servers on other panes (including across other sessions). I can quickly open any url using <span class="keys"><kbd class="key-enter">Enter</kbd></span>. Or use <span class="keys"><kbd class="key-q">Q</kbd></span> to directly kill a server, without even having to jump to that terminal to press <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-c">C</kbd></span>.</p>
+<h2 id="final-thoughts">Final thoughts</h2>
+<p>I keep coming up with little tweaks to my setup almost daily. I recently started using a custom <code>/oneoff</code> command in Claude Code, where Claude and the terminal exit themselves after finishing. The workflow is: start a new Claude terminal (<span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-t">T</kbd></span>, <code>cc</code>) and then ask something like <em>"/oneoff add link X to my Notion page Y"</em>. Another example: I added a <code>y</code> and <code>Y</code> to copy relative/absolute paths to a highlighted file in the neovim file tree, so I can reference it quickly in Claude Code.</p>
+<p>This pattern of using AI to create malleable computers holds elsewhere. For my homelab I started out using custom software like <a href="https://www.zimaspace.com/zimaos">zimaOS</a>. It's a small walled garden, and after fighting the limits for a while, I switched to a vanilla <a href="https://ubuntu.com/download/server">ubuntu server</a>. I was flying after that. Customized dashboards, Docker services, encrypted partitions for my password manager, and separate VPN mesh networks for exchanging encrypted backups; it was all easy and quick.</p>
+<p>So go tweak your own development setup. If you want to re-use any of my ideas here, just point your agent at <a href="https://github.com/timvink/dotfiles">github.com/timvink/dotfiles</a>.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+  
+
+
+
+        <div class="subscribe-box" id="subscribe">
+          <form action="https://timvink.us20.list-manage.com/subscribe/post?u=c3681ed076a325f316d8da807&amp;id=ea31642b5a&amp;f_id=000354e6f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate subscribe-form-row" target="_self" novalidate="">
+            <span class="subscribe-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6m-2 0-8 5-8-5h16m0 12H4V8l8 5 8-5v10Z"></path></svg></span>
+            <input type="email" name="EMAIL" class="required email subscribe-email" id="mce-EMAIL" required="" value="" placeholder="your@email.com">
+            <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="subscribe-button md-button md-button--primary" value="Subscribe">
+            <div id="mce-responses" class="clear foot" style="display:none;">
+              <div class="response" id="mce-error-response"></div>
+              <div class="response" id="mce-success-response"></div>
+            </div>
+            <div aria-hidden="true" style="position: absolute; left: -5000px;">
+              <input type="text" name="b_c3681ed076a325f316d8da807_ea31642b5a" tabindex="-1" value="">
+            </div>
+          </form>
+        </div>
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Tim Vink · <a href="https://www.gethumandesign.com/support/">Vink Data en AI B.V.</a>, KvK 97053449 · Brands: <a href="https://www.gethumandesign.com">gethumandesign.com</a>
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../js/mkdocs-charts-plugin.js"></script>
+      
+        <script src="../../assets/js/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
