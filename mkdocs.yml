@@ -2,6 +2,7 @@ site_name: ~/timvink/
 site_url: https://timvink.nl
 site_description: Personal site and blog of Tim Vink
 site_author: Tim Vink
+copyright: 'Tim Vink · <a href="https://www.gethumandesign.com/support/">Vink Data en AI B.V.</a>, KvK 97053449 · makers of <a href="https://www.gethumandesign.com">gethumandesign.com</a>'
 
 theme:
   name: material
