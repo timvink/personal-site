@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  {{ super() }}
+  {% set person = {
+    "@type": "Person",
+    "@id": config.site_url ~ "#person",
+    "name": config.site_author,
+    "url": config.site_url ~ "about/",
+    "sameAs": [
+      "https://github.com/timvink",
+      "https://nl.linkedin.com/in/timvink",
+      "https://x.com/timvink"
+    ]
+  } %}
+  {% if page.is_homepage %}
+    {% set ld = {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": config.site_url ~ "#website",
+          "name": config.site_name,
+          "url": config.site_url,
+          "description": config.site_description,
+          "author": {"@id": config.site_url ~ "#person"}
+        },
+        person
+      ]
+    } %}
+  {% elif page.meta and page.meta.template == "blog-post.html" and page.config and page.config.date %}
+    {% set ld = {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": page.title,
+      "url": page.canonical_url,
+      "mainEntityOfPage": page.canonical_url,
+      "datePublished": page.config.date.created.isoformat(),
+      "dateModified": (page.config.date.updated or page.config.date.created).isoformat(),
+      "author": person,
+      "isPartOf": {"@id": config.site_url ~ "#website"}
+    } %}
+  {% endif %}
+  {% if ld %}
+    <script type="application/ld+json">{{ ld | tojson }}</script>
+  {% endif %}
+{% endblock %}
