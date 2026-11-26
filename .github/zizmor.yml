@@ -4,3 +4,7 @@ rules:
       # The deploy job pushes to gh-pages with `mkdocs gh-deploy`, which uses
       # the credentials checkout persists, and it uploads no artifacts.
       - ci.yml
+  dependabot-cooldown:
+    config:
+      # Monthly grouped updates; 3 days is enough to catch yanked releases.
+      days: 3
