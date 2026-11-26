@@ -1,0 +1,85 @@
+/* Keyboard Visualization Styles for Blog Post */
+/* Uses mkdocs-material theme detection via [data-md-color-scheme] */
+
+.keyboard-demo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1.5rem 0;
+}
+
+.keyboard-demo svg {
+    width: min(900px, 100%);
+    height: auto;
+}
+
+/* ===== Light mode styles (default scheme) ===== */
+[data-md-color-scheme="default"] .key-rect {
+    fill: #ffffff;
+    stroke: #90a4ae;
+    stroke-width: 2;
+    rx: 6;
+}
+
+[data-md-color-scheme="default"] .home-position-key .key-rect {
+    fill: rgba(79, 70, 229, 0.08);
+    stroke: #5c6bc0;
+}
+
+[data-md-color-scheme="default"] .key-legend {
+    fill: #37474f;
+}
+
+[data-md-color-scheme="default"] .thumb-key .key-rect {
+    fill: #ffffff;
+    stroke: #90a4ae;
+    stroke-width: 2.5;
+}
+
+[data-md-color-scheme="default"] .unassigned-key .key-rect {
+    fill: #eceff1;
+    stroke: #b0bec5;
+    stroke-dasharray: 4 4;
+    opacity: 0.6;
+}
+
+/* ===== Dark mode styles (slate scheme) ===== */
+[data-md-color-scheme="slate"] .key-rect {
+    fill: #2d3748;
+    stroke: #718096;
+    stroke-width: 2;
+    rx: 6;
+}
+
+[data-md-color-scheme="slate"] .home-position-key .key-rect {
+    fill: rgba(139, 92, 246, 0.15);
+    stroke: #8b5cf6;
+}
+
+[data-md-color-scheme="slate"] .key-legend {
+    fill: #e2e8f0;
+}
+
+[data-md-color-scheme="slate"] .thumb-key .key-rect {
+    fill: #1a202c;
+    stroke: #718096;
+    stroke-width: 2.5;
+}
+
+[data-md-color-scheme="slate"] .unassigned-key .key-rect {
+    fill: #1a1f2e;
+    stroke: #4a5568;
+    stroke-dasharray: 4 4;
+    opacity: 0.5;
+}
+
+/* Key legends base styling */
+.key-legend {
+    font-size: 18px;
+    font-weight: 600;
+    font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+    text-anchor: middle;
+    dominant-baseline: middle;
+    pointer-events: none;
+    user-select: none;
+}
