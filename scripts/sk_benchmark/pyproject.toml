@@ -10,3 +10,6 @@ dependencies = [
     "scikit-learn>=1.5.2",
     "tqdm>=4.66.5",
 ]
+
+[tool.uv]
+exclude-newer = "24 hours"
