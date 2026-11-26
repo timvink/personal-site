@@ -1,0 +1,6 @@
+rules:
+  artipacked:
+    ignore:
+      # The deploy job pushes to gh-pages with `mkdocs gh-deploy`, which uses
+      # the credentials checkout persists, and it uploads no artifacts.
+      - ci.yml
